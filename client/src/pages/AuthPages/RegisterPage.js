@@ -1,16 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHttp } from '../../hooks/http.hook';
+import { NavLink } from 'react-router-dom';
 import './AuthPage.scss';
 
 export const RegisterPage = () => {
   const { loading, request } = useHttp();
   const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = async data => {
+  const onSubmit = async formData => {
     try {
-      const response = await request('/api/auth/register', 'POST', { ...data });
-      console.log(response);
+      const data = await request('/api/auth/register', 'POST', { ...formData });
+      console.log(data);
     } catch (e) {}
   };
 
@@ -20,7 +21,17 @@ export const RegisterPage = () => {
       <form className='auth-form' onSubmit={handleSubmit(onSubmit)}>
         <div className='input-field'>
           <input
-            ref={register({ required: 'FIELD IS REQUIRED' })}
+            ref={register({
+              required: 'FIELD IS REQUIRED',
+              minLength: {
+                value: 4,
+                message: 'USERNAME LENGTH SHOULD BE GREATER, THAN 3 CHARACTERS'
+              },
+              maxLength: {
+                value: 12,
+                message: 'USERNAME LENGTH SHOULD BE LESS, THAN 13 CHARACTERS'
+              }
+            })}
             name='username'
             placeholder='Username'
             autoComplete='off'
@@ -32,7 +43,13 @@ export const RegisterPage = () => {
         </div>
         <div className='input-field'>
           <input
-            ref={register({ required: 'FIELD IS REQUIRED' })}
+            ref={register({
+              required: 'FIELD IS REQUIRED',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'INVALID EMAIL ADDRESS'
+              }
+            })}
             name='email'
             placeholder='Email'
             autoComplete='off'
@@ -44,7 +61,13 @@ export const RegisterPage = () => {
         </div>
         <div className='input-field'>
           <input
-            ref={register({ required: 'FIELD IS REQUIRED' })}
+            ref={register({
+              required: 'FIELD IS REQUIRED',
+              minLength: {
+                value: 6,
+                message: 'PASSWORD SHOULD BE LONGER, THAN 5 CHARACTERS'
+              }
+            })}
             name='password'
             placeholder='Password'
             autoComplete='off'
@@ -54,48 +77,18 @@ export const RegisterPage = () => {
             <p className='input-error'>{errors.password?.message}</p>
           )}
         </div>
-        <div className='input-field'>
-          <label className='label'>Birthday:</label>
-          <input
-            ref={register({ required: 'FIELD IS REQUIRED' })}
-            name='birthday'
-            placeholder='Birthday'
-            autoComplete='off'
-            type='date'
-          />
-          {errors.birthday && (
-            <p className='input-error'>{errors.birthday?.message}</p>
-          )}
-        </div>
-        <div className='input-field'>
-          <label className='label'>Gender:</label>
-          <select
-            name='gender'
-            ref={register({ required: 'FIELD IS REQUIRED' })}
-          >
-            <option value='Male'>Male</option>
-            <option value='Female'>Female</option>
-          </select>
-          {errors.gender && (
-            <p className='input-error'>{errors.gender?.message}</p>
-          )}
-        </div>
-        <div className='input-field'>
-          <textarea
-            name='bio'
-            ref={register({ required: 'FIELD IS REQUIRED' })}
-            placeholder='Bio'
-          />
-          {errors.bio && <p className='input-error'>{errors.bio?.message}</p>}
-        </div>
 
         <input
           type='submit'
           className='btn'
-          value='Sign up'
+          value='Register'
           disabled={loading}
         />
       </form>
+
+      <NavLink to='/login' className='auth__link'>
+        Already have an account? Than Login{' '}
+      </NavLink>
     </div>
   );
 };

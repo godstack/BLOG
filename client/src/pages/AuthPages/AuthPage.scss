@@ -11,9 +11,17 @@ $text-color: white;
     text-align: center;
     border-bottom: 3px solid #4f6294;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 120px;
     color: $text-color;
     font-size: 3rem;
+  }
+
+  .auth__link {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    color: $text-color;
+    font-size: 1.5rem;
   }
 }
 
@@ -68,6 +76,10 @@ $text-color: white;
   .btn:hover {
     letter-spacing: 0.6rem;
     background: #bf1650;
+  }
+
+  .btn:disabled {
+    background: rgb(153, 150, 150);
   }
 
   .input-error {
