@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://godlexa:1mongoose1@cluster0.augvv.azure.mongodb.net/app?retryWrites=true&w=majority",
+  "jwtSecret": "Oleksii's Blog"
+}

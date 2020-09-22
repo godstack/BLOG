@@ -1,0 +1,83 @@
+$btn-color: #ec5990;
+$text-color: white;
+
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #15202b;
+  padding: 20px 40px;
+
+  .auth__header {
+    text-align: center;
+    border-bottom: 3px solid #4f6294;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: $text-color;
+    font-size: 3rem;
+  }
+}
+
+%input-styles {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  background: #192734;
+  border-bottom: 3px solid #8899a6;
+  color: $text-color;
+}
+
+.auth-form {
+  width: 50%;
+  margin: 0 auto;
+
+  input {
+    @extend %input-styles;
+  }
+
+  textarea {
+    @extend %input-styles;
+  }
+
+  select {
+    @extend %input-styles;
+  }
+
+  .btn {
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    border: none;
+    background: $btn-color;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    border: 1px solid $btn-color;
+    transition: all 0.5s ease-in-out;
+    color: $text-color;
+  }
+
+  .label {
+    margin-bottom: 5px;
+    color: $text-color;
+    display: block;
+    font-size: 1.3rem;
+  }
+
+  .btn:hover {
+    letter-spacing: 0.6rem;
+    background: #bf1650;
+  }
+
+  .input-error {
+    color: $text-color;
+    padding: 5px 10px;
+    font-size: 1.3rem;
+    color: rgb(218, 42, 42);
+    border: 2px dashed rgb(218, 42, 42);
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+}
