@@ -65,16 +65,6 @@ router.post(
 
       console.log('session', req.session);
 
-      const token = jwt.sign(
-        {
-          userId: user.id
-        },
-        config.get('jwtSecret'),
-        {
-          expiresIn: '1h'
-        }
-      );
-
       res
         .status(201)
         .json({ message: 'New User was created!', user: sessionUser });
@@ -159,9 +149,9 @@ router.delete('/logout', async (req, res) => {
 });
 
 router.get('/authchecker', (req, res) => {
-  const sessUser = req.session.user;
-  if (sessUser) {
-    return res.json({ message: ' Authenticated Successfully', sessUser });
+  const { user } = req.session;
+  if (user) {
+    return res.json({ message: ' Authenticated Successfully', user });
   } else {
     return res.status(401).json({ message: 'Unauthorized' });
   }

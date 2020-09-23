@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 import { useHttp } from '../../hooks/http.hook';
 import { NavLink } from 'react-router-dom';
 import './AuthPage.scss';
+import { useDispatch } from 'react-redux';
+import { requestRegister } from '../../redux/actions';
 
 export const RegisterPage = () => {
   const { loading, request } = useHttp();
   const { register, errors, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = async formData => {
     try {
-      const data = await request('/api/auth/register', 'POST', { ...formData });
-      console.log(data);
+      dispatch(requestRegister({ ...formData }));
     } catch (e) {}
   };
 

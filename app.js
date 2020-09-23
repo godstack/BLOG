@@ -13,7 +13,7 @@ app.use(express.json({ extended: true }));
 app.use(express.json());
 
 const mongoDBstore = new MongoDBStore({
-  uri: config.get('mongUri'),
+  uri: config.get('mongoUri'),
   collection: 'mySessions'
 });
 
