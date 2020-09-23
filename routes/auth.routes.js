@@ -63,8 +63,6 @@ router.post(
 
       req.session.user = sessionUser;
 
-      console.log('session', req.session);
-
       res
         .status(201)
         .json({ message: 'New User was created!', user: sessionUser });
@@ -118,8 +116,6 @@ router.post(
 
       req.session.user = sessionUser;
 
-      console.log('session', req.session);
-
       res.json({ message: 'Successful login', user: sessionUser });
     } catch (e) {
       res.status(500).json({ message: 'Something went wrong, try again' });
@@ -132,18 +128,14 @@ router.delete('/logout', async (req, res) => {
     const { user } = req.session;
 
     if (user) {
-      const err = await req.session.destroy();
-      if (err) {
-        throw err;
-      }
+      await req.session.destroy();
 
       res.clearCookie(config.get('SESS_NAME'));
-      res.json({ user });
+      res.json({ message: 'Successful logout' });
     } else {
       throw new Error('Something went wrong');
     }
   } catch (e) {
-    console.log(e);
     res.status(422).json({ message: 'Something went wrong, try again' });
   }
 });

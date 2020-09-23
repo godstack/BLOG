@@ -1,15 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useHttp } from '../../hooks/http.hook';
+
 import { NavLink } from 'react-router-dom';
 import './AuthPage.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { requestRegister } from '../../redux/actions';
 
 export const RegisterPage = () => {
-  const { loading, request } = useHttp();
   const { register, errors, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.session.loading);
 
   const onSubmit = async formData => {
     try {
