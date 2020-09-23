@@ -1,0 +1,51 @@
+$border: 2px solid #2f3b44;
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  width: 20%;
+  height: 100vh;
+  padding: 20px 0;
+  background: rgb(21, 32, 43);
+  border-right: $border;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .header__item {
+    font-size: 2rem;
+    width: 80%;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px 20px;
+
+    i {
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+
+    a.active {
+      color: #2a98df;
+    }
+  }
+
+  .header__item:hover {
+    background: #152c3e;
+    color: #2a98df;
+  }
+
+  .logout {
+    margin-top: auto;
+    border-top: $border;
+  }
+}

@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 /* Убираем внутренние отступы */
 ul[class],
 ol[class] {
@@ -80,7 +84,15 @@ select {
 .app-loader-wrapper {
   width: 100%;
   height: 100vh;
+  background: rgb(21, 32, 43);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.main-authorized {
+  background: rgb(21, 32, 43);
+  width: 100vw;
+  min-height: 100vh;
+  padding: 20px 20px 20px calc(20% + 20px);
 }

@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestCheckAuth } from './redux/actions';
 import { Loader } from './components/Loader/Loader';
+import { Header } from './components/Header/Header';
+import classNames from 'classnames';
 
 function App() {
   const dispatch = useDispatch();
@@ -11,7 +13,7 @@ function App() {
 
   useEffect(() => {
     dispatch(requestCheckAuth());
-  }, []);
+  }, [dispatch]);
 
   const isAuthorized = useSelector(state => !!state.session.userId);
 
@@ -27,7 +29,10 @@ function App() {
 
   return (
     <Router>
-      <main>{routes}</main>
+      {isAuthorized && <Header />}
+      <main className={classNames({ 'main-authorized': isAuthorized })}>
+        {routes}
+      </main>
     </Router>
   );
 }
