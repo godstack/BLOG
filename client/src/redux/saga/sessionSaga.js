@@ -5,7 +5,7 @@ import {
   setAuthUser,
   showSessionLoading
 } from '../actions';
-import { request } from '../request';
+import axios from 'axios';
 
 import {
   REQUEST_CHECK_AUTH,
@@ -17,13 +17,15 @@ import {
 function* workerLoginSaga({ payload: formData }) {
   yield put(showSessionLoading());
   try {
-    const data = yield call(request, '/api/auth/login', 'POST', {
+    const response = yield call(axios.post, '/api/auth/login', {
       ...formData
     });
-    yield put(setAuthUser(data.user));
+
+    yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
   } catch (e) {
+    console.log('error', e);
     yield put(hideSessionLoading());
   }
 }
@@ -31,13 +33,15 @@ function* workerLoginSaga({ payload: formData }) {
 function* workerRegisterSaga({ payload: formData }) {
   yield put(showSessionLoading());
   try {
-    const data = yield call(request, '/api/auth/register', 'POST', {
+    const response = yield call(axios.post, '/api/auth/register', {
       ...formData
     });
-    yield put(setAuthUser(data.user));
+
+    yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
   } catch (e) {
+    console.log('error', e);
     yield put(hideSessionLoading());
   }
 }
@@ -45,10 +49,11 @@ function* workerRegisterSaga({ payload: formData }) {
 function* workerLogoutSaga() {
   yield put(showSessionLoading());
   try {
-    yield call(request, 'api/auth/logout', 'DELETE');
+    yield call(axios.delete, 'api/auth/logout');
     yield put(logoutAuthUser());
     yield put(hideSessionLoading());
   } catch (e) {
+    console.log('error', e);
     yield put(hideSessionLoading());
   }
 }
@@ -56,13 +61,14 @@ function* workerLogoutSaga() {
 function* workerCheckAuthSaga() {
   yield put(showSessionLoading());
   try {
-    const data = yield call(request, '/api/auth/authchecker', 'GET');
-    if (data.user) {
-      yield put(setAuthUser(data.user));
+    const response = yield call(axios.get, '/api/auth/authchecker');
+    if (response.data.user) {
+      yield put(setAuthUser(response.data.user));
     }
 
     yield put(hideSessionLoading());
   } catch (e) {
+    console.log('error', e);
     yield put(hideSessionLoading());
   }
 }

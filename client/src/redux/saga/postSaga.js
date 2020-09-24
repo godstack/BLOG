@@ -1,12 +1,13 @@
 import { call, takeLatest } from 'redux-saga/effects';
-import { request } from '../request';
+import axios from 'axios';
 import { REQUEST_CREATE_POST } from '../types';
 
 function* workerPostCreateSaga({ payload: formData }) {
   console.log(formData);
-  yield call(request, '/api/post/create', 'POST', formData);
 
-  // console.log(formData);
+  const response = yield call(axios.post, '/api/post/create', formData);
+
+  console.log(response);
 }
 
 export function* postSaga() {

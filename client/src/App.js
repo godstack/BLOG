@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 function App() {
   const dispatch = useDispatch();
+
   const loading = useSelector(state => state.session.loading);
 
   useEffect(() => {

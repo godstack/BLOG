@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { requestCreatePost } from '../../redux/actions';
-import { request } from '../../redux/request';
+
 import './CreatePage.scss';
 
 export const CreatePage = () => {
@@ -17,8 +17,7 @@ export const CreatePage = () => {
     fd.append('text', data.text);
     fd.append('img', data.img[0], data.img[0].name);
 
-    request('/api/post/create', 'POST', fd);
-    // dispatch(requestCreatePost(fd));
+    dispatch(requestCreatePost(fd));
   };
 
   return (
