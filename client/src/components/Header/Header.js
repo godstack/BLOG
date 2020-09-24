@@ -35,7 +35,7 @@ export const Header = () => {
         </NavLink>
       </div>
       <div className='header__item'>
-        <NavLink to='/create-post'>
+        <NavLink to='/create-page'>
           <i className='far fa-plus-square'></i>
           <span className='item__name'>Create Post</span>
         </NavLink>

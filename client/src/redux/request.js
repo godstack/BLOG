@@ -5,10 +5,12 @@ export const request = async (
   headers = {}
 ) => {
   try {
-    if (body) {
-      body = JSON.stringify(body);
-      headers['Content-Type'] = 'application/json';
-    }
+    // if (body) {
+    //   body = JSON.stringify(body);
+    //   // headers['Content-Type'] = 'application/json';
+
+    //   headers['Content-Type'] = 'multipart/form-data';
+    // }
 
     const response = await fetch(url, {
       method,

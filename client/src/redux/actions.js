@@ -2,6 +2,7 @@ import {
   HIDE_SESSION_LOADING,
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
+  REQUEST_CREATE_POST,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
   REQUEST_REGISTER,
@@ -57,5 +58,14 @@ export const showSessionLoading = () => {
 export const hideSessionLoading = () => {
   return {
     type: HIDE_SESSION_LOADING
+  };
+};
+
+// posts
+
+export const requestCreatePost = formData => {
+  return {
+    type: REQUEST_CREATE_POST,
+    payload: formData
   };
 };
