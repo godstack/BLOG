@@ -34,6 +34,12 @@ export const Header = () => {
           <span className='item__name'>Users</span>
         </NavLink>
       </div>
+      <div className='header__item'>
+        <NavLink to='/create-post'>
+          <i className='far fa-plus-square'></i>
+          <span className='item__name'>Create Post</span>
+        </NavLink>
+      </div>
 
       <div className='header__item logout' onClick={handleLogout}>
         <i className='fas fa-door-open'></i>
