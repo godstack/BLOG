@@ -3,5 +3,8 @@
   "mongoUri": "mongodb+srv://godlexa:1mongoose1@cluster0.augvv.azure.mongodb.net/app?retryWrites=true&w=majority",
   "jwtSecret": "Oleksii's Blog",
   "SESS_NAME": "sid",
-  "SESS_SECRET": "secret!session"
+  "SESS_SECRET": "secret!session",
+  "CLOUDINARY_NAME": "dlhi0pku2",
+  "CLOUDINARY_API_KEY": "124814921528481",
+  "CLOUDINARY_API_SECRET": "QUMi47VhJ96pzEKKgROLhIAfuEY"
 }

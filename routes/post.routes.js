@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const { Types } = require('mongoose');
 const router = Router();
+const { cloudinary } = require('../utils/cloudnary');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -38,15 +39,29 @@ const upload = multer({
 
 router.post('/create', upload.single('img'), async (req, res) => {
   try {
-    // const { user: sessUser } = req.session;
+    const { user: sessUser } = req.session;
 
-    // if (!sessUser) {
-    //   return res.status(401).json({ message: 'Unauthorized' });
-    // }
+    if (!sessUser) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { title, text } = req.body;
 
     console.log(req.file, JSON.stringify(req.body));
 
+    const encoded = Buffer.from(req.file, 'base64');
+
+    console.log('encoded', encoded);
+
+    const uploadResponse = await cloudinary.uploader.upload(encoded, {
+      upload_preset: 'dev_setups'
+    });
+
+    console.log(uploadResponse);
+
     // const user = await User.findById(sessUser.userId);
+
+    // const post = new Post({ title, text,  });
 
     return res.json({ message: 'ok' });
   } catch (e) {

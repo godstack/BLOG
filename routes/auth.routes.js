@@ -3,7 +3,7 @@ const User = require('../models/User');
 const { validationResult, check } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const config = require('config');
-const sessionizeUser = require('../util/helpers');
+const sessionizeUser = require('../utils/helpers');
 const router = Router();
 
 // /api/auth/register
