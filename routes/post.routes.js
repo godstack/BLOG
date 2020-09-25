@@ -45,28 +45,41 @@ router.post('/create', upload.single('img'), async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { title, text } = req.body;
+    const { text } = req.body;
 
-    console.log(req.file, JSON.stringify(req.body));
+    const user = await User.findById(sessUser.userId);
 
-    const encoded = Buffer.from(req.file, 'base64');
+    const result = await cloudinary.uploader.upload(req.file.path);
 
-    console.log('encoded', encoded);
-
-    const uploadResponse = await cloudinary.uploader.upload(encoded, {
-      upload_preset: 'dev_setups'
+    const post = new Post({
+      text,
+      author: sessUser.userId,
+      image: result.url
     });
 
-    console.log(uploadResponse);
+    user.posts.push(post.id);
 
-    // const user = await User.findById(sessUser.userId);
+    await post.save();
 
-    // const post = new Post({ title, text,  });
+    await user.save();
 
-    return res.json({ message: 'ok' });
+    return res.json({
+      message: 'Post was successfully created!',
+      postId: post.id
+    });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: 'Something went wrong!' });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    res.json({ post });
+  } catch (e) {
+    console.log(e.message);
   }
 });
 

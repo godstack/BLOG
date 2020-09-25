@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   userId: null,
-  loading: false
+  loading: true
 };
 
 export const sessionReducer = (state = initialState, action) => {

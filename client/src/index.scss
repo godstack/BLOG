@@ -90,9 +90,9 @@ select {
   align-items: center;
 }
 
-.main-authorized {
-  background: rgb(21, 32, 43);
-  width: 100vw;
+.workspace {
+  margin-left: 20%;
+  background: rgb(31, 47, 63);
   min-height: 100vh;
-  padding: 20px 20px 20px calc(20% + 20px);
+  color: white;
 }

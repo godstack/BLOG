@@ -5,16 +5,20 @@ import { LoginPage } from './pages/AuthPages/LoginPage';
 import { RegisterPage } from './pages/AuthPages/RegisterPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
+import { PostPage } from './pages/PostPage/PostPage';
 
 export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
     return (
-      <Switch>
-        <Route path='/profile' exact component={ProfilePage} />
-        <Route path='/home' exact component={HomePage} />
-        <Route path='/create-page' exact component={CreatePage} />
-        <Redirect to='/profile' />
-      </Switch>
+      <section className='workspace'>
+        <Switch>
+          <Route path='/profile' exact component={ProfilePage} />
+          <Route path='/home' exact component={HomePage} />
+          <Route path='/create-post' exact component={CreatePage} />
+          <Route path='/post' exact component={PostPage} />
+          <Redirect to='/profile' />
+        </Switch>
+      </section>
     );
   }
 

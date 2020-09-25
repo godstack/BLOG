@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { requestCheckAuth } from './redux/actions';
 import { Loader } from './components/Loader/Loader';
 import { Header } from './components/Header/Header';
-import classNames from 'classnames';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ function App() {
   }, [dispatch]);
 
   const isAuthorized = useSelector(state => !!state.session.userId);
-
   const routes = useRoutes(isAuthorized);
 
   if (loading) {
@@ -31,9 +29,7 @@ function App() {
   return (
     <Router>
       {isAuthorized && <Header />}
-      <main className={classNames({ 'main-authorized': isAuthorized })}>
-        {routes}
-      </main>
+      <main>{routes}</main>
     </Router>
   );
 }

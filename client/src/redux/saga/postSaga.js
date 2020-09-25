@@ -1,5 +1,6 @@
-import { call, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { push } from 'connected-react-router';
 import { REQUEST_CREATE_POST } from '../types';
 
 function* workerPostCreateSaga({ payload: formData }) {
@@ -8,6 +9,8 @@ function* workerPostCreateSaga({ payload: formData }) {
   const response = yield call(axios.post, '/api/post/create', formData);
 
   console.log(response);
+
+  yield put(push(`/post/${response.postId}`));
 }
 
 export function* postSaga() {
