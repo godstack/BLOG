@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { requestCreatePost } from '../../redux/actions';
-import { useHistory } from 'react-router-dom';
+
+import { Loader } from '../../components/Loader/Loader';
 
 import './CreatePage.scss';
 
 export const CreatePage = () => {
   const { register, errors, handleSubmit } = useForm();
   const dispatch = useDispatch();
+
+  const loading = useSelector(state => state.post.loading);
 
   const [file, setFile] = useState(null);
 
@@ -32,18 +35,20 @@ export const CreatePage = () => {
     dispatch(requestCreatePost(fd));
   };
 
-  const history = useHistory();
-
   return (
     <section className='create-page'>
       <h2 className='create-page__header'>Add a new POST</h2>
 
+      {loading && (
+        <div className='app-loader-wrapper'>
+          <Loader />
+        </div>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>
-        <button type='submit' className='post-form-btn'>
+        <button type='submit' className='post-form-btn' disabled={loading}>
           Submit
         </button>
-
-        <button onClick={() => history.push('/profile')}>history</button>
 
         <textarea
           className='post-form__textarea'

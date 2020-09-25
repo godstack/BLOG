@@ -1,4 +1,5 @@
 import {
+  HIDE_CREATE_POST_LOADING,
   HIDE_SESSION_LOADING,
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
@@ -7,6 +8,7 @@ import {
   REQUEST_LOGOUT,
   REQUEST_REGISTER,
   SET_AUTH_USER,
+  SHOW_CREATE_POST_LOADING,
   SHOW_SESSION_LOADING
 } from './types';
 
@@ -67,5 +69,17 @@ export const requestCreatePost = formData => {
   return {
     type: REQUEST_CREATE_POST,
     payload: formData
+  };
+};
+
+export const showCreatePostLoading = () => {
+  return {
+    type: SHOW_CREATE_POST_LOADING
+  };
+};
+
+export const hideCreatePostLoading = () => {
+  return {
+    type: HIDE_CREATE_POST_LOADING
   };
 };

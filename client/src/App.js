@@ -19,7 +19,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className='app-loader-wrapper'>
+      <div className='app-loader-wrapper loader-bg'>
         <Loader />
       </div>
     );
@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       {isAuthorized && <Header />}
-      <main>{routes}</main>
+      <main> {routes}</main>
     </>
   );
 }
