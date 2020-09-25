@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { requestCreatePost } from '../../redux/actions';
+import { useHistory } from 'react-router-dom';
 
 import './CreatePage.scss';
 
@@ -31,6 +32,8 @@ export const CreatePage = () => {
     dispatch(requestCreatePost(fd));
   };
 
+  const history = useHistory();
+
   return (
     <section className='create-page'>
       <h2 className='create-page__header'>Add a new POST</h2>
@@ -39,6 +42,8 @@ export const CreatePage = () => {
         <button type='submit' className='post-form-btn'>
           Submit
         </button>
+
+        <button onClick={() => history.push('/profile')}>history</button>
 
         <textarea
           className='post-form__textarea'

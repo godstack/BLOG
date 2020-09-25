@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRoutes } from './routes';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestCheckAuth } from './redux/actions';
 import { Loader } from './components/Loader/Loader';
@@ -27,10 +26,10 @@ function App() {
   }
 
   return (
-    <Router>
+    <>
       {isAuthorized && <Header />}
       <main>{routes}</main>
-    </Router>
+    </>
   );
 }
 

@@ -15,7 +15,7 @@ export const useRoutes = isAuthenticated => {
           <Route path='/profile' exact component={ProfilePage} />
           <Route path='/home' exact component={HomePage} />
           <Route path='/create-post' exact component={CreatePage} />
-          <Route path='/post' exact component={PostPage} />
+          <Route path='/post/:postId' component={PostPage} />
           <Redirect to='/profile' />
         </Switch>
       </section>

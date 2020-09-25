@@ -4,6 +4,7 @@ import './PostPage.scss';
 export const PostPage = () => {
   return (
     <section className='post-page'>
+      Post page
       <div className='post-page__img'></div>
     </section>
   );

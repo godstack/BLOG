@@ -10,7 +10,7 @@ import configureStore from './redux/configureStore';
 import './index.scss';
 
 const store = configureStore();
-debugger;
+
 const app = (
   <Provider store={store}>
     <ConnectedRouter history={history}>
