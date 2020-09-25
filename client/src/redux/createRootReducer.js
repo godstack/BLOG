@@ -8,8 +8,8 @@ import { connectRouter } from 'connected-react-router';
 //     router: connectRouter(history)
 //   });
 
-export const createRootReducer = () =>
+export const createRootReducer = history =>
   combineReducers({
+    router: connectRouter(history),
     session: sessionReducer
-    // router: connectRouter(history)
   });

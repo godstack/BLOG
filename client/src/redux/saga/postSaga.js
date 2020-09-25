@@ -10,7 +10,7 @@ function* workerPostCreateSaga({ payload: formData }) {
 
   console.log(response);
 
-  yield put(push(`/post/${response.postId}`));
+  yield put(push(`/post/${response.data.postId}`));
 }
 
 export function* postSaga() {

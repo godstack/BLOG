@@ -13,11 +13,9 @@ export const history = createBrowserHistory();
 
 export default function configureStore() {
   const store = createStore(
-    createRootReducer(),
-    //     createRootReducer(history),
+    createRootReducer(history),
     composeWithDevTools(
-      applyMiddleware(sagaMiddleware)
-      //   routerMiddleware(history)
+      applyMiddleware(routerMiddleware(history), sagaMiddleware)
     )
   );
 
