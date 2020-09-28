@@ -1,21 +1,32 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
-import { REQUEST_CREATE_POST } from '../types';
-import { hideCreatePostLoading, showCreatePostLoading } from '../actions';
+import { REQUEST_CREATE_POST, REQUEST_GET_POST } from '../types';
+import {
+  hideCreatePostLoading,
+  setPostPage,
+  showCreatePostLoading
+} from '../actions';
 
 function* workerPostCreateSaga({ payload: formData }) {
-  console.log(formData);
   yield put(showCreatePostLoading());
   const response = yield call(axios.post, '/api/post/create', formData);
-
-  console.log(response);
 
   yield put(push(`/post/${response.data.postId}`));
 
   yield put(hideCreatePostLoading());
 }
 
+function* workerPostGet(args) {
+  console.log('from worker', args.payload);
+
+  const response = yield call(axios.get, `/api/post/${args.payload}`);
+
+  console.log(response);
+  yield put(setPostPage(response.data));
+}
+
 export function* postSaga() {
   yield takeLatest(REQUEST_CREATE_POST, workerPostCreateSaga);
+  yield takeEvery(REQUEST_GET_POST, workerPostGet);
 }

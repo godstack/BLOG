@@ -75,9 +75,22 @@ router.post('/create', upload.single('img'), async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
+    const { user: sessUser } = req.session;
+
+    if (!sessUser) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
     const post = await Post.findById(req.params.id);
 
-    res.json({ post });
+    const author = await User.findById(post.author);
+
+    const resAuthorInfo = {
+      username: author.username,
+      profileImg: author.profileImg
+    };
+
+    res.json({ post, author: resAuthorInfo });
   } catch (e) {
     console.log(e.message);
   }

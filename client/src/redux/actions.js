@@ -4,10 +4,12 @@ import {
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
   REQUEST_CREATE_POST,
+  REQUEST_GET_POST,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
   REQUEST_REGISTER,
   SET_AUTH_USER,
+  SET_POST_PAGE,
   SHOW_CREATE_POST_LOADING,
   SHOW_SESSION_LOADING
 } from './types';
@@ -81,5 +83,19 @@ export const showCreatePostLoading = () => {
 export const hideCreatePostLoading = () => {
   return {
     type: HIDE_CREATE_POST_LOADING
+  };
+};
+
+export const requestGetPost = postId => {
+  return {
+    type: REQUEST_GET_POST,
+    payload: postId
+  };
+};
+
+export const setPostPage = post => {
+  return {
+    type: SET_POST_PAGE,
+    payload: post
   };
 };

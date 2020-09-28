@@ -7,6 +7,7 @@ const schema = new Schema({
   posts: [{ type: Types.ObjectId, ref: 'Post' }],
   likes: [{ type: Types.ObjectId, ref: 'Post' }],
   birthday: { type: Date },
+  profileImg: { type: String },
   gender: { type: String },
   bio: { type: String }
 });

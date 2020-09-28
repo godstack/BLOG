@@ -1,0 +1,30 @@
+.post-card {
+  width: 90%;
+  margin: 20px auto;
+  display: grid;
+  padding: 10px;
+  background: #000;
+  grid-template-areas:
+    'authorImg username . . .'
+    '. postImg postImg postImg postImg'
+    '. text text text text';
+
+  .post-card__authorImg {
+    grid-area: authorImg;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3d3e40;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .post-card__img {
+    grid-area: postImg;
+  }
+
+  .post-card__authorUsername {
+    grid-area: username;
+  }
+}
