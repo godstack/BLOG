@@ -9,7 +9,7 @@ export const PostCard = ({ post, author }) => {
         style={{ backgroundImage: `url(${author.profileImg})` }}
       />
 
-      <div className='post-card__authorUsername'>{author.username}</div>
+      <div className='post-card__authorUsername'>@{author.username}</div>
       <div
         className='post-card__img'
         style={{ backgroundImage: `url(${post.image})` }}

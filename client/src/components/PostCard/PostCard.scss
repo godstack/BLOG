@@ -2,12 +2,17 @@
   width: 90%;
   margin: 20px auto;
   display: grid;
-  padding: 10px;
-  background: #000;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #38444d;
+  border-radius: 10px;
   grid-template-areas:
-    'authorImg username . . .'
-    '. postImg postImg postImg postImg'
-    '. text text text text';
+    'authorImg username '
+    '. postImg '
+    '. text';
+  grid-template-columns: 60px calc(100% - 80px);
+
+  gap: 20px;
 
   .post-card__authorImg {
     grid-area: authorImg;
@@ -22,9 +27,24 @@
 
   .post-card__img {
     grid-area: postImg;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
   }
 
   .post-card__authorUsername {
     grid-area: username;
+    font-size: 1.5rem;
+    font-weight: 500;
+    align-self: center;
+  }
+
+  .post-card__text {
+    grid-area: text;
+    font-size: 1.2rem;
+    word-wrap: break-word;
   }
 }
