@@ -6,17 +6,21 @@ import { RegisterPage } from './pages/AuthPages/RegisterPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
+import { useSelector } from 'react-redux';
 
 export const useRoutes = isAuthenticated => {
+  const { username } = useSelector(state => state.session.user);
+
   if (isAuthenticated) {
     return (
       <section className='workspace'>
         <Switch>
-          <Route path='/profile' exact component={ProfilePage} />
+          <Route path='/profile/:username' exact component={ProfilePage} />
           <Route path='/home' exact component={HomePage} />
           <Route path='/create-post' exact component={CreatePage} />
           <Route path='/post/:postId' component={PostPage} />
-          <Redirect to='/profile' />
+
+          <Redirect to={`/profile/${username}`} />
         </Switch>
       </section>
     );

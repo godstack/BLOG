@@ -37,6 +37,7 @@ app.use(
 
 app.use('/api/auth/', require('./routes/auth.routes'));
 app.use('/api/post/', require('./routes/post.routes'));
+app.use('/api/user/', require('./routes/user.routes'));
 
 const PORT = config.get('port') || 5000;
 

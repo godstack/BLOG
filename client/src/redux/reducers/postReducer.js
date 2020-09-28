@@ -2,7 +2,7 @@ import {
   HIDE_CREATE_POST_LOADING,
   SET_POST_PAGE,
   SHOW_CREATE_POST_LOADING
-} from './types';
+} from '../types';
 
 const initialState = {
   postPage: { post: null, author: null },

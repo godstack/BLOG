@@ -49,7 +49,7 @@ function* workerRegisterSaga({ payload: formData }) {
 function* workerLogoutSaga() {
   yield put(showSessionLoading());
   try {
-    yield call(axios.delete, 'api/auth/logout');
+    yield call(axios.delete, '/api/auth/logout');
     yield put(logoutAuthUser());
     yield put(hideSessionLoading());
   } catch (e) {

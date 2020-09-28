@@ -3,10 +3,10 @@ import {
   LOGOUT_AUTH_USER,
   SET_AUTH_USER,
   SHOW_SESSION_LOADING
-} from './types';
+} from '../types';
 
 const initialState = {
-  userId: null,
+  user: { userId: null, username: null },
   loading: true
 };
 
@@ -17,9 +17,9 @@ export const sessionReducer = (state = initialState, action) => {
     case HIDE_SESSION_LOADING:
       return { ...state, loading: false };
     case SET_AUTH_USER:
-      return { ...state, userId: action.payload.userId };
+      return { ...state, user: action.payload };
     case LOGOUT_AUTH_USER:
-      return { ...state, userId: null };
+      return { ...state, user: { userId: null, username: null } };
     default:
       return state;
   }

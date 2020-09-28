@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { requestLogout } from '../../redux/actions';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const { username } = useSelector(state => state.session.user);
 
   const handleLogout = () => {
     dispatch(requestLogout());
@@ -24,7 +25,7 @@ export const Header = () => {
           </NavLink>
         </div>
         <div className='header__item'>
-          <NavLink to='/profile'>
+          <NavLink to={`/profile/${username}`}>
             <i className='fas fa-user-circle'></i>
             <span className='item__name'>Profile</span>
           </NavLink>

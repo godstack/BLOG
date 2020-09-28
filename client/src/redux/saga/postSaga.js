@@ -17,10 +17,10 @@ function* workerPostCreateSaga({ payload: formData }) {
   yield put(hideCreatePostLoading());
 }
 
-function* workerPostGet(args) {
-  console.log('from worker', args.payload);
+function* workerPostGet({ payload }) {
+  console.log('from worker', payload);
 
-  const response = yield call(axios.get, `/api/post/${args.payload}`);
+  const response = yield call(axios.get, `/api/post/${payload}`);
 
   console.log(response);
   yield put(setPostPage(response.data));

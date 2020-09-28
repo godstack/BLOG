@@ -5,11 +5,13 @@ import {
   REQUEST_CHECK_AUTH,
   REQUEST_CREATE_POST,
   REQUEST_GET_POST,
+  REQUEST_GET_PROFILE_INFO,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
   REQUEST_REGISTER,
   SET_AUTH_USER,
   SET_POST_PAGE,
+  SET_PROFILE_INFO,
   SHOW_CREATE_POST_LOADING,
   SHOW_SESSION_LOADING
 } from './types';
@@ -97,5 +99,20 @@ export const setPostPage = post => {
   return {
     type: SET_POST_PAGE,
     payload: post
+  };
+};
+
+export const requestGetProfileInfo = (username, currentPage) => {
+  console.log('action');
+  return {
+    type: REQUEST_GET_PROFILE_INFO,
+    payload: { username, currentPage }
+  };
+};
+
+export const setProfileInfo = profileInfo => {
+  return {
+    type: SET_PROFILE_INFO,
+    payload: profileInfo
   };
 };

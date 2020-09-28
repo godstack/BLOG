@@ -14,7 +14,7 @@ function App() {
     dispatch(requestCheckAuth());
   }, [dispatch]);
 
-  const isAuthorized = useSelector(state => !!state.session.userId);
+  const isAuthorized = useSelector(state => !!state.session.user.userId);
   const routes = useRoutes(isAuthorized);
 
   if (loading) {
