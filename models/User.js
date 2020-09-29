@@ -10,8 +10,8 @@ const schema = new Schema({
   profileImg: { type: String, default: null },
   gender: { type: String, default: null },
   bio: { type: String, default: null },
-  following: [{ type: Types.ObjectId, ref: 'User' }],
-  followers: [{ type: Types.ObjectId, ref: 'User' }]
+  followers: [{ type: Types.ObjectId, ref: 'User' }],
+  following: [{ type: Types.ObjectId, ref: 'User' }]
 });
 
 module.exports = model('User', schema);

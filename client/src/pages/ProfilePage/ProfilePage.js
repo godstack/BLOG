@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { requestGetProfileInfo } from '../../redux/actions';
+import { requestFollow, requestGetProfileInfo } from '../../redux/actions';
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
+import classNames from 'classnames';
 import './ProfilePage.scss';
 
 export const ProfilePage = () => {
@@ -14,8 +15,27 @@ export const ProfilePage = () => {
     state => state.profile
   );
 
+  const { user: authUser } = useSelector(state => state.session);
+
+  const handleFollow = () => {
+    dispatch(requestFollow(user.username));
+  };
+
   const showFollowBtn = () => {
-    return <button className='btn'>Follow</button>;
+    debugger;
+    const isSelfAccount = authUser.userId === user.id;
+
+    if (isSelfAccount) {
+      return <div className='empty'></div>;
+    }
+
+    const isExist = user.followers.find(id => id === authUser.userId);
+
+    return (
+      <button className={classNames('btn')} onClick={handleFollow}>
+        {isExist ? 'Unfollow' : 'Follow'}
+      </button>
+    );
   };
 
   useEffect(() => {

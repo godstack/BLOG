@@ -5,12 +5,14 @@ import {
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
   REQUEST_CREATE_POST,
+  REQUEST_FOLLOW,
   REQUEST_GET_POST,
   REQUEST_GET_PROFILE_INFO,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
   REQUEST_REGISTER,
   SET_AUTH_USER,
+  SET_FOLLOWERS,
   SET_POST_PAGE,
   SET_PROFILE_INFO,
   SHOW_CREATE_POST_LOADING,
@@ -127,5 +129,19 @@ export const showProfileLoading = () => {
 export const hideProfileLoading = () => {
   return {
     type: HIDE_PROFILE_LOADING
+  };
+};
+
+export const requestFollow = username => {
+  return {
+    type: REQUEST_FOLLOW,
+    payload: username
+  };
+};
+
+export const setFollowers = followers => {
+  return {
+    type: SET_FOLLOWERS,
+    payload: followers
   };
 };
