@@ -25,12 +25,10 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
 }
 
 function* workerFollow({ payload }) {
-  console.log(payload);
   yield put(showFollowLoading());
   const response = yield call(axios.put, `/api/user/${payload}/follow`);
   yield put(setFollowers(response.data.followers));
   yield put(hideFollowLoading());
-  // console.log();
 }
 
 export function* userSaga() {

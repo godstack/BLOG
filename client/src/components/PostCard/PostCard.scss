@@ -55,13 +55,12 @@
 
   .post_actions {
     grid-area: actions;
-
     display: flex;
     justify-content: space-around;
     align-content: center;
 
     .icon-red {
-      color: rgb(172, 44, 44);
+      color: rgb(172, 44, 44) !important;
     }
 
     .action-item {

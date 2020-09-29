@@ -71,21 +71,14 @@ $bnt-color: #1c90d9;
     }
   }
 
-  .follow-wrapper {
+  .profile__details {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    color: rgb(148, 143, 143);
 
-    .profile__followers {
-      display: inline-block;
-      margin-right: 20px;
-      color: grey;
-    }
-
-    .profile__following {
-      display: inline-block;
-      color: grey;
-    }
-
-    .follow-amount {
+    .details-span {
       color: white;
       font-size: 1.1rem;
     }

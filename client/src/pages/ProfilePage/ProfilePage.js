@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { requestFollow, requestGetProfileInfo } from '../../redux/actions';
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
@@ -78,14 +78,17 @@ export const ProfilePage = () => {
         <div className='profile__info'>
           {showFollowBtn()}
           <div className='profile__username'>@{user.username}</div>
-          <div className='follow-wrapper'>
+          <div className='profile__details'>
             <div className='profile__followers'>
-              <span className='follow-amount'>{user.followers.length}</span>{' '}
+              <span className='details-span'>{user.followers.length}</span>{' '}
               Followers
             </div>
             <div className='profile__following'>
-              <span className='follow-amount'>{user.following.length}</span>{' '}
+              <span className='details-span'>{user.following.length}</span>{' '}
               Following
+            </div>
+            <div className='profile__following'>
+              <span className='details-span'>{postsCount}</span> posts
             </div>
           </div>
         </div>
