@@ -49,7 +49,7 @@ router.get('/profile/:username', async (req, res) => {
   }
 });
 
-router.post('/:username/follow', async (req, res) => {
+router.put('/:username/follow', async (req, res) => {
   try {
     const { user: sessUser } = req.session;
 

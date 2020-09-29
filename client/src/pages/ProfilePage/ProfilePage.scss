@@ -19,7 +19,7 @@ $bnt-color: #1c90d9;
   }
 
   .profile__user-img {
-    background-color: black;
+    background-color: rgb(151, 150, 150);
     border-radius: 50%;
     border: 2px solid white;
     height: 100px;
@@ -43,6 +43,15 @@ $bnt-color: #1c90d9;
     font-size: 1.1rem;
     font-weight: bold;
     margin: 10px auto;
+    transition: all 0.2s ease-in-out;
+
+    &:disabled {
+      background: rgb(117, 113, 113);
+    }
+
+    &:disabled:hover {
+      background: rgb(117, 113, 113);
+    }
 
     &:hover {
       background: rgba($bnt-color, 0.2);
@@ -53,6 +62,32 @@ $bnt-color: #1c90d9;
     height: 50px;
   }
 
-  .btn-following {
+  .unfollow-btn {
+    color: rgb(209, 66, 66);
+    border: 1px solid rgb(209, 66, 66);
+
+    &:hover {
+      background: rgba(209, 66, 66, 0.2);
+    }
+  }
+
+  .follow-wrapper {
+    margin-top: 20px;
+
+    .profile__followers {
+      display: inline-block;
+      margin-right: 20px;
+      color: grey;
+    }
+
+    .profile__following {
+      display: inline-block;
+      color: grey;
+    }
+
+    .follow-amount {
+      color: white;
+      font-size: 1.1rem;
+    }
   }
 }

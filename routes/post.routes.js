@@ -96,4 +96,34 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.put('/:postId/like', async (req, res) => {
+  try {
+    const { user: sessUser } = req.session;
+
+    if (!sessUser) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { postId } = req.params;
+
+    const post = await Post.findById(postId);
+
+    const isLikedByUser = post.likes.find(el => el.equals(sessUser.userId));
+
+    if (isLikedByUser) {
+      post.likes = post.likes.filter(el => !el.equals(sessUser.userId));
+    } else {
+      post.likes.push(sessUser.userId);
+    }
+
+    await post.save();
+
+    res.json(post);
+  } catch (e) {
+    res
+      .status(500)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
 module.exports = router;

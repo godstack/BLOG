@@ -2,6 +2,7 @@ import {
   HIDE_CREATE_POST_LOADING,
   HIDE_PROFILE_LOADING,
   HIDE_SESSION_LOADING,
+  HIDE_FOLLOW_LOADING,
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
   REQUEST_CREATE_POST,
@@ -16,8 +17,14 @@ import {
   SET_POST_PAGE,
   SET_PROFILE_INFO,
   SHOW_CREATE_POST_LOADING,
+  SHOW_FOLLOW_LOADING,
   SHOW_PROFILE_LOADING,
-  SHOW_SESSION_LOADING
+  SHOW_SESSION_LOADING,
+  REQUEST_LIKE_POST,
+  LIKE_POST,
+  UPDATE_PROFILE_POST,
+  SHOW_POST_UPDATE_LOADING,
+  HIDE_POST_UPDATE_LOADING
 } from './types';
 
 export const requestLogin = formData => {
@@ -143,5 +150,43 @@ export const setFollowers = followers => {
   return {
     type: SET_FOLLOWERS,
     payload: followers
+  };
+};
+
+export const showFollowLoading = () => {
+  return {
+    type: SHOW_FOLLOW_LOADING
+  };
+};
+
+export const hideFollowLoading = () => {
+  return {
+    type: HIDE_FOLLOW_LOADING
+  };
+};
+
+export const requestLikePost = postId => {
+  return {
+    type: REQUEST_LIKE_POST,
+    payload: postId
+  };
+};
+
+export const updateProfilePost = post => {
+  return {
+    type: UPDATE_PROFILE_POST,
+    payload: post
+  };
+};
+
+export const showPostUpdateLoading = () => {
+  return {
+    type: SHOW_POST_UPDATE_LOADING
+  };
+};
+
+export const hidePostUpdateLoading = () => {
+  return {
+    type: HIDE_POST_UPDATE_LOADING
   };
 };

@@ -1,8 +1,13 @@
 import {
+  HIDE_FOLLOW_LOADING,
+  HIDE_POST_UPDATE_LOADING,
   HIDE_PROFILE_LOADING,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
-  SHOW_PROFILE_LOADING
+  SHOW_FOLLOW_LOADING,
+  SHOW_POST_UPDATE_LOADING,
+  SHOW_PROFILE_LOADING,
+  UPDATE_PROFILE_POST
 } from '../types';
 
 const initialState = {
@@ -10,7 +15,9 @@ const initialState = {
   posts: null,
   postsCount: null,
   pagesCount: null,
-  loading: false
+  loading: false,
+  followLoading: false,
+  postUpdateLoading: false
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -21,8 +28,27 @@ export const profileReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case HIDE_PROFILE_LOADING:
       return { ...state, loading: false };
+    case SHOW_FOLLOW_LOADING:
+      return { ...state, followLoading: true };
+    case HIDE_FOLLOW_LOADING:
+      return { ...state, followLoading: false };
     case SET_FOLLOWERS:
-      return { ...state, followers: action.payload };
+      return { ...state, user: { ...state.user, followers: action.payload } };
+    case SHOW_POST_UPDATE_LOADING:
+      return { ...state, postUpdateLoading: true };
+    case HIDE_POST_UPDATE_LOADING:
+      return { ...state, postUpdateLoading: false };
+    case UPDATE_PROFILE_POST:
+      let { posts } = state;
+
+      for (let i = 0; i < posts.length; i++) {
+        if (posts[i]._id === action.payload._id) {
+          posts[i] = action.payload;
+          break;
+        }
+      }
+
+      return { ...state, posts };
     default:
       return state;
   }
