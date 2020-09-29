@@ -25,8 +25,6 @@ export const CreatePage = () => {
   }
 
   const onSubmit = data => {
-    console.log('data', data);
-
     const fd = new FormData();
 
     fd.append('text', data.text);
@@ -37,13 +35,13 @@ export const CreatePage = () => {
 
   return (
     <section className='create-page'>
-      <h2 className='create-page__header'>Add a new POST</h2>
-
       {loading && (
-        <div className='app-loader-wrapper'>
+        <div className='workspace-loader'>
           <Loader />
         </div>
       )}
+
+      <h2 className='create-page__header'>Add a new POST</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>
         <button type='submit' className='post-form-btn' disabled={loading}>

@@ -1,4 +1,54 @@
+$bnt-color: #1c90d9;
+
 .profile-page {
   color: white;
   padding-bottom: 20px;
+}
+
+.profile-header {
+  width: 100%;
+  border-bottom: 10px solid #2f3b44;
+
+  .profile__info {
+    padding: 5px 20px;
+  }
+
+  .profile__header-photo {
+    height: 200px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .profile__user-img {
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid white;
+    height: 100px;
+    width: 100px;
+    margin: -50px 0 -50px 20px;
+  }
+
+  .profile__username {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .btn {
+    display: block;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid $bnt-color;
+    padding: 5px 15px;
+    color: $bnt-color;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px auto;
+
+    &:hover {
+      background: rgba($bnt-color, 0.2);
+    }
+  }
+
+  .btn-following {
+  }
 }

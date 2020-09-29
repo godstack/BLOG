@@ -18,11 +18,8 @@ function* workerPostCreateSaga({ payload: formData }) {
 }
 
 function* workerPostGet({ payload }) {
-  console.log('from worker', payload);
-
   const response = yield call(axios.get, `/api/post/${payload}`);
 
-  console.log(response);
   yield put(setPostPage(response.data));
 }
 

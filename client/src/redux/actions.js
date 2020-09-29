@@ -1,5 +1,6 @@
 import {
   HIDE_CREATE_POST_LOADING,
+  HIDE_PROFILE_LOADING,
   HIDE_SESSION_LOADING,
   LOGOUT_AUTH_USER,
   REQUEST_CHECK_AUTH,
@@ -13,6 +14,7 @@ import {
   SET_POST_PAGE,
   SET_PROFILE_INFO,
   SHOW_CREATE_POST_LOADING,
+  SHOW_PROFILE_LOADING,
   SHOW_SESSION_LOADING
 } from './types';
 
@@ -103,7 +105,6 @@ export const setPostPage = post => {
 };
 
 export const requestGetProfileInfo = (username, currentPage) => {
-  console.log('action');
   return {
     type: REQUEST_GET_PROFILE_INFO,
     payload: { username, currentPage }
@@ -114,5 +115,17 @@ export const setProfileInfo = profileInfo => {
   return {
     type: SET_PROFILE_INFO,
     payload: profileInfo
+  };
+};
+
+export const showProfileLoading = () => {
+  return {
+    type: SHOW_PROFILE_LOADING
+  };
+};
+
+export const hideProfileLoading = () => {
+  return {
+    type: HIDE_PROFILE_LOADING
   };
 };

@@ -8,7 +8,7 @@ export const PostPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const { post, author } = useSelector(state => state.post.postPage);
-  console.log(post);
+
   useEffect(() => {
     dispatch(requestGetPost(params.postId));
   }, [dispatch, params.postId]);

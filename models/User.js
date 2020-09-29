@@ -6,10 +6,12 @@ const schema = new Schema({
   password: { type: String, required: true },
   posts: [{ type: Types.ObjectId, ref: 'Post' }],
   likes: [{ type: Types.ObjectId, ref: 'Post' }],
-  birthday: { type: Date },
-  profileImg: { type: String },
-  gender: { type: String },
-  bio: { type: String }
+  birthday: { type: Date, default: null },
+  profileImg: { type: String, default: null },
+  gender: { type: String, default: null },
+  bio: { type: String, default: null },
+  following: [{ type: Types.ObjectId, ref: 'User' }],
+  followers: [{ type: Types.ObjectId, ref: 'User' }]
 });
 
 module.exports = model('User', schema);
