@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
 import { useSelector } from 'react-redux';
+import { UsersPage } from './pages/UsersPage.js/UsersPage';
 
 export const useRoutes = isAuthenticated => {
   const { username } = useSelector(state => state.session.user);
@@ -19,6 +20,10 @@ export const useRoutes = isAuthenticated => {
           <Route path='/home' exact component={HomePage} />
           <Route path='/create-post' exact component={CreatePage} />
           <Route path='/post/:postId' component={PostPage} />
+          <Route
+            path={['/:username/followers', '/:username/following', '/users']}
+            component={UsersPage}
+          />
 
           <Redirect to={`/profile/${username}`} />
         </Switch>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import {
   requestGetProfileInfo,
   requestGetUserPosts
@@ -74,12 +74,16 @@ export const ProfilePage = () => {
           <div className='profile__username'>@{user.username}</div>
           <div className='profile__details'>
             <div className='details-item'>
-              <span className='details-span'>{user.followers.length}</span>{' '}
-              Followers
+              <NavLink to={`/${user.username}/followers`}>
+                <span className='details-span'>{user.followers.length}</span>{' '}
+                Followers
+              </NavLink>
             </div>
             <div className='details-item'>
-              <span className='details-span'>{user.following.length}</span>{' '}
-              Following
+              <NavLink to={`/${user.username}/following`}>
+                <span className='details-span'>{user.following.length}</span>{' '}
+                Following
+              </NavLink>
             </div>
             <div>
               <span className='details-span'>{user.posts}</span> posts

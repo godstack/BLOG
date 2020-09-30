@@ -16,7 +16,7 @@ import {
 const initialState = {
   user: null,
   posts: null,
-  postsLoading: true,
+  postsLoading: false,
   pagesCount: null,
   loading: false,
   followLoading: false,

@@ -69,8 +69,6 @@ router.put('/:username/follow', async (req, res) => {
 
     const { username } = req.params;
 
-    //
-
     const aimUser = await User.findOne({ username });
     const authorizedUser = await User.findById(sessUser.userId);
 
@@ -99,6 +97,42 @@ router.put('/:username/follow', async (req, res) => {
     res.json({
       followers: aimUser.followers
     });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: e.message });
+  }
+});
+
+router.get('/:username/followers', async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const user = await User.findOne({ username });
+
+    const followers = user.followers.map(item => ({
+      username: item.username,
+      profileImg: item.profileImg
+    }));
+
+    return res.json({ followers });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: e.message });
+  }
+});
+
+router.get('/:username/following', async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const user = await User.findOne({ username });
+
+    const following = user.following.map(item => ({
+      username: item.username,
+      profileImg: item.profileImg
+    }));
+
+    return res.json({ following });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
