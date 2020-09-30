@@ -1,10 +1,13 @@
 import {
   HIDE_FOLLOW_LOADING,
+  HIDE_POSTS_LOADING,
   HIDE_POST_UPDATE_LOADING,
   HIDE_PROFILE_LOADING,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
+  SET_USER_POSTS,
   SHOW_FOLLOW_LOADING,
+  SHOW_POSTS_LOADING,
   SHOW_POST_UPDATE_LOADING,
   SHOW_PROFILE_LOADING,
   UPDATE_PROFILE_POST
@@ -13,7 +16,7 @@ import {
 const initialState = {
   user: null,
   posts: null,
-  postsCount: null,
+  postsLoading: true,
   pagesCount: null,
   loading: false,
   followLoading: false,
@@ -49,6 +52,13 @@ export const profileReducer = (state = initialState, action) => {
       }
 
       return { ...state, posts };
+
+    case SET_USER_POSTS:
+      return { ...state, posts: action.payload };
+    case SHOW_POSTS_LOADING:
+      return { ...state, postsLoading: true };
+    case HIDE_POSTS_LOADING:
+      return { ...state, postsLoading: false };
     default:
       return state;
   }

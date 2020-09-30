@@ -2,9 +2,24 @@
   color: white;
   padding-bottom: 20px;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .profile__main {
+    flex-grow: 2;
+  }
 
   .profile__pagination {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile__posts-loader {
+    width: 100%;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;

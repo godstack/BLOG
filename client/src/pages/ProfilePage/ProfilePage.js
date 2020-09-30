@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { requestGetProfileInfo } from '../../redux/actions/profileActions';
+import {
+  requestGetProfileInfo,
+  requestGetUserPosts
+} from '../../redux/actions/profileActions';
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
@@ -17,15 +20,30 @@ export const ProfilePage = () => {
   const {
     user,
     posts,
+    postsLoading,
     pagesCount,
-    postsCount,
     loading,
     postUpdateLoading
   } = useSelector(state => state.profile);
 
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
-  }, [currentPage, username, dispatch]);
+  }, []);
+
+  const postsList = postsLoading ? (
+    <div className='profile__posts-loader'>
+      <Loader />
+    </div>
+  ) : (
+    posts?.map(post => (
+      <PostCard
+        key={post._id}
+        author={user}
+        post={post}
+        loading={postUpdateLoading}
+      />
+    ))
+  );
 
   if (loading) {
     return (
@@ -64,27 +82,22 @@ export const ProfilePage = () => {
               Following
             </div>
             <div>
-              <span className='details-span'>{postsCount}</span> posts
+              <span className='details-span'>{user.posts}</span> posts
             </div>
           </div>
         </div>
       </header>
+      <section className='profile__main'>
+        {postsList}
 
-      {posts.map(post => (
-        <PostCard
-          key={post._id}
-          author={user}
-          post={post}
-          loading={postUpdateLoading}
-        />
-      ))}
-
-      <section className='profile__pagination'>
-        <Pagination
-          currentPage={currentPage}
-          pagesCount={pagesCount}
-          setPage={setCurrentPage}
-        />
+        <section className='profile__pagination'>
+          <Pagination
+            currentPage={currentPage}
+            pagesCount={pagesCount}
+            setPage={setCurrentPage}
+            callback={page => dispatch(requestGetUserPosts(username, page))}
+          />
+        </section>
       </section>
     </section>
   );

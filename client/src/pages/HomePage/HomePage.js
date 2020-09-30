@@ -7,6 +7,7 @@ export const HomePage = () => {
   return (
     <section className='home-page'>
       <h2 className='home__header'>Home</h2>
+      <div></div>
     </section>
   );
 };
