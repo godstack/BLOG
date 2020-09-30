@@ -1,0 +1,58 @@
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
+import './FollowButton.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestFollow } from '../../redux/actions/profileActions';
+
+export const FollowButton = () => {
+  const dispatch = useDispatch();
+  const { user, followLoading } = useSelector(state => state.profile);
+
+  const { user: authUser } = useSelector(state => state.session);
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const isExist = !!user.followers.find(id => id === authUser.userId);
+  const [btnText, setBtnText] = useState(btnTextConditions());
+
+  const isSelfAccount = authUser.userId === user.id;
+
+  function btnTextConditions() {
+    if (!isHovered && isExist) {
+      return 'Following';
+    } else if (isHovered && isExist) {
+      return 'Unfollow';
+    } else if (!isExist) {
+      return 'Follow';
+    }
+  }
+
+  useEffect(() => {
+    setBtnText(btnTextConditions());
+  }, [isHovered, isExist]);
+
+  const handleFollow = e => {
+    dispatch(requestFollow(user.username));
+    setIsHovered(false);
+  };
+
+  return (
+    <div className='empty-btn'>
+      {!isSelfAccount && (
+        <button
+          className={classNames(
+            'btn',
+            { 'following-btn': !isHovered && isExist },
+            { 'unfollow-btn': isHovered && isExist }
+          )}
+          onClick={handleFollow}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          disabled={followLoading}
+        >
+          {btnText}
+        </button>
+      )}
+    </div>
+  );
+};

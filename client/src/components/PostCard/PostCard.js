@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { requestLikePost } from '../../redux/actions';
+import { requestLikePost } from '../../redux/actions/postActions';
 import classNames from 'classnames';
 import './PostCard.scss';
 

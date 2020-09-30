@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestLogin } from '../../redux/actions';
+import { requestLogin } from '../../redux/actions/authActions';
 import './AuthPage.scss';
 
 export const LoginPage = () => {

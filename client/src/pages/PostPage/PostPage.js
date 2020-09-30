@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestGetPost } from '../../redux/actions';
+import { requestGetPost } from '../../redux/actions/postActions';
 import './PostPage.scss';
 
 export const PostPage = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestCreatePost } from '../../redux/actions';
+import { requestCreatePost } from '../../redux/actions/postActions';
 
 import { Loader } from '../../components/Loader/Loader';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestLogout } from '../../redux/actions';
+import { requestLogout } from '../../redux/actions/authActions';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
 

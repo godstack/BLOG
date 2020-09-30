@@ -1,0 +1,38 @@
+$bnt-color: #1c90d9;
+
+.empty-btn {
+  height: 50px;
+
+  .btn {
+    display: block;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid $bnt-color;
+    padding: 5px 15px;
+    color: $bnt-color;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px auto;
+    transition: all 0.2s ease-in-out;
+
+    &:disabled {
+      background: rgb(117, 113, 113);
+    }
+
+    &:disabled:hover {
+      background: rgb(117, 113, 113);
+    }
+  }
+
+  .unfollow-btn {
+    color: white;
+    border: 1px solid rgb(209, 66, 66);
+    background: rgb(209, 66, 66);
+  }
+
+  .following-btn {
+    background: $bnt-color;
+    color: white;
+  }
+}

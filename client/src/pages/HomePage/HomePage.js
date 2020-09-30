@@ -1,20 +1,12 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import './HomePage.scss';
 
 export const HomePage = () => {
-  // const params = useParams();
-  // const dispatch = useDispatch();
-  // const { post, author } = useSelector(state => state.post.postPage);
-
-  // useEffect(() => {
-  //   dispatch(requestGetProfileInfo(params.postId));
-  // }, [dispatch, params.postId]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <section className='home-page'>
-      <h1>Home page</h1>
-      {/* <PostCard post={post} author={author} /> */}
+      <h2 className='home__header'>Home</h2>
     </section>
   );
 };

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 import './AuthPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestRegister } from '../../redux/actions';
+import { requestRegister } from '../../redux/actions/authActions';
 
 export const RegisterPage = () => {
   const { register, errors, handleSubmit } = useForm();

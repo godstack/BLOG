@@ -4,7 +4,7 @@ import {
   logoutAuthUser,
   setAuthUser,
   showSessionLoading
-} from '../actions';
+} from '../actions/authActions';
 import axios from 'axios';
 
 import {

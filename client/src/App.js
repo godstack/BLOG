@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRoutes } from './routes';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestCheckAuth } from './redux/actions';
+import { requestCheckAuth } from './redux/actions/authActions';
 import { Loader } from './components/Loader/Loader';
 import { Header } from './components/Header/Header';
 

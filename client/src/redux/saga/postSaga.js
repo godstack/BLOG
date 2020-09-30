@@ -13,7 +13,7 @@ import {
   showCreatePostLoading,
   showPostUpdateLoading,
   updateProfilePost
-} from '../actions';
+} from '../actions/postActions';
 
 function* workerPostCreateSaga({ payload: formData }) {
   yield put(showCreatePostLoading());

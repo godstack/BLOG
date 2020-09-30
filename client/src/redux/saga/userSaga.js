@@ -8,7 +8,7 @@ import {
   setFollowers,
   showFollowLoading,
   hideFollowLoading
-} from '../actions';
+} from '../actions/profileActions';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   try {
