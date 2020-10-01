@@ -1,0 +1,39 @@
+.user-item {
+  width: 60%;
+  margin: 30px auto;
+  padding: 10px;
+  border-radius: 60px;
+  display: flex;
+
+  align-items: center;
+  border: 2px solid #224763;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: #224763;
+    cursor: pointer;
+  }
+
+  .user-item__img {
+    background-color: rgb(151, 150, 150);
+    border-radius: 50%;
+
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+  }
+
+  .user-item__username {
+    font-size: 1.3rem;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+
+    &:hover {
+      border-bottom: 1px solid #ffff;
+    }
+  }
+
+  .user-item__btn {
+    margin-left: auto;
+    z-index: 5;
+  }
+}

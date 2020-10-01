@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './FollowButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestFollow } from '../../redux/actions/profileActions';
 
-export const FollowButton = ({ user }) => {
+export const FollowButton = ({ user, requestFollow }) => {
   const dispatch = useDispatch();
   // const { user } = useSelector(state => state.profile);
 

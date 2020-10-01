@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {
-  REQUEST_FOLLOW,
+  REQUEST_FOLLOW_FROM_PROFILE,
   REQUEST_GET_PROFILE_INFO,
   REQUEST_GET_USER_POSTS
 } from '../types';
@@ -24,7 +24,7 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
         params: { page: currentPage }
       })
     ]);
-    console.log(userInfo, postsInfo);
+
     yield put(setProfileInfo({ ...postsInfo.data, ...userInfo.data }));
     yield put(hideProfileLoading());
   } catch (e) {
@@ -58,5 +58,5 @@ function* workerGetUserPosts({ payload: { username, currentPage } }) {
 export function* userSaga() {
   yield takeEvery(REQUEST_GET_PROFILE_INFO, workerGetProfileInfo);
   yield takeEvery(REQUEST_GET_USER_POSTS, workerGetUserPosts);
-  yield takeEvery(REQUEST_FOLLOW, workerFollow);
+  yield takeEvery(REQUEST_FOLLOW_FROM_PROFILE, workerFollow);
 }

@@ -109,7 +109,7 @@ router.get('/:username/followers', async (req, res) => {
 
     const followers = await getUsersList(user.followers);
 
-    return res.json({ users: followers, type: 'Followers' });
+    return res.json({ users: followers });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
@@ -124,7 +124,7 @@ router.get('/:username/following', async (req, res) => {
 
     const following = await getUsersList(user.following);
 
-    return res.json({ users: following, type: 'Following' });
+    return res.json({ users: following });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });

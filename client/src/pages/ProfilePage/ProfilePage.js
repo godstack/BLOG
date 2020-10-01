@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import {
+  requestFollowFromProfile,
   requestGetProfileInfo,
   requestGetUserPosts
 } from '../../redux/actions/profileActions';
@@ -23,7 +24,7 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
-  }, []);
+  }, [username, dispatch]);
 
   const postsList = postsLoading ? (
     <div className='profile__posts-loader'>
@@ -58,7 +59,7 @@ export const ProfilePage = () => {
           }}
         />
         <div className='profile__info'>
-          <FollowButton user={user} />
+          <FollowButton user={user} requestFollow={requestFollowFromProfile} />
           <div className='profile__username'>@{user.username}</div>
           <div className='profile__details'>
             <div className='details-item'>

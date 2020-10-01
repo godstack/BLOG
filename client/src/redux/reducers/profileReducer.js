@@ -28,7 +28,7 @@ export const profileReducer = (state = initialState, action) => {
 
     case SET_FOLLOWERS:
       const authUserId = action.payload;
-      debugger;
+
       let { followers } = state.user;
 
       const isFollowed = !!followers.find(id => id === authUserId);

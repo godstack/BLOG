@@ -1,5 +1,5 @@
 import {
-  REQUEST_FOLLOW,
+  REQUEST_FOLLOW_FROM_PROFILE,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
   HIDE_PROFILE_LOADING,
@@ -39,8 +39,8 @@ export const hideProfileLoading = () => ({
   type: HIDE_PROFILE_LOADING
 });
 
-export const requestFollow = (aimUsername, authUserId) => ({
-  type: REQUEST_FOLLOW,
+export const requestFollowFromProfile = (aimUsername, authUserId) => ({
+  type: REQUEST_FOLLOW_FROM_PROFILE,
   payload: { aimUsername, authUserId }
 });
 
