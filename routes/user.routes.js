@@ -107,12 +107,9 @@ router.get('/:username/followers', async (req, res) => {
 
     const user = await User.findOne({ username });
 
-    const followers = user.followers.map(item => ({
-      username: item.username,
-      profileImg: item.profileImg
-    }));
+    const followers = await getUsersList(user.followers);
 
-    return res.json({ followers });
+    return res.json({ users: followers, type: 'Followers' });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
@@ -125,16 +122,30 @@ router.get('/:username/following', async (req, res) => {
 
     const user = await User.findOne({ username });
 
-    const following = user.following.map(item => ({
-      username: item.username,
-      profileImg: item.profileImg
-    }));
+    const following = await getUsersList(user.following);
 
-    return res.json({ following });
+    return res.json({ users: following, type: 'Following' });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
+
+async function getUsersList(arr) {
+  const resultArr = [];
+
+  for (const id of arr) {
+    const user = await User.findById(id);
+
+    resultArr.push({
+      username: user.username,
+      profileImg: user.profileImg,
+      id: user.id,
+      followers: user.followers
+    });
+  }
+
+  return resultArr;
+}
 
 module.exports = router;

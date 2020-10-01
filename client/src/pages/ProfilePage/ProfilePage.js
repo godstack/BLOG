@@ -58,7 +58,7 @@ export const ProfilePage = () => {
           }}
         />
         <div className='profile__info'>
-          <FollowButton />
+          <FollowButton user={user} />
           <div className='profile__username'>@{user.username}</div>
           <div className='profile__details'>
             <div className='details-item'>

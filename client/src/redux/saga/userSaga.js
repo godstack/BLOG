@@ -36,7 +36,7 @@ function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
     yield put(setFollowers(authUserId));
 
-    const response = yield call(axios.put, `/api/user/${aimUsername}/follow`);
+    yield call(axios.put, `/api/user/${aimUsername}/follow`);
   } catch (e) {
     console.log(e.message);
     yield put(setFollowers(authUserId));
