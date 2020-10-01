@@ -6,7 +6,7 @@ import { requestFollow } from '../../redux/actions/profileActions';
 
 export const FollowButton = () => {
   const dispatch = useDispatch();
-  const { user, followLoading } = useSelector(state => state.profile);
+  const { user } = useSelector(state => state.profile);
 
   const { user: authUser } = useSelector(state => state.session);
 
@@ -32,7 +32,7 @@ export const FollowButton = () => {
   }, [isHovered, isExist]);
 
   const handleFollow = e => {
-    dispatch(requestFollow(user.username));
+    dispatch(requestFollow(user.username, authUser.userId));
     setIsHovered(false);
   };
 
@@ -48,7 +48,6 @@ export const FollowButton = () => {
           onClick={handleFollow}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          disabled={followLoading}
         >
           {btnText}
         </button>

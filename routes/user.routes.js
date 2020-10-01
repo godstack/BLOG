@@ -94,9 +94,7 @@ router.put('/:username/follow', async (req, res) => {
 
     await authorizedUser.save();
 
-    res.json({
-      followers: aimUser.followers
-    });
+    res.status(200);
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });

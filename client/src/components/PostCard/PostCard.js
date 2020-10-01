@@ -5,7 +5,7 @@ import { requestLikePost } from '../../redux/actions/postActions';
 import classNames from 'classnames';
 import './PostCard.scss';
 
-export const PostCard = ({ post, author, loading }) => {
+export const PostCard = ({ post, author }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector(state => state.session);
@@ -18,7 +18,7 @@ export const PostCard = ({ post, author, loading }) => {
   );
 
   const handleLike = () => {
-    dispatch(requestLikePost(post._id));
+    dispatch(requestLikePost(post._id, user.userId));
   };
 
   return (
@@ -46,11 +46,10 @@ export const PostCard = ({ post, author, loading }) => {
         <button
           className={classNames('action-item', { 'icon-red': isLiked })}
           onClick={handleLike}
-          disabled={loading}
         >
           {likes} {post.likes.length}
         </button>
-        <button className='action-item' disabled={loading}>
+        <button className='action-item'>
           <i className='fas fa-comment'></i>
         </button>
       </div>

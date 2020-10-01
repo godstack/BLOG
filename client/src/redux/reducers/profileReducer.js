@@ -1,14 +1,10 @@
 import {
-  HIDE_FOLLOW_LOADING,
   HIDE_POSTS_LOADING,
-  HIDE_POST_UPDATE_LOADING,
   HIDE_PROFILE_LOADING,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
   SET_USER_POSTS,
-  SHOW_FOLLOW_LOADING,
   SHOW_POSTS_LOADING,
-  SHOW_POST_UPDATE_LOADING,
   SHOW_PROFILE_LOADING,
   UPDATE_PROFILE_POST
 } from '../types';
@@ -18,9 +14,7 @@ const initialState = {
   posts: null,
   postsLoading: false,
   pagesCount: null,
-  loading: false,
-  followLoading: false,
-  postUpdateLoading: false
+  loading: false
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -31,25 +25,40 @@ export const profileReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case HIDE_PROFILE_LOADING:
       return { ...state, loading: false };
-    case SHOW_FOLLOW_LOADING:
-      return { ...state, followLoading: true };
-    case HIDE_FOLLOW_LOADING:
-      return { ...state, followLoading: false };
+
     case SET_FOLLOWERS:
-      return { ...state, user: { ...state.user, followers: action.payload } };
-    case SHOW_POST_UPDATE_LOADING:
-      return { ...state, postUpdateLoading: true };
-    case HIDE_POST_UPDATE_LOADING:
-      return { ...state, postUpdateLoading: false };
+      const authUserId = action.payload;
+      debugger;
+      let { followers } = state.user;
+
+      const isFollowed = !!followers.find(id => id === authUserId);
+
+      if (isFollowed) {
+        followers = followers.filter(id => id !== authUserId);
+      } else {
+        followers = [...followers, authUserId];
+      }
+
+      return { ...state, user: { ...state.user, followers } };
+
     case UPDATE_PROFILE_POST:
       let { posts } = state;
 
-      for (let i = 0; i < posts.length; i++) {
-        if (posts[i]._id === action.payload._id) {
-          posts[i] = action.payload;
-          break;
+      posts = posts.map(post => {
+        if (post._id === action.payload.postId) {
+          const isLikedByUser = post.likes.find(
+            el => el === action.payload.userId
+          );
+
+          if (isLikedByUser) {
+            post.likes = post.likes.filter(el => el !== action.payload.userId);
+          } else {
+            post.likes.push(action.payload.userId);
+          }
         }
-      }
+
+        return post;
+      });
 
       return { ...state, posts };
 

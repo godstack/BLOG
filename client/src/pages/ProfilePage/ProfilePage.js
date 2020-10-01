@@ -17,14 +17,9 @@ export const ProfilePage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const {
-    user,
-    posts,
-    postsLoading,
-    pagesCount,
-    loading,
-    postUpdateLoading
-  } = useSelector(state => state.profile);
+  const { user, posts, postsLoading, pagesCount, loading } = useSelector(
+    state => state.profile
+  );
 
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
@@ -35,14 +30,7 @@ export const ProfilePage = () => {
       <Loader />
     </div>
   ) : (
-    posts?.map(post => (
-      <PostCard
-        key={post._id}
-        author={user}
-        post={post}
-        loading={postUpdateLoading}
-      />
-    ))
+    posts?.map(post => <PostCard key={post._id} author={user} post={post} />)
   );
 
   if (loading) {

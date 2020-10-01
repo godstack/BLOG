@@ -8,10 +8,8 @@ import {
 } from '../types';
 import {
   hideCreatePostLoading,
-  hidePostUpdateLoading,
   setPostPage,
   showCreatePostLoading,
-  showPostUpdateLoading,
   updateProfilePost
 } from '../actions/postActions';
 
@@ -30,17 +28,13 @@ function* workerPostGet({ payload: postId }) {
   yield put(setPostPage(response.data));
 }
 
-function* workerLikePost({ payload: postId }) {
+function* workerLikePost({ payload: { postId, userId } }) {
   try {
-    yield put(showPostUpdateLoading());
+    yield put(updateProfilePost(postId, userId));
 
     const response = yield call(axios.put, `/api/post/${postId}/like`);
-
-    yield put(updateProfilePost(response.data));
-
-    yield put(hidePostUpdateLoading());
   } catch (e) {
-    yield put(hidePostUpdateLoading());
+    yield put(updateProfilePost(postId, userId));
   }
 }
 

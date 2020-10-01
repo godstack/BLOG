@@ -1,10 +1,8 @@
 import {
-  HIDE_FOLLOW_LOADING,
-  HIDE_PROFILE_LOADING,
   REQUEST_FOLLOW,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
-  SHOW_FOLLOW_LOADING,
+  HIDE_PROFILE_LOADING,
   SHOW_PROFILE_LOADING,
   REQUEST_GET_USER_POSTS,
   REQUEST_GET_PROFILE_INFO,
@@ -13,80 +11,48 @@ import {
   HIDE_POSTS_LOADING
 } from '../types';
 
-export const requestGetProfileInfo = (username, currentPage) => {
-  return {
-    type: REQUEST_GET_PROFILE_INFO,
-    payload: { username, currentPage }
-  };
-};
+export const requestGetProfileInfo = (username, currentPage) => ({
+  type: REQUEST_GET_PROFILE_INFO,
+  payload: { username, currentPage }
+});
 
-export const requestGetUserPosts = (username, currentPage) => {
-  return {
-    type: REQUEST_GET_USER_POSTS,
-    payload: { username, currentPage }
-  };
-};
+export const requestGetUserPosts = (username, currentPage) => ({
+  type: REQUEST_GET_USER_POSTS,
+  payload: { username, currentPage }
+});
 
-export const setUserPosts = posts => {
-  return {
-    type: SET_USER_POSTS,
-    payload: posts
-  };
-};
+export const setUserPosts = posts => ({
+  type: SET_USER_POSTS,
+  payload: posts
+});
 
-export const setProfileInfo = profileInfo => {
-  return {
-    type: SET_PROFILE_INFO,
-    payload: profileInfo
-  };
-};
+export const setProfileInfo = profileInfo => ({
+  type: SET_PROFILE_INFO,
+  payload: profileInfo
+});
 
-export const showProfileLoading = () => {
-  return {
-    type: SHOW_PROFILE_LOADING
-  };
-};
+export const showProfileLoading = () => ({
+  type: SHOW_PROFILE_LOADING
+});
 
-export const hideProfileLoading = () => {
-  return {
-    type: HIDE_PROFILE_LOADING
-  };
-};
+export const hideProfileLoading = () => ({
+  type: HIDE_PROFILE_LOADING
+});
 
-export const requestFollow = username => {
-  return {
-    type: REQUEST_FOLLOW,
-    payload: username
-  };
-};
+export const requestFollow = (aimUsername, authUserId) => ({
+  type: REQUEST_FOLLOW,
+  payload: { aimUsername, authUserId }
+});
 
-export const setFollowers = followers => {
-  return {
-    type: SET_FOLLOWERS,
-    payload: followers
-  };
-};
+export const setFollowers = authUserId => ({
+  type: SET_FOLLOWERS,
+  payload: authUserId
+});
 
-export const showFollowLoading = () => {
-  return {
-    type: SHOW_FOLLOW_LOADING
-  };
-};
+export const showPostsLoading = () => ({
+  type: SHOW_POSTS_LOADING
+});
 
-export const hideFollowLoading = () => {
-  return {
-    type: HIDE_FOLLOW_LOADING
-  };
-};
-
-export const showPostsLoading = () => {
-  return {
-    type: SHOW_POSTS_LOADING
-  };
-};
-
-export const hidePostsLoading = () => {
-  return {
-    type: HIDE_POSTS_LOADING
-  };
-};
+export const hidePostsLoading = () => ({
+  type: HIDE_POSTS_LOADING
+});

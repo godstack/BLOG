@@ -118,7 +118,7 @@ router.put('/:postId/like', async (req, res) => {
 
     await post.save();
 
-    res.json(post);
+    res.status(200);
   } catch (e) {
     res
       .status(500)

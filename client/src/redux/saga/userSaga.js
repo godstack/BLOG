@@ -10,8 +10,6 @@ import {
   showProfileLoading,
   hideProfileLoading,
   setFollowers,
-  showFollowLoading,
-  hideFollowLoading,
   setUserPosts,
   showPostsLoading,
   hidePostsLoading
@@ -34,11 +32,15 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   }
 }
 
-function* workerFollow({ payload }) {
-  yield put(showFollowLoading());
-  const response = yield call(axios.put, `/api/user/${payload}/follow`);
-  yield put(setFollowers(response.data.followers));
-  yield put(hideFollowLoading());
+function* workerFollow({ payload: { aimUsername, authUserId } }) {
+  try {
+    yield put(setFollowers(authUserId));
+
+    const response = yield call(axios.put, `/api/user/${aimUsername}/follow`);
+  } catch (e) {
+    console.log(e.message);
+    yield put(setFollowers(authUserId));
+  }
 }
 
 function* workerGetUserPosts({ payload: { username, currentPage } }) {
