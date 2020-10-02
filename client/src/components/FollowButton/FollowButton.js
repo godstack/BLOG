@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const FollowButton = ({ user, requestFollow }) => {
   const dispatch = useDispatch();
-  // const { user } = useSelector(state => state.profile);
 
   const { user: authUser } = useSelector(state => state.session);
 
@@ -14,7 +13,7 @@ export const FollowButton = ({ user, requestFollow }) => {
   const isExist = !!user.followers.find(id => id === authUser.userId);
   const [btnText, setBtnText] = useState(btnTextConditions());
 
-  const isSelfAccount = authUser.userId === user.id;
+  const isSelfAccount = authUser.userId === user._id;
 
   function btnTextConditions() {
     if (!isHovered && isExist) {

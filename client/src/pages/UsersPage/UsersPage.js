@@ -43,9 +43,35 @@ export const UsersPage = () => {
     return (
       <div className='users-list'>
         {users?.map(user => (
-          <UserItem user={user} key={user.id} />
+          <UserItem user={user} key={user._id} />
         ))}
       </div>
+    );
+  }
+
+  function showHeaderContent() {
+    if (location.pathname === '/all-users') {
+      return <div className='all-users'>All users</div>;
+    }
+
+    return (
+      <>
+        <div className='header__links'>
+          <NavLink to={`/profile/${userListOwner}`} className='link-back'>
+            <i className='fas fa-arrow-left'></i>
+          </NavLink>
+          <div className='list-owner'>@{userListOwner}</div>
+        </div>
+        <div className='list-type-wrapper'>
+          {' '}
+          <NavLink to={`/${userListOwner}/followers`} className='list-type'>
+            Followers
+          </NavLink>
+          <NavLink to={`/${userListOwner}/following`} className='list-type'>
+            Following
+          </NavLink>
+        </div>
+      </>
     );
   }
 
@@ -55,22 +81,7 @@ export const UsersPage = () => {
 
   return (
     <section className='users-page'>
-      <header className='users-page__header'>
-        <div className='header__links'>
-          <NavLink to={`/profile/${userListOwner}`} className='link-back'>
-            <i className='fas fa-arrow-left'></i>
-          </NavLink>
-          <div className='list-owner'>@{userListOwner}</div>
-        </div>
-        <div className='list-type-wrapper'>
-          <NavLink to={`/${userListOwner}/followers`} className='list-type'>
-            Followers
-          </NavLink>
-          <NavLink to={`/${userListOwner}/following`} className='list-type'>
-            Following
-          </NavLink>
-        </div>
-      </header>
+      <header className='users-page__header'>{showHeaderContent()}</header>
       {showUsersList()}
 
       {!loading && (

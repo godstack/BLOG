@@ -18,7 +18,7 @@ router.get('/:username/info', async (req, res) => {
       profileImg: user.profileImg,
       following: user.following,
       followers: user.followers,
-      id: user.id,
+      _id: user.id,
       posts: user.posts.length
     };
 
@@ -170,12 +170,33 @@ async function getUsersList(arr, skip, PAGE_SIZE) {
     resultArr.push({
       username: user.username,
       profileImg: user.profileImg,
-      id: user.id,
+      _id: user.id,
       followers: user.followers
     });
   }
 
   return resultArr;
 }
+
+router.get('/all-users', async (req, res) => {
+  try {
+    let { page } = req.query;
+    page = parseInt(page);
+
+    const PAGE_SIZE = 10;
+
+    const skip = (page - 1) * PAGE_SIZE;
+
+    const users = await User.find({}).skip(skip).limit(PAGE_SIZE);
+
+    const count = await User.find({}).countDocuments();
+    const pagesCount = Math.ceil(count / PAGE_SIZE);
+
+    res.json({ users, pagesCount });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: e.message });
+  }
+});
 
 module.exports = router;

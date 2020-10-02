@@ -31,7 +31,7 @@ export const Header = () => {
           </NavLink>
         </div>
         <div className='header__item'>
-          <NavLink to='/explore'>
+          <NavLink to='/all-users'>
             <i className='fas fa-users'></i>
             <span className='item__name'>Users</span>
           </NavLink>

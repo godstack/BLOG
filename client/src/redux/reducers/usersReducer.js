@@ -19,7 +19,6 @@ export const usersReducer = (state = initialState, action) => {
 
       users = users.map(item => {
         if (item.username === aimUsername) {
-          debugger;
           const isFollowed = !!item.followers.find(el => el === authUserId);
 
           if (isFollowed) {

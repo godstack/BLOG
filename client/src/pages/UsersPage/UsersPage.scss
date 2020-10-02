@@ -36,6 +36,12 @@ $red-color: rgb(221, 49, 49);
     padding: 20px 20px 0;
     border-bottom: 10px solid #2f3b44;
 
+    .all-users {
+      text-align: center;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
     .header__links {
       display: flex;
       justify-content: flex-start;
@@ -75,6 +81,7 @@ $red-color: rgb(221, 49, 49);
         text-transform: capitalize;
         padding: 10px;
         text-decoration: none;
+        border-bottom: 4px solid transparent;
 
         &:hover {
           background: rgba(29, 161, 242, 0.2);
