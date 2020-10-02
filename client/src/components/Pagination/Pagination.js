@@ -5,7 +5,7 @@ export const Pagination = ({ currentPage, pagesCount, setPage, callback }) => {
   const nextPageHandler = () => {
     if (currentPage < pagesCount) {
       setPage(prevState => {
-        callback(currentPage + 1);
+        callback(prevState + 1);
 
         return prevState + 1;
       });
@@ -15,7 +15,7 @@ export const Pagination = ({ currentPage, pagesCount, setPage, callback }) => {
   const previousPageHandler = () => {
     if (currentPage > 1) {
       setPage(prevState => {
-        callback(currentPage - 1);
+        callback(prevState - 1);
 
         return prevState - 1;
       });

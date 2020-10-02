@@ -11,11 +11,15 @@ import {
   showUsersListLoading
 } from '../actions/usersActions';
 
-function* workerSetUsersList({ payload: url }) {
+function* workerSetUsersList({ payload: { url, page } }) {
   try {
     yield put(showUsersListLoading());
 
-    const response = yield call(axios.get, `/api/user${url}`);
+    const response = yield call(axios.get, `/api/user${url}`, {
+      params: { page }
+    });
+
+    console.log(response.data);
 
     yield put(setUsersList(response.data));
 

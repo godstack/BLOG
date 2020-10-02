@@ -86,12 +86,14 @@ export const ProfilePage = () => {
         {postsList}
 
         <section className='profile__pagination'>
-          <Pagination
-            currentPage={currentPage}
-            pagesCount={pagesCount}
-            setPage={setCurrentPage}
-            callback={page => dispatch(requestGetUserPosts(username, page))}
-          />
+          {!postsLoading && (
+            <Pagination
+              currentPage={currentPage}
+              pagesCount={pagesCount}
+              setPage={setCurrentPage}
+              callback={page => dispatch(requestGetUserPosts(username, page))}
+            />
+          )}
         </section>
       </section>
     </section>

@@ -7,9 +7,9 @@ import {
   SHOW_USER_LIST_LOADING
 } from '../types';
 
-export const requestGetUsersList = url => ({
+export const requestGetUsersList = (url, page) => ({
   type: REQUEST_GET_USERS_LIST,
-  payload: url
+  payload: { url, page }
 });
 
 export const setUsersList = usersList => ({

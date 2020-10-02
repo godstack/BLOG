@@ -105,11 +105,21 @@ router.get('/:username/followers', async (req, res) => {
   try {
     const { username } = req.params;
 
+    let { page } = req.query;
+
+    page = parseInt(page);
+
+    const PAGE_SIZE = 10;
+
+    const skip = (page - 1) * PAGE_SIZE;
+
     const user = await User.findOne({ username });
 
-    const followers = await getUsersList(user.followers);
+    const followers = await getUsersList(user.followers, skip, PAGE_SIZE);
 
-    return res.json({ users: followers });
+    const pagesCount = Math.ceil(user.followers.length / PAGE_SIZE);
+
+    return res.json({ users: followers, pagesCount });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
@@ -120,21 +130,41 @@ router.get('/:username/following', async (req, res) => {
   try {
     const { username } = req.params;
 
+    let { page } = req.query;
+
+    page = parseInt(page);
+
+    const PAGE_SIZE = 10;
+
+    const skip = (page - 1) * PAGE_SIZE;
+
     const user = await User.findOne({ username });
 
-    const following = await getUsersList(user.following);
+    const following = await getUsersList(user.following, skip, PAGE_SIZE);
 
-    return res.json({ users: following });
+    const pagesCount = Math.ceil(user.following.length / PAGE_SIZE);
+
+    return res.json({ users: following, pagesCount });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
 
-async function getUsersList(arr) {
+async function getUsersList(arr, skip, PAGE_SIZE) {
+  const filteredArr = [];
+
+  for (let i = skip; i < skip + PAGE_SIZE; i++) {
+    if (arr[i]) {
+      filteredArr.push(arr[i]);
+    } else {
+      break;
+    }
+  }
+
   const resultArr = [];
 
-  for (const id of arr) {
+  for (const id of filteredArr) {
     const user = await User.findById(id);
 
     resultArr.push({

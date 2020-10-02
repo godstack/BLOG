@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestGetUsersList } from '../../redux/actions/usersActions';
 import { UserItem } from '../../components/UserItem/UserItem';
 import { Loader } from '../../components/Loader/Loader';
+import { Pagination } from '../../components/Pagination/Pagination';
 import './UsersPage.scss';
 
 export const UsersPage = () => {
@@ -12,7 +13,9 @@ export const UsersPage = () => {
 
   const [, userListOwner, type] = location.pathname.split('/');
 
-  const { users, loading } = useSelector(state => state.users);
+  const { users, loading, pagesCount } = useSelector(state => state.users);
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   console.log(users);
 
@@ -47,7 +50,7 @@ export const UsersPage = () => {
   }
 
   useEffect(() => {
-    dispatch(requestGetUsersList(location.pathname));
+    dispatch(requestGetUsersList(location.pathname, currentPage));
   }, [userListOwner, type]);
 
   return (
@@ -69,6 +72,17 @@ export const UsersPage = () => {
         </div>
       </header>
       {showUsersList()}
+
+      {!loading && (
+        <Pagination
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+          pagesCount={pagesCount}
+          callback={page =>
+            dispatch(requestGetUsersList(location.pathname, page))
+          }
+        />
+      )}
     </section>
   );
 };
