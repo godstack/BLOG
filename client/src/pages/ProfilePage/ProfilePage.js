@@ -62,18 +62,20 @@ export const ProfilePage = () => {
           <FollowButton user={user} requestFollow={requestFollowFromProfile} />
           <div className='profile__username'>@{user.username}</div>
           <div className='profile__details'>
-            <div className='details-item'>
-              <NavLink to={`/${user.username}/followers`}>
-                <span className='details-span'>{user.followers.length}</span>{' '}
-                Followers
-              </NavLink>
-            </div>
-            <div className='details-item'>
-              <NavLink to={`/${user.username}/following`}>
-                <span className='details-span'>{user.following.length}</span>{' '}
-                Following
-              </NavLink>
-            </div>
+            <NavLink
+              to={`/${user.username}/followers`}
+              className='details-item'
+            >
+              <span className='details-span'>{user.followers.length}</span>{' '}
+              Followers
+            </NavLink>
+            <NavLink
+              to={`/${user.username}/following`}
+              className='details-item'
+            >
+              <span className='details-span'>{user.following.length}</span>{' '}
+              Following
+            </NavLink>
             <div>
               <span className='details-span'>{user.posts}</span> posts
             </div>

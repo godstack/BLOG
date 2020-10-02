@@ -28,7 +28,11 @@ export const UsersPage = () => {
     if (!users?.length) {
       return (
         <div className='users-list__empty'>
-          <span>User list is empty</span> <i className='far fa-frown-open'></i>
+          <span>
+            <span className='bold'>@{userListOwner}</span> has no{' '}
+            <span className='bold'>{type}</span> yet
+          </span>{' '}
+          <i className='far fa-frown-open'></i>
         </div>
       );
     }
@@ -44,7 +48,7 @@ export const UsersPage = () => {
 
   useEffect(() => {
     dispatch(requestGetUsersList(location.pathname));
-  }, []);
+  }, [userListOwner, type]);
 
   return (
     <section className='users-page'>
@@ -55,7 +59,14 @@ export const UsersPage = () => {
           </NavLink>
           <div className='list-owner'>@{userListOwner}</div>
         </div>
-        <div className='list-type'>{type}</div>
+        <div className='list-type-wrapper'>
+          <NavLink to={`/${userListOwner}/followers`} className='list-type'>
+            Followers
+          </NavLink>
+          <NavLink to={`/${userListOwner}/following`} className='list-type'>
+            Following
+          </NavLink>
+        </div>
       </header>
       {showUsersList()}
     </section>

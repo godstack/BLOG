@@ -22,13 +22,18 @@ $red-color: rgb(221, 49, 49);
     border-bottom: 3px solid $red-color;
     font-size: 1.5rem;
 
+    .bold {
+      font-weight: bold;
+      color: lightcoral;
+    }
+
     i {
       font-size: 2rem;
     }
   }
 
   .users-page__header {
-    padding: 20px;
+    padding: 20px 20px 0;
     border-bottom: 10px solid #2f3b44;
 
     .header__links {
@@ -58,13 +63,29 @@ $red-color: rgb(221, 49, 49);
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
-    .list-type {
-      color: $blue-color;
-      font-size: 2rem;
-      text-align: center;
-      text-transform: capitalize;
-      padding-bottom: 10px;
-      border-bottom: 4px solid $blue-color;
+    .list-type-wrapper {
+      width: 100%;
+
+      .list-type {
+        display: inline-block;
+        width: 50%;
+        color: #8899a6;
+        font-size: 1.5rem;
+        text-align: center;
+        text-transform: capitalize;
+        padding: 10px;
+        text-decoration: none;
+
+        &:hover {
+          background: rgba(29, 161, 242, 0.2);
+        }
+      }
+
+      .active {
+        border-bottom: 4px solid $blue-color;
+        font-weight: bold;
+        color: $blue-color;
+      }
     }
   }
 }
