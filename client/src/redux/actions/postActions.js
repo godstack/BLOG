@@ -30,13 +30,3 @@ export const setPostPage = post => ({
   type: SET_POST_PAGE,
   payload: post
 });
-
-export const requestLikePost = (postId, userId) => ({
-  type: REQUEST_LIKE_POST,
-  payload: { postId, userId }
-});
-
-export const updateProfilePost = (postId, userId) => ({
-  type: UPDATE_PROFILE_POST,
-  payload: { postId, userId }
-});

@@ -1,8 +1,9 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, take, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_FOLLOW_FROM_PROFILE,
   REQUEST_GET_PROFILE_INFO,
-  REQUEST_GET_USER_POSTS
+  REQUEST_GET_USER_POSTS,
+  REQUEST_LIKE_FROM_PROFILE
 } from '../types';
 import axios from 'axios';
 import {
@@ -12,7 +13,8 @@ import {
   setFollowers,
   setUserPosts,
   showPostsLoading,
-  hidePostsLoading
+  hidePostsLoading,
+  updateProfilePost
 } from '../actions/profileActions';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
@@ -55,8 +57,19 @@ function* workerGetUserPosts({ payload: { username, currentPage } }) {
   yield put(hidePostsLoading());
 }
 
-export function* userSaga() {
+function* workerLikePost({ payload: { postId, userId } }) {
+  try {
+    yield put(updateProfilePost(postId, userId));
+
+    yield call(axios.put, `/api/post/${postId}/like`);
+  } catch (e) {
+    yield put(updateProfilePost(postId, userId));
+  }
+}
+
+export function* profileSaga() {
   yield takeEvery(REQUEST_GET_PROFILE_INFO, workerGetProfileInfo);
   yield takeEvery(REQUEST_GET_USER_POSTS, workerGetUserPosts);
   yield takeEvery(REQUEST_FOLLOW_FROM_PROFILE, workerFollow);
+  yield takeEvery(REQUEST_LIKE_FROM_PROFILE, workerLikePost);
 }

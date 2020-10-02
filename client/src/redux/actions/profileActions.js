@@ -8,7 +8,9 @@ import {
   REQUEST_GET_PROFILE_INFO,
   SET_USER_POSTS,
   SHOW_POSTS_LOADING,
-  HIDE_POSTS_LOADING
+  HIDE_POSTS_LOADING,
+  REQUEST_LIKE_FROM_PROFILE,
+  UPDATE_PROFILE_POST
 } from '../types';
 
 export const requestGetProfileInfo = (username, currentPage) => ({
@@ -55,4 +57,14 @@ export const showPostsLoading = () => ({
 
 export const hidePostsLoading = () => ({
   type: HIDE_POSTS_LOADING
+});
+
+export const requestLikeFromProfile = (postId, userId) => ({
+  type: REQUEST_LIKE_FROM_PROFILE,
+  payload: { postId, userId }
+});
+
+export const updateProfilePost = (postId, userId) => ({
+  type: UPDATE_PROFILE_POST,
+  payload: { postId, userId }
 });

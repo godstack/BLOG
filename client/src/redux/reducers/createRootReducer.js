@@ -4,6 +4,7 @@ import { connectRouter } from 'connected-react-router';
 import { postReducer } from './postReducer';
 import { profileReducer } from './profileReducer';
 import { usersReducer } from './usersReducer';
+import { homePageReducer } from './homePageReducer';
 
 export const createRootReducer = history =>
   combineReducers({
@@ -11,5 +12,6 @@ export const createRootReducer = history =>
     session: sessionReducer,
     post: postReducer,
     profile: profileReducer,
-    users: usersReducer
+    users: usersReducer,
+    home: homePageReducer
   });

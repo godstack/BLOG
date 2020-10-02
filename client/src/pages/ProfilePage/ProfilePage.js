@@ -4,7 +4,8 @@ import { NavLink, useParams } from 'react-router-dom';
 import {
   requestFollowFromProfile,
   requestGetProfileInfo,
-  requestGetUserPosts
+  requestGetUserPosts,
+  requestLikeFromProfile
 } from '../../redux/actions/profileActions';
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
@@ -31,7 +32,14 @@ export const ProfilePage = () => {
       <Loader />
     </div>
   ) : (
-    posts?.map(post => <PostCard key={post._id} author={user} post={post} />)
+    posts?.map(post => (
+      <PostCard
+        key={post._id}
+        author={user}
+        post={post}
+        requestLikePost={requestLikeFromProfile}
+      />
+    ))
   );
 
   if (loading) {

@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { requestLikePost } from '../../redux/actions/postActions';
 import classNames from 'classnames';
 import './PostCard.scss';
 
-export const PostCard = ({ post, author }) => {
+export const PostCard = ({ post, author, requestLikePost }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector(state => state.session);

@@ -8,6 +8,7 @@ import {
   SHOW_PROFILE_LOADING,
   UPDATE_PROFILE_POST
 } from '../types';
+import { likePostFn } from '../helperFunctions/likePostFn';
 
 const initialState = {
   user: null,
@@ -42,25 +43,7 @@ export const profileReducer = (state = initialState, action) => {
       return { ...state, user: { ...state.user, followers } };
 
     case UPDATE_PROFILE_POST:
-      let { posts } = state;
-
-      posts = posts.map(post => {
-        if (post._id === action.payload.postId) {
-          const isLikedByUser = post.likes.find(
-            el => el === action.payload.userId
-          );
-
-          if (isLikedByUser) {
-            post.likes = post.likes.filter(el => el !== action.payload.userId);
-          } else {
-            post.likes.push(action.payload.userId);
-          }
-        }
-
-        return post;
-      });
-
-      return { ...state, posts };
+      return { ...state, posts: likePostFn(state.posts, action) };
 
     case SET_USER_POSTS:
       return { ...state, posts: action.payload };

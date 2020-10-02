@@ -31,7 +31,8 @@ router.get('/:username/info', async (req, res) => {
 
 router.get('/:username/posts', async (req, res) => {
   try {
-    const { page } = req.query;
+    let { page } = req.query;
+    page = parseInt(page);
     const { username } = req.params;
 
     const PAGE_SIZE = 5;

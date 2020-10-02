@@ -28,18 +28,7 @@ function* workerPostGet({ payload: postId }) {
   yield put(setPostPage(response.data));
 }
 
-function* workerLikePost({ payload: { postId, userId } }) {
-  try {
-    yield put(updateProfilePost(postId, userId));
-
-    yield call(axios.put, `/api/post/${postId}/like`);
-  } catch (e) {
-    yield put(updateProfilePost(postId, userId));
-  }
-}
-
 export function* postSaga() {
   yield takeLatest(REQUEST_CREATE_POST, workerPostCreateSaga);
   yield takeEvery(REQUEST_GET_POST, workerPostGet);
-  yield takeEvery(REQUEST_LIKE_POST, workerLikePost);
 }
