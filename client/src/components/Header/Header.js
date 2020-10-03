@@ -18,30 +18,26 @@ export const Header = () => {
         <div className='logo'>
           <i className='fab fa-blogger-b'></i>
         </div>
-        <div className='header__item'>
-          <NavLink to='/home'>
-            <i className='fas fa-home'></i>
-            <span className='item__name'>Home</span>
-          </NavLink>
-        </div>
-        <div className='header__item'>
-          <NavLink to={`/profile/${username}`}>
-            <i className='fas fa-user-circle'></i>
-            <span className='item__name'>Profile</span>
-          </NavLink>
-        </div>
-        <div className='header__item'>
-          <NavLink to='/all-users'>
-            <i className='fas fa-users'></i>
-            <span className='item__name'>Users</span>
-          </NavLink>
-        </div>
-        <div className='header__item'>
-          <NavLink to='/create-post'>
-            <i className='far fa-plus-square'></i>
-            <span className='item__name'>Create Post</span>
-          </NavLink>
-        </div>
+
+        <NavLink to='/home' className='header__item'>
+          <i className='fas fa-home'></i>
+          <span className='item__name'>Home</span>
+        </NavLink>
+
+        <NavLink to={`/profile/${username}`} className='header__item'>
+          <i className='fas fa-user-circle'></i>
+          <span className='item__name'>Profile</span>
+        </NavLink>
+
+        <NavLink to='/all-users' className='header__item'>
+          <i className='fas fa-users'></i>
+          <span className='item__name'>Users</span>
+        </NavLink>
+
+        <NavLink to='/create-post' className='header__item'>
+          <i className='far fa-plus-square'></i>
+          <span className='item__name'>Create Post</span>
+        </NavLink>
 
         <div className='header__item logout' onClick={handleLogout}>
           <i className='fas fa-door-open'></i>

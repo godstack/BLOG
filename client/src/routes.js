@@ -8,6 +8,7 @@ import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
 import { useSelector } from 'react-redux';
 import { UsersPage } from './pages/UsersPage/UsersPage';
+import { SettingsProfilePage } from './pages/SettingsProfilePage/SettingsProfilePage';
 
 export const useRoutes = isAuthenticated => {
   const { username } = useSelector(state => state.session.user);
@@ -28,6 +29,11 @@ export const useRoutes = isAuthenticated => {
             ]}
             exact
             component={UsersPage}
+          />
+          <Route
+            path='/settings/profile'
+            exact
+            component={SettingsProfilePage}
           />
 
           <Redirect to={`/profile/${username}`} />

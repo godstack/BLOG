@@ -124,3 +124,26 @@ button:focus {
   z-index: 2;
   background: rgba(0, 0, 0, 0.4);
 }
+
+$bnt-color: #1c90d9;
+
+.btn {
+  display: block;
+  border-radius: 30px;
+  background: transparent;
+  border: 1px solid $bnt-color;
+  padding: 5px 15px;
+  color: $bnt-color;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  width: 120px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: rgba($bnt-color, 0.3);
+    cursor: pointer;
+  }
+}

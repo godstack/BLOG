@@ -19,9 +19,13 @@ export const ProfilePage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { user: authUser } = useSelector(state => state.session);
+
   const { user, posts, postsLoading, pagesCount, loading } = useSelector(
     state => state.profile
   );
+  debugger;
+  const isSelfAccount = authUser.username === username;
 
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
@@ -67,7 +71,20 @@ export const ProfilePage = () => {
           }}
         />
         <div className='profile__info'>
-          <FollowButton user={user} requestFollow={requestFollowFromProfile} />
+          {isSelfAccount ? (
+            <div className='link-wrapper'>
+              {' '}
+              <NavLink to='/settings/profile' className='btn'>
+                Edit profile
+              </NavLink>
+            </div>
+          ) : (
+            <FollowButton
+              user={user}
+              requestFollow={requestFollowFromProfile}
+            />
+          )}
+
           <div className='profile__username'>@{user.username}</div>
           <div className='profile__details'>
             <NavLink

@@ -1,0 +1,13 @@
+import {
+  REQUEST_USER_INFO_FOR_PROFILE_SETTINGS,
+  SET_USER_INFO_FOR_PROFILE_SETTINGS
+} from '../types';
+
+export const requestUserInfoForSettings = () => ({
+  type: REQUEST_USER_INFO_FOR_PROFILE_SETTINGS
+});
+
+export const setUserInfoForProfileSettings = user => ({
+  type: SET_USER_INFO_FOR_PROFILE_SETTINGS,
+  payload: user
+});

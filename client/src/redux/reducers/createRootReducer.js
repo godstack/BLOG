@@ -5,6 +5,7 @@ import { postReducer } from './postReducer';
 import { profileReducer } from './profileReducer';
 import { usersReducer } from './usersReducer';
 import { homePageReducer } from './homePageReducer';
+import { settingsReducer } from './settingsReducer';
 
 export const createRootReducer = history =>
   combineReducers({
@@ -13,5 +14,6 @@ export const createRootReducer = history =>
     post: postReducer,
     profile: profileReducer,
     users: usersReducer,
-    home: homePageReducer
+    home: homePageReducer,
+    settings: settingsReducer
   });
