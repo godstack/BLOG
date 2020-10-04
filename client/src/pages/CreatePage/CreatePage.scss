@@ -1,10 +1,17 @@
 .create-page {
+  padding-bottom: 20px;
+
   .create-page__header {
     text-align: center;
     text-transform: uppercase;
     border-bottom: 3px solid #4f6294;
     font-size: 2rem;
     margin-bottom: 40px;
+  }
+
+  .file-info {
+    width: 50%;
+    margin: 30px auto 0;
   }
 
   .input-error {
@@ -29,6 +36,10 @@
     align-items: center;
     justify-content: center;
 
+    input[type='file'] {
+      display: none;
+    }
+
     .file-upload {
       height: 200px;
       width: 200px;
@@ -47,19 +58,9 @@
       color: #ffffff;
       font-size: 100px;
 
-      input[type='file'] {
-        height: 200px;
-        width: 200px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
       &:hover {
         background-position: 0 -100%;
-
+        cursor: pointer;
         color: #2590eb;
       }
     }
@@ -112,23 +113,6 @@
       outline: none;
       background: rgb(207, 207, 207);
       width: 70%;
-    }
-  }
-
-  .list-group {
-    display: block;
-    border-radius: 4px;
-    padding: 10px 15px;
-    background-color: #fff;
-    margin: 30px auto 0;
-    border: 1px solid #ddd;
-    color: black;
-    width: 50%;
-
-    .list-group-item {
-      span {
-        font-weight: bold;
-      }
     }
   }
 

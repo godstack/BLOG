@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestCreatePost } from '../../redux/actions/postActions';
-
 import { Loader } from '../../components/Loader/Loader';
-
+import { FileInfo } from '../../components/FileInfo/FileInfo';
 import './CreatePage.scss';
 
 export const CreatePage = () => {
@@ -14,15 +13,6 @@ export const CreatePage = () => {
   const loading = useSelector(state => state.post.loading);
 
   const [file, setFile] = useState(null);
-
-  function fileSize(size) {
-    const i = Math.floor(Math.log(size) / Math.log(1024));
-    return (
-      (size / Math.pow(1024, i)).toFixed(2) * 1 +
-      ' ' +
-      ['B', 'kB', 'MB', 'GB', 'TB'][i]
-    );
-  }
 
   const onSubmit = data => {
     const fd = new FormData();
@@ -63,35 +53,27 @@ export const CreatePage = () => {
 
         <p className='image__text'>Upload a picture</p>
         <div className='wrapper'>
-          <div className='file-upload'>
-            <input
-              ref={register({
-                required: 'FILE IS REQUIRED'
-              })}
-              type='file'
-              name='img'
-              accept='image/jpeg,image/png'
-              onChange={e => setFile(e.target.files[0])}
-            />
+          <input
+            ref={register({
+              required: 'FILE IS REQUIRED'
+            })}
+            type='file'
+            name='img'
+            id='img'
+            accept='image/jpeg,image/png'
+            onChange={e => setFile(e.target.files[0])}
+          />
+
+          <label htmlFor='img' className='file-upload'>
             <i className='fa fa-arrow-up'></i>
-          </div>
+          </label>
         </div>
         {errors.img && <p className='input-error'>{errors.img?.message}</p>}
       </form>
 
-      {file && (
-        <div className='list-group'>
-          <div className='list-group-item'>
-            <span>File name:</span> {file.name}
-          </div>
-          <div className='list-group-item'>
-            <span>File type:</span> {file.type}
-          </div>
-          <div className='list-group-item'>
-            <span>File size:</span> {fileSize(file.size)}
-          </div>
-        </div>
-      )}
+      <div className='file-info'>
+        <FileInfo file={file} />
+      </div>
     </section>
   );
 };

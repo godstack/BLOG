@@ -1,16 +1,11 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
-import {
-  REQUEST_CREATE_POST,
-  REQUEST_GET_POST,
-  REQUEST_LIKE_POST
-} from '../types';
+import { REQUEST_CREATE_POST, REQUEST_GET_POST } from '../types';
 import {
   hideCreatePostLoading,
   setPostPage,
-  showCreatePostLoading,
-  updateProfilePost
+  showCreatePostLoading
 } from '../actions/postActions';
 
 function* workerPostCreateSaga({ payload: formData }) {

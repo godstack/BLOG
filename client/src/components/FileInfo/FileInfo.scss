@@ -1,0 +1,14 @@
+.list-group {
+  display: block;
+  border-radius: 4px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: black;
+
+  .list-group-item {
+    span {
+      font-weight: bold;
+    }
+  }
+}

@@ -13,26 +13,34 @@ import { SettingsProfilePage } from './pages/SettingsProfilePage/SettingsProfile
 export const useRoutes = isAuthenticated => {
   const { username } = useSelector(state => state.session.user);
 
-  // if (isAuthenticated) {
-  return (
-    <section className='workspace'>
-      <Switch>
-        <Route path='/profile/:username' exact component={ProfilePage} />
-        <Route path='/home' exact component={HomePage} />
-        <Route path='/create-post' exact component={CreatePage} />
-        <Route path='/post/:postId' component={PostPage} />
-        <Route
-          path={['/:username/followers', '/:username/following', '/all-users']}
-          exact
-          component={UsersPage}
-        />
-        <Route path='/settings/profile' exact component={SettingsProfilePage} />
+  if (isAuthenticated) {
+    return (
+      <section className='workspace'>
+        <Switch>
+          <Route path='/profile/:username' exact component={ProfilePage} />
+          <Route path='/home' exact component={HomePage} />
+          <Route path='/create-post' exact component={CreatePage} />
+          <Route path='/post/:postId' component={PostPage} />
+          <Route
+            path={[
+              '/:username/followers',
+              '/:username/following',
+              '/all-users'
+            ]}
+            exact
+            component={UsersPage}
+          />
+          <Route
+            path='/settings/profile'
+            exact
+            component={SettingsProfilePage}
+          />
 
-        <Redirect to={`/profile/${username}`} />
-      </Switch>
-    </section>
-  );
-  // }
+          <Redirect to={`/profile/${username}`} />
+        </Switch>
+      </section>
+    );
+  }
 
   return (
     <Switch>
