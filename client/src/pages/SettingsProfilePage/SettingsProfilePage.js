@@ -19,11 +19,11 @@ export const SettingsProfilePage = () => {
 
   return (
     <section className='settings-profile'>
-      <header className='settings-profile__header'>
-        <h2>Edit profile</h2>
-      </header>
+      <header className='settings-profile__header'>Edit profile</header>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className='settings-form'>
+        <input type='submit' value='Save' className='btn' />
+
         <div
           className='profileImg'
           style={{
@@ -37,10 +37,14 @@ export const SettingsProfilePage = () => {
             accept='image/jpeg,image/png'
             name='profileImg'
             ref={register}
+            id='profileImg'
           />
+          <label htmlFor='profileImg'>
+            <i className='fas fa-folder-plus'></i>
+          </label>
         </div>
+
         <div className='input-field'>
-          <label>Username</label>
           <input
             ref={register({
               required: 'FIELD IS REQUIRED',
@@ -54,30 +58,32 @@ export const SettingsProfilePage = () => {
               }
             })}
             name='username'
+            id='username'
             placeholder='Username'
             autoComplete='off'
             type='text'
             defaultValue={user?.username}
           />
+          <label htmlFor='username'>Username</label>
           {errors.username && (
             <p className='input-error'>{errors.username?.message}</p>
           )}
         </div>
-        <div className='input-field'>
-          <label>Gender</label>
+        <div className='select'>
+          <div className='select__title'>Gender</div>
           <select name='gender' ref={register} defaultValue={user?.gender}>
             <option value='female'>female</option>
             <option value='male'>male</option>
           </select>
         </div>
         <div className='input-field'>
-          <label>Bio</label>
           <textarea
             name='bio'
             placeholder='bio'
             ref={register}
             defaultValue={user?.bio}
           />
+          <label htmlFor='bio'>Bio</label>
         </div>
         <div className='input-field'>
           <label>Birthday</label>

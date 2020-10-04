@@ -24,7 +24,7 @@ export const ProfilePage = () => {
   const { user, posts, postsLoading, pagesCount, loading } = useSelector(
     state => state.profile
   );
-  debugger;
+
   const isSelfAccount = authUser.username === username;
 
   useEffect(() => {
