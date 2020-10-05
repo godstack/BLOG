@@ -13,7 +13,7 @@ export const setUserInfoForProfileSettings = user => ({
   payload: user
 });
 
-export const requestCreatePost = formData => ({
+export const requestUpdateUserInfoFromSettings = formData => ({
   type: REQUEST_UPDATE_USER_INFO_FROM_SETTINGS,
   payload: formData
 });

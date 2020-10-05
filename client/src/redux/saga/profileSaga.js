@@ -1,4 +1,4 @@
-import { all, call, put, take, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_FOLLOW_FROM_PROFILE,
   REQUEST_GET_PROFILE_INFO,

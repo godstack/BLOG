@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const User = require('../models/User');
 const { cloudinary } = require('../utils/cloudnary');
+
+const upload = require('../utils/upload');
 const router = Router();
 
 router.get('/profile', async (req, res) => {
@@ -28,7 +30,7 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-router.put('/profile', async (req, res) => {
+router.put('/profile', upload.single('profileImg'), async (req, res) => {
   try {
     const { user: sessUser } = req.session;
 
@@ -36,7 +38,33 @@ router.put('/profile', async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { username, bio, birthday, gender } = req.body;
+    let { username, bio, birthday, gender } = req.body;
+
+    const user = await User.findById(sessUser.userId);
+
+    const candidateUsername = await User.findOne({ username });
+
+    if (candidateUsername && user.username !== username) {
+      return res
+        .status(400)
+        .json({ message: 'User with such username already exists' });
+    }
+
+    birthday = new Date(birthday);
+
+    const validBirthday = birthday < Date.now();
+
+    if (!validBirthday) {
+      return res
+        .status(400)
+        .json({ message: 'Invalid date. It should be less than now' });
+    }
+
+    if (bio.length > 300) {
+      return res
+        .status(400)
+        .json({ message: 'Invalid bio. Max length is 300 characters' });
+    }
 
     let result = null;
 
@@ -44,16 +72,11 @@ router.put('/profile', async (req, res) => {
       result = await cloudinary.uploader.upload(req.file.path);
     }
 
-    const user = await User.findById(user.userId);
-
-    user = {
-      ...user,
-      username,
-      bio,
-      birthday,
-      gender,
-      profileImg: result ? result.url : result
-    };
+    user.username = username;
+    user.bio = bio;
+    user.birthday = birthday;
+    user.gender = gender;
+    user.profileImg = result ? result.url : user.profileImg;
 
     await user.save();
 

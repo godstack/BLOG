@@ -17,7 +17,9 @@
   .user-item__img {
     background-color: rgb(151, 150, 150);
     border-radius: 50%;
-
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 50px;
     width: 50px;
     margin-right: 20px;

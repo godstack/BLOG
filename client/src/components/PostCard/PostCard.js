@@ -27,7 +27,7 @@ export const PostCard = ({ post, author, requestLikePost }) => {
           className='post-card__authorImg'
           style={{
             backgroundImage: author.profileImg
-              ? author.profileImg
+              ? `url(${author.profileImg})`
               : `url(https://www.flaticon.com/svg/static/icons/svg/929/929493.svg)`
           }}
         />

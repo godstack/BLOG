@@ -2,7 +2,6 @@ import React from 'react';
 import './FileInfo.scss';
 
 export const FileInfo = ({ file }) => {
-  debugger;
   function fileSize(size) {
     const i = Math.floor(Math.log(size) / Math.log(1024));
     return (

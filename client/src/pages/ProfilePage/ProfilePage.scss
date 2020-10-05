@@ -54,6 +54,9 @@
   .profile__user-img {
     background-color: rgb(151, 150, 150);
     border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: 2px solid white;
     height: 100px;
     width: 100px;

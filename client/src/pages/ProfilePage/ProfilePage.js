@@ -66,7 +66,7 @@ export const ProfilePage = () => {
           className='profile__user-img'
           style={{
             backgroundImage: user?.profileImg
-              ? user?.profileImg
+              ? `url(${user?.profileImg})`
               : `url(https://www.flaticon.com/svg/static/icons/svg/929/929493.svg)`
           }}
         />

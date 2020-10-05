@@ -1,4 +1,3 @@
-import { actionChannel } from 'redux-saga/effects';
 import {
   HIDE_HOME_PAGE_LOADING,
   SET_HOME_PAGE_INFO,

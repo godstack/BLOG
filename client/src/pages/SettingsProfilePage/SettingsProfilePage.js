@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { FileInfo } from '../../components/FileInfo/FileInfo';
-import { requestUserInfoForSettings } from '../../redux/actions/settingsActions';
+import {
+  requestUpdateUserInfoFromSettings,
+  requestUserInfoForSettings
+} from '../../redux/actions/settingsActions';
 import './SettingsProfilePage.scss';
 
 export const SettingsProfilePage = () => {
@@ -14,22 +17,30 @@ export const SettingsProfilePage = () => {
 
   const [file, setFile] = useState(null);
 
+  const [gender, setGender] = useState('female');
+
+  useEffect(() => {
+    setGender(user?.gender);
+  }, [user?.gender]);
+
   useEffect(() => {
     dispatch(requestUserInfoForSettings());
   }, []);
 
   const onSubmit = data => {
     const fd = new FormData();
-    debugger;
+
     console.log(data);
     fd.append('username', data.username);
     fd.append('bio', data.bio);
     fd.append('birthday', data.birthday);
     fd.append('gender', data.gender);
 
-    if (data.profileImg) {
+    if (data.profileImg.length) {
       fd.append('profileImg', data.profileImg[0], data.profileImg[0].name);
     }
+
+    dispatch(requestUpdateUserInfoFromSettings(fd));
   };
 
   return (
@@ -43,7 +54,7 @@ export const SettingsProfilePage = () => {
             className='profileImg'
             style={{
               backgroundImage: user?.profileImg
-                ? user?.profileImg
+                ? `url(${user?.profileImg})`
                 : `url(https://www.flaticon.com/svg/static/icons/svg/929/929493.svg)`
             }}
           >
@@ -91,7 +102,12 @@ export const SettingsProfilePage = () => {
         </div>
         <div className='select'>
           <div className='select__title'>Gender</div>
-          <select name='gender' ref={register} defaultValue={user?.gender}>
+          <select
+            name='gender'
+            ref={register}
+            value={gender}
+            onChange={e => setGender(e.target.value)}
+          >
             <option value='female'>female</option>
             <option value='male'>male</option>
           </select>
@@ -107,7 +123,12 @@ export const SettingsProfilePage = () => {
         </div>
         <div className='input-field'>
           <label>Birthday</label>
-          <input type='date' name='birthday' ref={register} />
+          <input
+            type='date'
+            name='birthday'
+            ref={register}
+            defaultValue={user?.birthday.split('T')[0]}
+          />
         </div>
       </form>
     </section>
