@@ -1,4 +1,12 @@
 .settings-form {
+  .input-error {
+    padding: 20px;
+    border: 3px dashed red;
+    color: red;
+    margin: 20px;
+    text-transform: none;
+  }
+
   .btn {
     background: rgb(29, 161, 242);
     color: white;

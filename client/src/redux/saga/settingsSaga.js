@@ -5,7 +5,7 @@ import {
 } from '../types';
 import axios from 'axios';
 import { setUserInfoForProfileSettings } from '../actions/settingsActions';
-import { notifyError } from '../actions/toastrActions';
+import { notifyError, notifySuccess } from '../actions/toastrActions';
 
 function* workerSetUserInfoForSettings() {
   try {
@@ -24,7 +24,19 @@ function* workerSetUserInfoForSettings() {
 }
 
 function* workerUpdateUserInfo({ payload: formData }) {
-  yield call(axios.put, '/api/settings/profile', formData);
+  try {
+    yield call(axios.put, '/api/settings/profile', formData);
+    yield put(
+      notifySuccess('Profile info', 'Profile info updated successfully')
+    );
+  } catch (e) {
+    yield put(
+      notifyError(
+        'Update profile info',
+        e?.response?.data?.message || 'Updating profile info was failed'
+      )
+    );
+  }
 }
 
 export function* settingsSaga() {

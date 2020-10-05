@@ -19,7 +19,10 @@ router.get('/:username/info', async (req, res) => {
       following: user.following,
       followers: user.followers,
       _id: user.id,
-      posts: user.posts.length
+      posts: user.posts.length,
+      bio: user.bio,
+      birthday: user.birthday,
+      gender: user.gender
     };
 
     res.json({ user: resUser });

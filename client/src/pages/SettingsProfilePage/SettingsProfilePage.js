@@ -116,7 +116,12 @@ export const SettingsProfilePage = () => {
           <textarea
             name='bio'
             placeholder='bio'
-            ref={register}
+            ref={register({
+              maxLength: {
+                value: 300,
+                message: 'BIO LENGTH SHOULD BE LESS, THAN 300 CHARACTERS'
+              }
+            })}
             defaultValue={user?.bio}
           />
           <label htmlFor='bio'>Bio</label>

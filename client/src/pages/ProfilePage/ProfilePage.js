@@ -26,6 +26,8 @@ export const ProfilePage = () => {
     state => state.profile
   );
 
+  console.log(user);
+
   const isSelfAccount = authUser.username === username;
 
   useEffect(() => {
@@ -87,6 +89,33 @@ export const ProfilePage = () => {
           )}
 
           <div className='profile__username'>@{user.username}</div>
+          <div className='profile__additional'>
+            {user?.gender && (
+              <div className='profile__additional-item'>
+                <span className='type'>
+                  <i className='fas fa-venus-mars'></i> gender:
+                </span>{' '}
+                {user?.gender}
+              </div>
+            )}
+            {user?.birthday && (
+              <div className='profile__additional-item'>
+                <span className='type'>
+                  <i className='far fa-calendar-alt'></i> birthday:{' '}
+                </span>
+                {user?.birthday.split('T')[0]}
+              </div>
+            )}
+            {user?.bio && (
+              <div className='profile__additional-item'>
+                {' '}
+                <span className='type'>
+                  <i className='fas fa-address-card'></i> bio:{' '}
+                </span>{' '}
+                {user?.bio}
+              </div>
+            )}
+          </div>
           <div className='profile__details'>
             <NavLink
               to={`/${user.username}/followers`}
