@@ -6,6 +6,7 @@ import {
   showSessionLoading
 } from '../actions/authActions';
 import axios from 'axios';
+import { toastr } from 'react-redux-toastr';
 
 import {
   REQUEST_CHECK_AUTH,
@@ -25,6 +26,7 @@ function* workerLoginSaga({ payload: formData }) {
 
     yield put(hideSessionLoading());
   } catch (e) {
+    // yield put(toastr.error(e.message));
     console.log('error', e);
     yield put(hideSessionLoading());
   }
@@ -42,6 +44,7 @@ function* workerRegisterSaga({ payload: formData }) {
     yield put(hideSessionLoading());
   } catch (e) {
     console.log('error', e);
+
     yield put(hideSessionLoading());
   }
 }
@@ -54,6 +57,7 @@ function* workerLogoutSaga() {
     yield put(hideSessionLoading());
   } catch (e) {
     console.log('error', e);
+
     yield put(hideSessionLoading());
   }
 }
@@ -69,6 +73,7 @@ function* workerCheckAuthSaga() {
     yield put(hideSessionLoading());
   } catch (e) {
     console.log('error', e);
+
     yield put(hideSessionLoading());
   }
 }

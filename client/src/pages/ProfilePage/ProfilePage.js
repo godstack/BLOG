@@ -11,6 +11,8 @@ import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { FollowButton } from '../../components/FollowButton/FollowButton';
+import { toastr } from 'react-redux-toastr';
+
 import './ProfilePage.scss';
 
 export const ProfilePage = () => {

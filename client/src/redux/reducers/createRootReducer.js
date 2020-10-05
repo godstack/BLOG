@@ -6,6 +6,7 @@ import { profileReducer } from './profileReducer';
 import { usersReducer } from './usersReducer';
 import { homePageReducer } from './homePageReducer';
 import { settingsReducer } from './settingsReducer';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 
 export const createRootReducer = history =>
   combineReducers({
@@ -15,5 +16,6 @@ export const createRootReducer = history =>
     profile: profileReducer,
     users: usersReducer,
     home: homePageReducer,
-    settings: settingsReducer
+    settings: settingsReducer,
+    toastr: toastrReducer
   });

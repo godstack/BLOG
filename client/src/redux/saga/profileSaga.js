@@ -16,6 +16,7 @@ import {
   hidePostsLoading,
   updateProfilePost
 } from '../actions/profileActions';
+import { toastr } from 'react-redux-toastr';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   try {
@@ -36,11 +37,13 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
 
 function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
+    yield put(toastr.success('title', 'message'));
     yield put(setFollowers(authUserId));
 
     yield call(axios.put, `/api/user/${aimUsername}/follow`);
   } catch (e) {
     console.log(e.message);
+
     yield put(setFollowers(authUserId));
   }
 }
