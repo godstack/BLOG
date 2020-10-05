@@ -6,7 +6,6 @@ import {
   showSessionLoading
 } from '../actions/authActions';
 import axios from 'axios';
-import { toastr } from 'react-redux-toastr';
 
 import {
   REQUEST_CHECK_AUTH,
@@ -14,6 +13,7 @@ import {
   REQUEST_LOGOUT,
   REQUEST_REGISTER
 } from '../types';
+import { notifySuccess, notifyError } from '../actions/toastrActions';
 
 function* workerLoginSaga({ payload: formData }) {
   yield put(showSessionLoading());
@@ -21,13 +21,16 @@ function* workerLoginSaga({ payload: formData }) {
     const response = yield call(axios.post, '/api/auth/login', {
       ...formData
     });
-
+    console.log(response.data);
     yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
+
+    yield put(notifySuccess('Login', 'Successful login!'));
   } catch (e) {
-    // yield put(toastr.error(e.message));
-    console.log('error', e);
+    yield put(
+      notifyError('Login', e?.response?.data?.message || 'Login failed')
+    );
     yield put(hideSessionLoading());
   }
 }
@@ -42,9 +45,14 @@ function* workerRegisterSaga({ payload: formData }) {
     yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
+    yield put(notifySuccess('Registration', 'Successful registration!'));
   } catch (e) {
-    console.log('error', e);
-
+    yield put(
+      notifyError(
+        'Registration',
+        e?.response?.data?.message || 'Registration failed'
+      )
+    );
     yield put(hideSessionLoading());
   }
 }
@@ -55,9 +63,12 @@ function* workerLogoutSaga() {
     yield call(axios.delete, '/api/auth/logout');
     yield put(logoutAuthUser());
     yield put(hideSessionLoading());
+    yield put(notifySuccess('Logout', 'Logout successfully'));
   } catch (e) {
     console.log('error', e);
-
+    yield put(
+      notifyError('Logout', e?.response?.data?.message || 'Logout failed')
+    );
     yield put(hideSessionLoading());
   }
 }
@@ -72,8 +83,12 @@ function* workerCheckAuthSaga() {
 
     yield put(hideSessionLoading());
   } catch (e) {
-    console.log('error', e);
-
+    yield put(
+      notifyError(
+        'Check Authorization',
+        e?.response?.data?.message || 'Check Authorization failed'
+      )
+    );
     yield put(hideSessionLoading());
   }
 }

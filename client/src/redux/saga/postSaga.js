@@ -7,20 +7,40 @@ import {
   setPostPage,
   showCreatePostLoading
 } from '../actions/postActions';
+import { notifyError } from '../actions/toastrActions';
 
 function* workerPostCreateSaga({ payload: formData }) {
-  yield put(showCreatePostLoading());
-  const response = yield call(axios.post, '/api/post/create', formData);
+  try {
+    yield put(showCreatePostLoading());
+    const response = yield call(axios.post, '/api/post/create', formData);
 
-  yield put(push(`/post/${response.data.postId}`));
+    yield put(push(`/post/${response.data.postId}`));
 
-  yield put(hideCreatePostLoading());
+    yield put(hideCreatePostLoading());
+  } catch (e) {
+    yield put(
+      notifyError(
+        'Post creation',
+        e?.response?.data?.message || 'Post creation was failed'
+      )
+    );
+    yield put(hideCreatePostLoading());
+  }
 }
 
 function* workerPostGet({ payload: postId }) {
-  const response = yield call(axios.get, `/api/post/${postId}`);
+  try {
+    const response = yield call(axios.get, `/api/post/${postId}`);
 
-  yield put(setPostPage(response.data));
+    yield put(setPostPage(response.data));
+  } catch (e) {
+    yield put(
+      notifyError(
+        'Post',
+        e?.response?.data?.message || 'Post fetching was failed'
+      )
+    );
+  }
 }
 
 export function* postSaga() {

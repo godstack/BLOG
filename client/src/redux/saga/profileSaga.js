@@ -16,7 +16,7 @@ import {
   hidePostsLoading,
   updateProfilePost
 } from '../actions/profileActions';
-import { toastr } from 'react-redux-toastr';
+import { notifyError } from '../actions/toastrActions';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   try {
@@ -31,33 +31,52 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
     yield put(setProfileInfo({ ...postsInfo.data, ...userInfo.data }));
     yield put(hideProfileLoading());
   } catch (e) {
+    yield put(
+      notifyError(
+        'Profile info',
+        e?.response?.data?.message || 'Profile info fetching was failed'
+      )
+    );
     yield put(hideProfileLoading());
   }
 }
 
 function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
-    yield put(toastr.success('title', 'message'));
     yield put(setFollowers(authUserId));
 
     yield call(axios.put, `/api/user/${aimUsername}/follow`);
   } catch (e) {
-    console.log(e.message);
-
+    yield put(
+      notifyError(
+        'Follow',
+        e?.response?.data?.message || 'Follow request was failed'
+      )
+    );
     yield put(setFollowers(authUserId));
   }
 }
 
 function* workerGetUserPosts({ payload: { username, currentPage } }) {
-  yield put(showPostsLoading());
+  try {
+    yield put(showPostsLoading());
 
-  const response = yield call(axios.get, `/api/user/${username}/posts`, {
-    params: { page: currentPage }
-  });
+    const response = yield call(axios.get, `/api/user/${username}/posts`, {
+      params: { page: currentPage }
+    });
 
-  yield put(setUserPosts(response.data.posts));
+    yield put(setUserPosts(response.data.posts));
 
-  yield put(hidePostsLoading());
+    yield put(hidePostsLoading());
+  } catch (e) {
+    yield put(
+      notifyError(
+        'User posts',
+        e?.response?.data?.message || 'User posts fetching was failed'
+      )
+    );
+    yield put(hidePostsLoading());
+  }
 }
 
 function* workerLikePost({ payload: { postId, userId } }) {
@@ -66,6 +85,12 @@ function* workerLikePost({ payload: { postId, userId } }) {
 
     yield call(axios.put, `/api/post/${postId}/like`);
   } catch (e) {
+    yield put(
+      notifyError(
+        'Like post',
+        e?.response?.data?.message || 'Like request was failed'
+      )
+    );
     yield put(updateProfilePost(postId, userId));
   }
 }

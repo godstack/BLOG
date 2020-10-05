@@ -10,6 +10,7 @@ import {
   setUsersList,
   showUsersListLoading
 } from '../actions/usersActions';
+import { notifyError } from '../actions/toastrActions';
 
 function* workerSetUsersList({ payload: { url, page } }) {
   try {
@@ -19,25 +20,32 @@ function* workerSetUsersList({ payload: { url, page } }) {
       params: { page }
     });
 
-    console.log(response.data);
-
     yield put(setUsersList(response.data));
 
     yield put(hideUsersListLoading());
   } catch (e) {
-    console.log(e.message);
+    yield put(
+      notifyError(
+        'User list',
+        e?.response?.data?.message || 'Fetching User list was failed'
+      )
+    );
     yield put(hideUsersListLoading());
   }
 }
 
 function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
-    console.log(aimUsername, authUserId);
     yield put(setFollowersUsersList(aimUsername, authUserId));
 
     yield call(axios.put, `/api/user/${aimUsername}/follow`);
   } catch (e) {
-    console.log(e.message);
+    yield put(
+      notifyError(
+        'Follow',
+        e?.response?.data?.message || 'Follow request was failed'
+      )
+    );
     yield put(setFollowersUsersList(aimUsername, authUserId));
   }
 }

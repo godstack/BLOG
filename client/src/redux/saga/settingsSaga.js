@@ -5,6 +5,7 @@ import {
 } from '../types';
 import axios from 'axios';
 import { setUserInfoForProfileSettings } from '../actions/settingsActions';
+import { notifyError } from '../actions/toastrActions';
 
 function* workerSetUserInfoForSettings() {
   try {
@@ -12,12 +13,18 @@ function* workerSetUserInfoForSettings() {
 
     yield put(setUserInfoForProfileSettings(response.data.user));
   } catch (e) {
-    console.log(e.message);
+    yield put(
+      notifyError(
+        'User info',
+        e?.response?.data?.message ||
+          'Fetching user info for settings was failed'
+      )
+    );
   }
 }
 
 function* workerUpdateUserInfo({ payload: formData }) {
-  const response = yield call(axios.put, '/api/settings/profile', formData);
+  yield call(axios.put, '/api/settings/profile', formData);
 }
 
 export function* settingsSaga() {

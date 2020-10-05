@@ -7,6 +7,7 @@ import {
   showHomePageLoading,
   updateHomePost
 } from '../actions/homePageActions';
+import { notifyError } from '../actions/toastrActions';
 
 function* workerSetHomePagePosts({ payload: page }) {
   try {
@@ -20,7 +21,13 @@ function* workerSetHomePagePosts({ payload: page }) {
 
     yield put(hideHomePageLoading());
   } catch (e) {
-    console.log(e.message);
+    yield put(
+      notifyError(
+        'Home page',
+        e?.response?.data?.message || 'Fetching home page info failed'
+      )
+    );
+
     yield put(hideHomePageLoading());
   }
 }
@@ -31,6 +38,12 @@ function* workerLikePost({ payload: { postId, userId } }) {
 
     yield call(axios.put, `/api/post/${postId}/like`);
   } catch (e) {
+    yield put(
+      notifyError(
+        'Like post',
+        e?.response?.data?.message || 'Like post action was failed'
+      )
+    );
     yield put(updateHomePost(postId, userId));
   }
 }
