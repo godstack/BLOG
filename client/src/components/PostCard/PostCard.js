@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
+import { Dropdown } from '../Dropdown/Dropdown';
 import './PostCard.scss';
 
-export const PostCard = ({ post, author, requestLikePost }) => {
+export const PostCard = ({
+  post,
+  author,
+  requestLikePost,
+  requestDeletePost
+}) => {
   const dispatch = useDispatch();
 
+  const menuNode = useRef();
+
   const { user } = useSelector(state => state.session);
+
+  const [open, setOpen] = useState(false);
+
+  const isSelfPost = user.username === author.username;
 
   const isLiked = post.likes.find(userId => userId === user.userId);
   const likes = isLiked ? (
@@ -15,6 +27,30 @@ export const PostCard = ({ post, author, requestLikePost }) => {
   ) : (
     <i className='far fa-heart'></i>
   );
+
+  function handleClickOutside(event) {
+    if (
+      !event.target.classList.contains('dropdown', 'fas fa-chevron-down') &&
+      !menuNode.current.contains(event.target)
+    ) {
+      debugger;
+      setOpen(false);
+    }
+  }
+
+  function handleDropdown(e) {
+    if (e.target.classList.contains('dropdown')) {
+      return;
+    }
+    setOpen(!open);
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleLike = () => {
     dispatch(requestLikePost(post._id, user.userId));
@@ -32,6 +68,19 @@ export const PostCard = ({ post, author, requestLikePost }) => {
           }}
         />
       </NavLink>
+
+      {isSelfPost && (
+        <div
+          className='dropdown-opener'
+          onClick={handleDropdown}
+          ref={menuNode}
+        >
+          <i className='fas fa-chevron-down open-icon'></i>
+          {open && (
+            <Dropdown postId={post._id} requestDeletePost={requestDeletePost} />
+          )}
+        </div>
+      )}
 
       <div className='post-card__authorUsername'>
         <NavLink to={`/profile/${author.username}`}>@{author.username}</NavLink>

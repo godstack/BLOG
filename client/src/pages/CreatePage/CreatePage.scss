@@ -49,9 +49,9 @@
     }
 
     .file-upload {
-      height: 200px;
-      width: 200px;
-      border-radius: 100px;
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
       position: relative;
 
       display: flex;
@@ -64,7 +64,7 @@
       background-size: 100% 200%;
       transition: all 1s;
       color: #ffffff;
-      font-size: 100px;
+      font-size: 3rem;
 
       &:hover {
         background-position: 0 -100%;
@@ -127,7 +127,7 @@
   .post-form {
     width: 60%;
     margin: 0 auto;
-    border: 2px dashed black;
+
     border-radius: 20px;
     padding: 20px 10px;
   }

@@ -72,11 +72,18 @@ router.put('/profile', upload.single('profileImg'), async (req, res) => {
       result = await cloudinary.uploader.upload(req.file.path);
     }
 
+    if (result) {
+      await cloudinary.uploader.destroy(user.profileImg_public_id);
+    }
+
     user.username = username;
     user.bio = bio;
     user.birthday = birthday;
     user.gender = gender;
     user.profileImg = result ? result.url : user.profileImg;
+    user.profileImg_public_id = result
+      ? result.public_id
+      : user.profileImg_public_id;
 
     await user.save();
 

@@ -1,0 +1,41 @@
+.dropdown {
+  position: absolute;
+  z-index: 2;
+  top: 35px;
+  right: 0;
+  width: 150px;
+  box-shadow: 0 0 5px white;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #15202b;
+  font-size: 1.3rem;
+
+  .menu-item {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+    padding: 10px;
+    margin: 5px 0;
+
+    span {
+      display: block;
+      margin-left: auto;
+    }
+
+    .delete {
+      color: crimson;
+    }
+
+    .edit {
+      color: lightseagreen;
+    }
+
+    &:hover {
+      background-color: #2f4861;
+      cursor: pointer;
+    }
+  }
+}

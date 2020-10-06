@@ -1,6 +1,7 @@
 import {
   HIDE_POSTS_LOADING,
   HIDE_PROFILE_LOADING,
+  REMOVE_PROFILE_POST,
   SET_FOLLOWERS,
   SET_PROFILE_INFO,
   SET_USER_POSTS,
@@ -44,6 +45,13 @@ export const profileReducer = (state = initialState, action) => {
 
     case UPDATE_PROFILE_POST:
       return { ...state, posts: likePostFn(state.posts, action) };
+    case REMOVE_PROFILE_POST:
+      debugger;
+      const posts = state.posts.filter(post => post._id !== action.payload);
+      let { user } = state;
+      user.posts--;
+
+      return { ...state, posts, user };
 
     case SET_USER_POSTS:
       return { ...state, posts: action.payload };

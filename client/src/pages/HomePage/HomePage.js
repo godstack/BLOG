@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   requestLikeFromHome,
-  requestPostsFromAllUsers
+  requestPostsFromAllUsers,
+  requestDeletePostFromHome
 } from '../../redux/actions/homePageActions';
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
@@ -36,6 +37,7 @@ export const HomePage = () => {
             key={post._id}
             author={post.author}
             requestLikePost={requestLikeFromHome}
+            requestDeletePost={requestDeletePostFromHome}
           />
         ))}
       </div>

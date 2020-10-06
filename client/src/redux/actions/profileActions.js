@@ -10,7 +10,9 @@ import {
   SHOW_POSTS_LOADING,
   HIDE_POSTS_LOADING,
   REQUEST_LIKE_FROM_PROFILE,
-  UPDATE_PROFILE_POST
+  UPDATE_PROFILE_POST,
+  REQUEST_DELETE_POST_FROM_PROFILE,
+  REMOVE_PROFILE_POST
 } from '../types';
 
 export const requestGetProfileInfo = (username, currentPage) => ({
@@ -67,4 +69,14 @@ export const requestLikeFromProfile = (postId, userId) => ({
 export const updateProfilePost = (postId, userId) => ({
   type: UPDATE_PROFILE_POST,
   payload: { postId, userId }
+});
+
+export const requestDeletePostFromProfile = postId => ({
+  type: REQUEST_DELETE_POST_FROM_PROFILE,
+  payload: postId
+});
+
+export const removeProfilePost = postId => ({
+  type: REMOVE_PROFILE_POST,
+  payload: postId
 });

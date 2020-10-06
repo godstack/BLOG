@@ -24,7 +24,8 @@ router.post('/create', upload.single('img'), async (req, res) => {
     const post = new Post({
       text,
       author: sessUser.userId,
-      image: result.url
+      image: result.url,
+      public_id: result.public_id
     });
 
     user.posts.push(post.id);
@@ -93,6 +94,40 @@ router.put('/:postId/like', async (req, res) => {
     res
       .status(500)
       .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
+router.delete('/:postId', async (req, res) => {
+  try {
+    const { user: sessUser } = req.session;
+
+    if (!sessUser) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { postId } = req.params;
+
+    const user = await User.findById(sessUser.userId);
+
+    const isPostExist = user.posts.find(id => id.equals(postId));
+
+    if (!isPostExist) {
+      return res.status(400).json({ message: "User don't have such post" });
+    }
+
+    user.posts = user.posts.filter(id => !id.equals(postId));
+
+    const post = await Post.findById(postId);
+
+    await cloudinary.uploader.destroy(post.public_id);
+
+    await post.remove();
+
+    await user.save();
+
+    res.json({ postId, message: 'Post was successfully deleted' });
+  } catch (e) {
+    res.status(500).json({ message: 'Failed delete post' });
   }
 });
 

@@ -1,5 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {
+  REQUEST_DELETE_POST_FROM_PROFILE,
   REQUEST_FOLLOW_FROM_PROFILE,
   REQUEST_GET_PROFILE_INFO,
   REQUEST_GET_USER_POSTS,
@@ -14,9 +15,10 @@ import {
   setUserPosts,
   showPostsLoading,
   hidePostsLoading,
-  updateProfilePost
+  updateProfilePost,
+  removeProfilePost
 } from '../actions/profileActions';
-import { notifyError } from '../actions/toastrActions';
+import { notifyError, notifySuccess } from '../actions/toastrActions';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   try {
@@ -95,9 +97,25 @@ function* workerLikePost({ payload: { postId, userId } }) {
   }
 }
 
+function* workerDeletePost({ payload: postId }) {
+  try {
+    yield put(showPostsLoading());
+    const response = yield call(axios.delete, `/api/post/${postId}`);
+    yield put(removeProfilePost(response.data.postId));
+    yield put(hidePostsLoading());
+    yield put(notifySuccess('Post', 'Deleted successfully'));
+  } catch (e) {
+    yield put(hidePostsLoading());
+    yield put(
+      notifyError('Post', e?.response?.data?.message || 'Failed to delete post')
+    );
+  }
+}
+
 export function* profileSaga() {
   yield takeEvery(REQUEST_GET_PROFILE_INFO, workerGetProfileInfo);
   yield takeEvery(REQUEST_GET_USER_POSTS, workerGetUserPosts);
   yield takeEvery(REQUEST_FOLLOW_FROM_PROFILE, workerFollow);
   yield takeEvery(REQUEST_LIKE_FROM_PROFILE, workerLikePost);
+  yield takeEvery(REQUEST_DELETE_POST_FROM_PROFILE, workerDeletePost);
 }

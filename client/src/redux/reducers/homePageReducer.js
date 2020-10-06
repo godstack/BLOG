@@ -1,5 +1,6 @@
 import {
   HIDE_HOME_PAGE_LOADING,
+  REMOVE_HOME_POST,
   SET_HOME_PAGE_INFO,
   SHOW_HOME_PAGE_LOADING,
   UPDATE_HOME_POST
@@ -22,6 +23,9 @@ export const homePageReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case HIDE_HOME_PAGE_LOADING:
       return { ...state, loading: false };
+    case REMOVE_HOME_POST:
+      const posts = state.posts.filter(post => post._id !== action.payload);
+      return { ...state, posts };
     default:
       return state;
   }

@@ -8,6 +8,7 @@ const schema = new Schema({
   likes: [{ type: Types.ObjectId, ref: 'Post' }],
   birthday: { type: Date, default: null },
   profileImg: { type: String, default: null },
+  profileImg_public_id: { type: String, default: null },
   gender: { type: String, default: null },
   bio: { type: String, default: null },
   followers: [{ type: Types.ObjectId, ref: 'User' }],

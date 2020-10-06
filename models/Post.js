@@ -5,7 +5,8 @@ const schema = new Schema({
   author: { type: Types.ObjectId, ref: 'User', required: true },
   likes: [{ type: Types.ObjectId, ref: 'User' }],
   date: { type: Date, default: Date.now() },
-  text: { type: String }
+  text: { type: String },
+  public_id: { type: String }
 });
 
 module.exports = model('Post', schema);
