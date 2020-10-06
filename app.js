@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const app = express();
 
-const NODE_ENV = 'development';
+const PORT = config.get('port') || 5000;
 
 app.disable('x-powered-by');
 
@@ -29,7 +29,7 @@ app.use(
     store: mongoDBstore,
     cookie: {
       sameSite: false,
-      secure: NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
       maxAge: SESS_LIFETIME
     }
   })
@@ -41,7 +41,13 @@ app.use('/api/user/', require('./routes/user.routes'));
 app.use('/api/home/', require('./routes/home.routes'));
 app.use('/api/settings/', require('./routes/settings.routes'));
 
-const PORT = config.get('port') || 5000;
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 async function start() {
   try {
