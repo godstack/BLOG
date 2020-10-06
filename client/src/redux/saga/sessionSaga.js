@@ -21,7 +21,7 @@ function* workerLoginSaga({ payload: formData }) {
     const response = yield call(axios.post, '/api/auth/login', {
       ...formData
     });
-    console.log(response.data);
+
     yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
@@ -65,7 +65,6 @@ function* workerLogoutSaga() {
     yield put(hideSessionLoading());
     yield put(notifySuccess('Logout', 'Logout successfully'));
   } catch (e) {
-    console.log('error', e);
     yield put(
       notifyError('Logout', e?.response?.data?.message || 'Logout failed')
     );

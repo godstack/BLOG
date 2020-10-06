@@ -27,8 +27,6 @@ export const ProfilePage = () => {
     state => state.profile
   );
 
-  console.log(user);
-
   const isSelfAccount = authUser.username === username;
 
   useEffect(() => {

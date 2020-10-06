@@ -17,8 +17,6 @@ export const UsersPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(users);
-
   function showUsersList() {
     if (loading) {
       return (

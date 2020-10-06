@@ -25,7 +25,6 @@ router.get('/profile', async (req, res) => {
 
     res.json({ user: resUser });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -89,7 +88,6 @@ router.put('/profile', upload.single('profileImg'), async (req, res) => {
 
     res.json({ message: 'User info updated successfully!' });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });

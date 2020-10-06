@@ -45,7 +45,6 @@ router.get('/all-users', async (req, res) => {
 
     res.json({ posts, pagesCount });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });

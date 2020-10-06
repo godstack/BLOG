@@ -30,7 +30,6 @@ export const SettingsProfilePage = () => {
   const onSubmit = data => {
     const fd = new FormData();
 
-    console.log(data);
     fd.append('username', data.username);
     fd.append('bio', data.bio);
     fd.append('birthday', data.birthday);

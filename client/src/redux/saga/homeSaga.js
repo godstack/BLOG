@@ -22,7 +22,6 @@ function* workerSetHomePagePosts({ payload: page }) {
     });
 
     yield put(setHomePageInfo(response.data));
-    console.log(response.data);
 
     yield put(hideHomePageLoading());
   } catch (e) {

@@ -67,7 +67,7 @@ router.post(
         .status(201)
         .json({ message: 'New User was created!', user: sessionUser });
     } catch (e) {
-      res.status(500).json({ message: 'Something went wrong, try again' });
+      res.status(500).json({ message: e.message });
     }
   }
 );
@@ -118,7 +118,7 @@ router.post(
 
       res.json({ message: 'Successful login', user: sessionUser });
     } catch (e) {
-      res.status(500).json({ message: 'Something went wrong, try again' });
+      res.status(500).json({ message: e.message });
     }
   }
 );
@@ -136,7 +136,7 @@ router.delete('/logout', async (req, res) => {
       throw new Error('Something went wrong');
     }
   } catch (e) {
-    res.status(422).json({ message: 'Something went wrong, try again' });
+    res.status(422).json({ message: e.message });
   }
 });
 

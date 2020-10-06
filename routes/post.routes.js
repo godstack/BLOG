@@ -43,8 +43,7 @@ router.post('/create', upload.single('img'), async (req, res) => {
       authorUsername: sessUser.username
     });
   } catch (e) {
-    console.log(e.message);
-    res.status(500).json({ message: 'Something went wrong!' });
+    res.status(500).json({ message: e.message });
   }
 });
 
@@ -60,7 +59,7 @@ router.get('/:id', async (req, res) => {
 
     res.json({ postText: post.text });
   } catch (e) {
-    console.log(e.message);
+    res.status(500).json({ message: e.message });
   }
 });
 
@@ -88,9 +87,7 @@ router.put('/:postId/like', async (req, res) => {
 
     res.status(200);
   } catch (e) {
-    res
-      .status(500)
-      .json({ message: e.message || 'Something went wrong, try again' });
+    res.status(500).json({ message: e.message });
   }
 });
 

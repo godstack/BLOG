@@ -27,7 +27,6 @@ router.get('/:username/info', async (req, res) => {
 
     res.json({ user: resUser });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -58,7 +57,6 @@ router.get('/:username/posts', async (req, res) => {
 
     res.json({ posts, pagesCount });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -100,7 +98,6 @@ router.put('/:username/follow', async (req, res) => {
 
     res.status(200);
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -125,7 +122,6 @@ router.get('/:username/followers', async (req, res) => {
 
     return res.json({ users: followers, pagesCount });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -150,7 +146,6 @@ router.get('/:username/following', async (req, res) => {
 
     return res.json({ users: following, pagesCount });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
@@ -198,7 +193,6 @@ router.get('/all-users', async (req, res) => {
 
     res.json({ users, pagesCount });
   } catch (e) {
-    console.log(e.message);
     res.status(500).json({ message: e.message });
   }
 });
