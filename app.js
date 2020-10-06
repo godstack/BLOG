@@ -3,6 +3,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const path = require('path');
 const app = express();
 
 const PORT = process.env.PORT || config.get('port') || 5000;
