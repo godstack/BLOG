@@ -35,7 +35,7 @@ router.post('/create', upload.single('img'), async (req, res) => {
 
     return res.json({
       message: 'Post was successfully created!',
-      postId: post.id
+      authorUsername: sessUser.username
     });
   } catch (e) {
     console.log(e.message);

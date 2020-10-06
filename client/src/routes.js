@@ -5,7 +5,6 @@ import { LoginPage } from './pages/AuthPages/LoginPage';
 import { RegisterPage } from './pages/AuthPages/RegisterPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
-import { PostPage } from './pages/PostPage/PostPage';
 import { useSelector } from 'react-redux';
 import { UsersPage } from './pages/UsersPage/UsersPage';
 import { SettingsProfilePage } from './pages/SettingsProfilePage/SettingsProfilePage';
@@ -20,7 +19,7 @@ export const useRoutes = isAuthenticated => {
           <Route path='/profile/:username' exact component={ProfilePage} />
           <Route path='/home' exact component={HomePage} />
           <Route path='/create-post' exact component={CreatePage} />
-          <Route path='/post/:postId' component={PostPage} />
+
           <Route
             path={[
               '/:username/followers',
