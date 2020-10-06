@@ -1,12 +1,12 @@
 import {
   HIDE_CREATE_POST_LOADING,
-  SET_POST_PAGE,
+  SET_POST_TEXT,
   SHOW_CREATE_POST_LOADING
 } from '../types';
 
 const initialState = {
-  postPage: { post: null, author: null },
-  loading: false
+  loading: false,
+  postText: ''
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -15,8 +15,8 @@ export const postReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case HIDE_CREATE_POST_LOADING:
       return { ...state, loading: false };
-    case SET_POST_PAGE:
-      return { ...state, postPage: { ...action.payload } };
+    case SET_POST_TEXT:
+      return { ...state, postText: action.payload };
     default:
       return state;
   }

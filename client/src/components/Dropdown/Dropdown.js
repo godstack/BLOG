@@ -9,19 +9,17 @@ export const Dropdown = ({ postId, requestDeletePost }) => {
 
   return (
     <div className='dropdown'>
-      <NavLink to='/' className='menu-item'>
-        Edit{' '}
+      <NavLink to={`/post/edit/${postId}`} className='menu-item'>
         <span className='edit'>
-          <i className='fas fa-edit'></i>
+          Edit <i className='fas fa-edit'></i>
         </span>
       </NavLink>
       <div
         className='menu-item'
         onClick={() => dispatch(requestDeletePost(postId))}
       >
-        Delete{' '}
         <span className='delete'>
-          <i className='fas fa-trash-alt'></i>
+          Delete <i className='fas fa-trash-alt'></i>
         </span>
       </div>
     </div>

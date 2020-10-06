@@ -34,7 +34,7 @@ export const Header = () => {
           <span className='item__name'>Users</span>
         </NavLink>
 
-        <NavLink to='/create-post' className='header__item'>
+        <NavLink to='/post/create' className='header__item'>
           <i className='far fa-plus-square'></i>
           <span className='item__name'>Create Post</span>
         </NavLink>

@@ -18,7 +18,11 @@ export const useRoutes = isAuthenticated => {
         <Switch>
           <Route path='/profile/:username' exact component={ProfilePage} />
           <Route path='/home' exact component={HomePage} />
-          <Route path='/create-post' exact component={CreatePage} />
+          <Route
+            path={['/post/create', '/post/edit/:postId']}
+            exact
+            component={CreatePage}
+          />
 
           <Route
             path={[

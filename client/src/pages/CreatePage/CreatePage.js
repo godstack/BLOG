@@ -1,26 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestCreatePost } from '../../redux/actions/postActions';
+import {
+  requestCreatePost,
+  requestEditPost,
+  requestGetPostText
+} from '../../redux/actions/postActions';
 import { Loader } from '../../components/Loader/Loader';
 import { FileInfo } from '../../components/FileInfo/FileInfo';
+import { useLocation, useParams } from 'react-router-dom';
 import './CreatePage.scss';
 
 export const CreatePage = () => {
   const { register, errors, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const loading = useSelector(state => state.post.loading);
+  const { postId } = useParams();
+
+  const location = useLocation();
+
+  const actionType = location.pathname.split('/')[2];
+
+  const { loading, postText } = useSelector(state => state.post);
 
   const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    if (actionType === 'edit') {
+      dispatch(requestGetPostText(postId));
+    }
+  }, []);
 
   const onSubmit = data => {
     const fd = new FormData();
 
     fd.append('text', data.text);
-    fd.append('img', data.img[0], data.img[0].name);
+    if (data.img.length) {
+      fd.append('img', data.img[0], data.img[0].name);
+    }
 
-    dispatch(requestCreatePost(fd));
+    if (actionType === 'create') {
+      dispatch(requestCreatePost(fd));
+    } else if (actionType === 'edit') {
+      dispatch(requestEditPost(fd, postId));
+    }
   };
 
   return (
@@ -31,7 +54,7 @@ export const CreatePage = () => {
         </div>
       )}
 
-      <h2 className='create-page__header'>Add a new POST</h2>
+      <h2 className='create-page__header'>{actionType} POST</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>
         <label htmlFor='img' className='image__text'>
@@ -40,7 +63,10 @@ export const CreatePage = () => {
         <div className='wrapper'>
           <input
             ref={register({
-              required: 'FILE IS REQUIRED'
+              required: {
+                value: actionType === 'create',
+                message: 'FILE IS REQUIRED'
+              }
             })}
             type='file'
             name='img'
@@ -64,12 +90,13 @@ export const CreatePage = () => {
             }
           })}
           name='text'
+          defaultValue={postText}
           placeholder='Write description to your picture here'
         />
         {errors.text && <p className='input-error'>{errors.text?.message}</p>}
 
         <button type='submit' className='post-form-btn' disabled={loading}>
-          Submit
+          {actionType}
         </button>
       </form>
 

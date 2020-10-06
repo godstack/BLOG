@@ -1,13 +1,17 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
-import { REQUEST_CREATE_POST, REQUEST_GET_POST } from '../types';
+import {
+  REQUEST_CREATE_POST,
+  REQUEST_EDIT_POST,
+  REQUEST_GET_POST_TEXT
+} from '../types';
 import {
   hideCreatePostLoading,
-  setPostPage,
+  setPostText,
   showCreatePostLoading
 } from '../actions/postActions';
-import { notifyError } from '../actions/toastrActions';
+import { notifyError, notifySuccess } from '../actions/toastrActions';
 
 function* workerPostCreateSaga({ payload: formData }) {
   try {
@@ -17,6 +21,7 @@ function* workerPostCreateSaga({ payload: formData }) {
     yield put(push(`/${response.data.authorUsername}/profile`));
 
     yield put(hideCreatePostLoading());
+    yield put(notifySuccess('Post creation', 'Post was created'));
   } catch (e) {
     yield put(
       notifyError(
@@ -28,22 +33,43 @@ function* workerPostCreateSaga({ payload: formData }) {
   }
 }
 
-function* workerPostGet({ payload: postId }) {
+function* workerGetPostText({ payload: postId }) {
   try {
     const response = yield call(axios.get, `/api/post/${postId}`);
 
-    yield put(setPostPage(response.data));
+    yield put(setPostText(response.data.postText));
   } catch (e) {
     yield put(
       notifyError(
         'Post',
-        e?.response?.data?.message || 'Post fetching was failed'
+        e?.response?.data?.message || 'Post text fetching was failed'
       )
     );
   }
 }
 
+function* workerPostEdit({ payload: { formData, postId } }) {
+  try {
+    yield put(showCreatePostLoading());
+    const response = yield call(axios.put, `/api/post/${postId}`, formData);
+
+    yield put(push(`/${response.data.authorUsername}/profile`));
+
+    yield put(hideCreatePostLoading());
+    yield put(notifySuccess('Post edit', 'Post was edited'));
+  } catch (e) {
+    yield put(
+      notifyError(
+        'Post edit',
+        e?.response?.data?.message || 'Post editing was failed'
+      )
+    );
+    yield put(hideCreatePostLoading());
+  }
+}
+
 export function* postSaga() {
   yield takeLatest(REQUEST_CREATE_POST, workerPostCreateSaga);
-  yield takeEvery(REQUEST_GET_POST, workerPostGet);
+  yield takeEvery(REQUEST_EDIT_POST, workerPostEdit);
+  yield takeEvery(REQUEST_GET_POST_TEXT, workerGetPostText);
 }
