@@ -6,6 +6,8 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require('path');
 const app = express();
 
+app.set('trust proxy', 1);
+
 const PORT = process.env.PORT || config.get('port') || 5000;
 
 app.disable('x-powered-by');
@@ -29,7 +31,7 @@ app.use(
     resave: false,
     store: mongoDBstore,
     cookie: {
-      sameSite: false,
+      sameSite: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: SESS_LIFETIME
     }
