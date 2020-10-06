@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const app = express();
 
-const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || config.get('port') || 5000;
 
 app.disable('x-powered-by');
 
