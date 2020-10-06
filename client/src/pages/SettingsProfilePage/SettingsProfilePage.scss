@@ -57,16 +57,6 @@
     }
   }
 
-  .select {
-    font-size: 1.3rem;
-    margin: 0 auto;
-    width: fit-content;
-
-    .select__title {
-      text-align: center;
-    }
-  }
-
   .input-field {
     position: relative;
     width: 50%;
@@ -77,7 +67,8 @@
     }
 
     input,
-    textarea {
+    textarea,
+    select {
       background: #314b64;
       padding: 30px 10px 10px;
       font-size: 1.3rem;

@@ -100,17 +100,18 @@ export const SettingsProfilePage = () => {
             <p className='input-error'>{errors.username?.message}</p>
           )}
         </div>
-        <div className='select'>
-          <div className='select__title'>Gender</div>
+        <div className='input-field'>
           <select
             name='gender'
             ref={register}
             value={gender}
             onChange={e => setGender(e.target.value)}
+            id='gender'
           >
             <option value='female'>female</option>
             <option value='male'>male</option>
           </select>
+          <label htmlFor='gender'>Gender</label>
         </div>
         <div className='input-field'>
           <textarea

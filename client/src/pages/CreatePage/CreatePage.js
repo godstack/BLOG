@@ -34,24 +34,9 @@ export const CreatePage = () => {
       <h2 className='create-page__header'>Add a new POST</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>
-        <button type='submit' className='post-form-btn' disabled={loading}>
-          Submit
-        </button>
-
-        <textarea
-          className='post-form__textarea'
-          ref={register({
-            maxLength: {
-              value: 300,
-              message: 'MAX TEXT LENGTH IS 300 CHARACTERS'
-            }
-          })}
-          name='text'
-          placeholder='Write description to your picture here'
-        />
-        {errors.text && <p className='input-error'>{errors.text?.message}</p>}
-
-        <p className='image__text'>Upload a picture</p>
+        <label htmlFor='img' className='image__text'>
+          Upload a picture
+        </label>
         <div className='wrapper'>
           <input
             ref={register({
@@ -69,6 +54,23 @@ export const CreatePage = () => {
           </label>
         </div>
         {errors.img && <p className='input-error'>{errors.img?.message}</p>}
+
+        <textarea
+          className='post-form__textarea'
+          ref={register({
+            maxLength: {
+              value: 300,
+              message: 'MAX TEXT LENGTH IS 300 CHARACTERS'
+            }
+          })}
+          name='text'
+          placeholder='Write description to your picture here'
+        />
+        {errors.text && <p className='input-error'>{errors.text?.message}</p>}
+
+        <button type='submit' className='post-form-btn' disabled={loading}>
+          Submit
+        </button>
       </form>
 
       <div className='file-info'>

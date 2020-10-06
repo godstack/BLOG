@@ -11,7 +11,7 @@
 
   .file-info {
     width: 50%;
-    margin: 30px auto 0;
+    margin: 0 auto;
   }
 
   .input-error {
@@ -24,9 +24,17 @@
   }
 
   .image__text {
-    text-align: center;
+    display: block;
+    margin: 0 auto;
     font-size: 1.7rem;
-    margin: 30px 0 20px;
+    margin-bottom: 30px;
+    transition: all 0.2s ease-in-out;
+    width: fit-content;
+
+    &:hover {
+      cursor: pointer;
+      color: cadetblue;
+    }
   }
 
   .wrapper {
@@ -68,20 +76,20 @@
 
   .post-form-btn {
     display: block;
-    margin: 0 auto;
-    padding: 10px 30px;
+    margin: 20px auto 0;
+    padding: 10px;
     background: brown;
     text-transform: uppercase;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     border: none;
     border-radius: 10px;
-    width: 230px;
+    width: 150px;
     cursor: pointer;
     transition: all 0.5s ease-in;
 
     &:hover {
       color: white;
-      width: 250px;
+      width: 170px;
       background: rgb(85, 8, 8);
     }
   }
@@ -117,6 +125,10 @@
   }
 
   .post-form {
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
+    border: 2px dashed black;
+    border-radius: 20px;
+    padding: 20px 10px;
   }
 }
