@@ -29,9 +29,10 @@ export const PostCard = ({
   );
 
   function handleClickOutside(event) {
+    debugger;
     if (
-      !event.target.classList.contains('dropdown', 'fas fa-chevron-down') &&
-      !menuNode.current.contains(event.target)
+      !event?.target?.classList?.contains('dropdown', 'fas fa-chevron-down') &&
+      !menuNode?.current?.contains(event.target)
     ) {
       debugger;
       setOpen(false);

@@ -17,7 +17,7 @@ export const SettingsProfilePage = () => {
 
   const [file, setFile] = useState(null);
 
-  const [gender, setGender] = useState('female');
+  const [gender, setGender] = useState('');
 
   useEffect(() => {
     setGender(user?.gender);
@@ -108,6 +108,9 @@ export const SettingsProfilePage = () => {
             onChange={e => setGender(e.target.value)}
             id='gender'
           >
+            <option disabled value=''>
+              -- select an option --{' '}
+            </option>
             <option value='female'>female</option>
             <option value='male'>male</option>
           </select>
@@ -133,7 +136,7 @@ export const SettingsProfilePage = () => {
             type='date'
             name='birthday'
             ref={register}
-            defaultValue={user?.birthday.split('T')[0]}
+            defaultValue={user?.birthday?.split('T')[0]}
           />
         </div>
       </form>
