@@ -29,6 +29,16 @@ export const HomePage = () => {
       );
     }
 
+    if (!posts?.length) {
+      return (
+        <div className='home-page__posts'>
+          <div className='empty'>
+            Users did't add any post yet <i className='far fa-frown-open'></i>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className='home-page__posts'>
         {posts?.map((post, i) => (
