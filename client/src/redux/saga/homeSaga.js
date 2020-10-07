@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
   REQUEST_DELETE_POST_FROM_HOME,
   REQUEST_LIKE_FROM_HOME,
@@ -14,11 +14,11 @@ import {
 } from '../actions/homePageActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
 
-function* workerSetHomePagePosts({ payload: page }) {
+function* workerSetHomePagePosts({ payload: { page, hashtags } }) {
   try {
     yield put(showHomePageLoading());
     const response = yield call(axios.get, '/api/home/all-users', {
-      params: { page }
+      params: { page, hashtags }
     });
 
     yield put(setHomePageInfo(response.data));
@@ -68,7 +68,7 @@ function* workerDeletePost({ payload: postId }) {
 }
 
 export function* homeSaga() {
-  yield takeEvery(REQUEST_POSTS_FROM_ALL_USERS, workerSetHomePagePosts);
+  yield takeLatest(REQUEST_POSTS_FROM_ALL_USERS, workerSetHomePagePosts);
   yield takeEvery(REQUEST_LIKE_FROM_HOME, workerLikePost);
   yield takeEvery(REQUEST_DELETE_POST_FROM_HOME, workerDeletePost);
 }

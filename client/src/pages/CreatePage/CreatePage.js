@@ -47,8 +47,6 @@ export const CreatePage = () => {
   const [file, setFile] = useState(null);
   const [hashtags, setHashtags] = useState([]);
 
-  debugger;
-
   useEffect(() => {
     if (actionType === 'edit') {
       dispatch(requestGetPost(postId));

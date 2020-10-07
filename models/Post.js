@@ -7,7 +7,7 @@ const schema = new Schema({
   date: { type: Date, default: Date.now() },
   text: { type: String },
   public_id: { type: String },
-  hashtags: { type: String }
+  hashtags: { type: String, default: '' }
 });
 
 module.exports = model('Post', schema);

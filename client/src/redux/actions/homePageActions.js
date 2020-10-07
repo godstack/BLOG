@@ -9,9 +9,9 @@ import {
   REMOVE_HOME_POST
 } from '../types';
 
-export const requestPostsFromAllUsers = page => ({
+export const requestPostsFromAllUsers = (page, hashtags) => ({
   type: REQUEST_POSTS_FROM_ALL_USERS,
-  payload: page
+  payload: { page, hashtags }
 });
 
 export const setHomePageInfo = data => ({

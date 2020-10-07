@@ -15,10 +15,11 @@ export const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { loading, posts, pagesCount } = useSelector(state => state.home);
+  const [hashtags, setHashtags] = useState('');
 
   useEffect(() => {
-    dispatch(requestPostsFromAllUsers(currentPage));
-  }, []);
+    dispatch(requestPostsFromAllUsers(currentPage, hashtags));
+  }, [hashtags]);
 
   function showPosts() {
     if (loading) {
@@ -60,6 +61,8 @@ export const HomePage = () => {
         <div className='tab-name'>Home</div>
         <div className='item'>Posts from all users</div>
       </h2>
+      <input type='text' onChange={e => setHashtags(e.target.value)} />
+
       {showPosts()}
       {!loading && (
         <div className='home-page__pagination'>
@@ -67,7 +70,9 @@ export const HomePage = () => {
             currentPage={currentPage}
             pagesCount={pagesCount}
             setPage={setCurrentPage}
-            callback={page => dispatch(requestPostsFromAllUsers(page))}
+            callback={page =>
+              dispatch(requestPostsFromAllUsers(page, hashtags))
+            }
           />
         </div>
       )}
