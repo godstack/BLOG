@@ -11,6 +11,7 @@
     'authorImg username '
     '. postImg '
     '. text'
+    '. hashtags'
     '. actions';
   grid-template-columns: 60px calc(100% - 80px);
   gap: 20px;
@@ -71,6 +72,12 @@
 
   .post-card__text {
     grid-area: text;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+  }
+
+  .post-card__hashtags {
+    grid-area: hashtags;
     font-size: 1.2rem;
     word-wrap: break-word;
   }

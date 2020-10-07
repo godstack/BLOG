@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   requestCreatePost,
   requestEditPost,
-  requestGetPostText
+  requestGetPost
 } from '../../redux/actions/postActions';
 import { Loader } from '../../components/Loader/Loader';
 import { FileInfo } from '../../components/FileInfo/FileInfo';
 import { useLocation, useParams } from 'react-router-dom';
+import CreatableSelect from 'react-select/creatable';
 import './CreatePage.scss';
 
 export const CreatePage = () => {
@@ -21,19 +22,49 @@ export const CreatePage = () => {
 
   const actionType = location.pathname.split('/')[2];
 
-  const { loading, postText } = useSelector(state => state.post);
+  const { loading, post } = useSelector(state => state.post);
+
+  function defaultValueHashtags() {
+    if (!post?.hashtags) {
+      return [];
+    }
+
+    const arr = [];
+
+    const hashtagsArr = post?.hashtags.split(',');
+
+    for (const item of hashtagsArr) {
+      arr.push({ label: item, value: item });
+    }
+
+    return arr;
+  }
+
+  useEffect(() => {
+    setHashtags(defaultValueHashtags());
+  }, [post]);
 
   const [file, setFile] = useState(null);
+  const [hashtags, setHashtags] = useState([]);
+
+  debugger;
 
   useEffect(() => {
     if (actionType === 'edit') {
-      dispatch(requestGetPostText(postId));
+      dispatch(requestGetPost(postId));
     }
   }, []);
 
   const onSubmit = data => {
     const fd = new FormData();
 
+    let hashtagsArr = [];
+
+    for (const item of hashtags) {
+      hashtagsArr.push(item.value.replace(/\W/g, '').toLowerCase());
+    }
+
+    fd.append('hashtags', hashtagsArr);
     fd.append('text', data.text);
     if (data.img.length) {
       fd.append('img', data.img[0], data.img[0].name);
@@ -90,10 +121,22 @@ export const CreatePage = () => {
             }
           })}
           name='text'
-          defaultValue={postText}
+          defaultValue={post?.postText}
           placeholder='Write description to your picture here'
         />
         {errors.text && <p className='input-error'>{errors.text?.message}</p>}
+
+        <div className='hashtags__select'>
+          <CreatableSelect
+            onChange={value => {
+              console.log(value);
+              setHashtags(value);
+            }}
+            isMulti
+            placeholder='Write hashtags here'
+            value={hashtags}
+          />
+        </div>
 
         <button type='submit' className='post-form-btn' disabled={loading}>
           {actionType}

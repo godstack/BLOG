@@ -21,7 +21,7 @@ export const PostCard = ({
 
   const isSelfPost = user.username === author.username;
 
-  const isLiked = post.likes.find(userId => userId === user.userId);
+  const isLiked = post?.likes.find(userId => userId === user.userId);
   const likes = isLiked ? (
     <i className='fas fa-heart'></i>
   ) : (
@@ -52,7 +52,7 @@ export const PostCard = ({
   }, []);
 
   const handleLike = () => {
-    dispatch(requestLikePost(post._id, user.userId));
+    dispatch(requestLikePost(post?._id, user.userId));
   };
 
   return (
@@ -76,7 +76,10 @@ export const PostCard = ({
         >
           <i className='fas fa-chevron-down open-icon'></i>
           {open && (
-            <Dropdown postId={post._id} requestDeletePost={requestDeletePost} />
+            <Dropdown
+              postId={post?._id}
+              requestDeletePost={requestDeletePost}
+            />
           )}
         </div>
       )}
@@ -86,15 +89,19 @@ export const PostCard = ({
       </div>
       <div
         className='post-card__img'
-        style={{ backgroundImage: `url(${post.image})` }}
+        style={{ backgroundImage: `url(${post?.image})` }}
       />
-      <div className='post-card__text'>{post.text}</div>
+      <div className='post-card__text'>{post?.text}</div>
+      <div className='post-card__hashtags'>
+        {post?.hashtags !== undefined &&
+          `#${post?.hashtags?.replace(/,/g, '#')}`}
+      </div>
       <div className='post_actions'>
         <button
           className={classNames('action-item', { 'icon-red': isLiked })}
           onClick={handleLike}
         >
-          {likes} {post.likes.length}
+          {likes} {post?.likes.length}
         </button>
         <button className='action-item'>
           <i className='fas fa-comment'></i>

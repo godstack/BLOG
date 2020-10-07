@@ -15,7 +15,7 @@ router.post('/create', upload.single('img'), async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { text } = req.body;
+    const { text, hashtags } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: 'Image is required' });
@@ -29,7 +29,8 @@ router.post('/create', upload.single('img'), async (req, res) => {
       text,
       author: sessUser.userId,
       image: result.url,
-      public_id: result.public_id
+      public_id: result.public_id,
+      hashtags
     });
 
     user.posts.push(post.id);
@@ -57,7 +58,7 @@ router.get('/:id', async (req, res) => {
 
     const post = await Post.findById(req.params.id);
 
-    res.json({ postText: post.text });
+    res.json({ postText: post.text, hashtags: post.hashtags });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

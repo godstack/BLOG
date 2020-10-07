@@ -4,11 +4,11 @@ import { push } from 'connected-react-router';
 import {
   REQUEST_CREATE_POST,
   REQUEST_EDIT_POST,
-  REQUEST_GET_POST_TEXT
+  REQUEST_GET_POST
 } from '../types';
 import {
   hideCreatePostLoading,
-  setPostText,
+  setPost,
   showCreatePostLoading
 } from '../actions/postActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
@@ -36,8 +36,8 @@ function* workerPostCreateSaga({ payload: formData }) {
 function* workerGetPostText({ payload: postId }) {
   try {
     const response = yield call(axios.get, `/api/post/${postId}`);
-
-    yield put(setPostText(response.data.postText));
+    console.log(response.data);
+    yield put(setPost(response.data));
   } catch (e) {
     yield put(
       notifyError(
@@ -71,5 +71,5 @@ function* workerPostEdit({ payload: { formData, postId } }) {
 export function* postSaga() {
   yield takeLatest(REQUEST_CREATE_POST, workerPostCreateSaga);
   yield takeEvery(REQUEST_EDIT_POST, workerPostEdit);
-  yield takeEvery(REQUEST_GET_POST_TEXT, workerGetPostText);
+  yield takeEvery(REQUEST_GET_POST, workerGetPostText);
 }
