@@ -96,7 +96,7 @@ router.put('/:username/follow', async (req, res) => {
 
     await authorizedUser.save();
 
-    res.status(200);
+    res.json({ message: 'Followed successfully' });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

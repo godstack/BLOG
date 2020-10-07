@@ -85,7 +85,8 @@ function* workerLikePost({ payload: { postId, userId } }) {
   try {
     yield put(updateProfilePost(postId, userId));
 
-    yield call(axios.put, `/api/post/${postId}/like`);
+    const response = yield call(axios.put, `/api/post/${postId}/like`);
+    console.log(response);
   } catch (e) {
     yield put(
       notifyError(

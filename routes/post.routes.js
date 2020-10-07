@@ -85,7 +85,7 @@ router.put('/:postId/like', async (req, res) => {
 
     await post.save();
 
-    res.status(200);
+    res.json({ message: 'liked successfully' });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
