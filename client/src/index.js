@@ -8,6 +8,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import configureStore from './redux/configureStore';
 import './index.scss';
 
+import io from 'socket.io-client';
+
+export const socket = io.connect('/');
+
 const store = configureStore();
 
 const app = (

@@ -5,6 +5,7 @@ import { sessionSaga } from './sessionSaga';
 import { profileSaga } from './profileSaga';
 import { usersSaga } from './usersSaga';
 import { settingsSaga } from './settingsSaga';
+import { freshJobsSaga } from './sockets';
 
 export default function* rootSaga() {
   yield all([
@@ -13,6 +14,7 @@ export default function* rootSaga() {
     profileSaga(),
     usersSaga(),
     homeSaga(),
-    settingsSaga()
+    settingsSaga(),
+    freshJobsSaga()
   ]);
 }

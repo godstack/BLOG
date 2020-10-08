@@ -8,14 +8,12 @@ import {
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
-import { useForm } from 'react-hook-form';
+import { socket } from '../../index';
 import './HomePage.scss';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-
-  const { register, handleSubmit } = useForm();
 
   const { loading, posts, pagesCount } = useSelector(state => state.home);
   const [hashtags, setHashtags] = useState('');
@@ -68,6 +66,15 @@ export const HomePage = () => {
         <div className='tab-name'>Home</div>
         <div className='item'>Posts from all users</div>
       </h2>
+
+      <button
+        onClick={() => {
+          debugger;
+          socket.emit('message', 'kek');
+        }}
+      >
+        kek
+      </button>
 
       <input
         type='text'
