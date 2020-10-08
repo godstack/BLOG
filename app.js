@@ -5,8 +5,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require('path');
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const socketio = require('socket.io');
 
 app.set('trust proxy', 1);
 
@@ -65,6 +64,8 @@ async function start() {
     const server = app.listen(PORT, () => {
       console.log(`App has been started on port ${PORT}...`);
     });
+
+    const io = socketio(server);
 
     io.on('connection', socket => {
       console.log('connected successfully', socket.id);
