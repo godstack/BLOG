@@ -8,11 +8,14 @@ import {
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
+import { useForm } from 'react-hook-form';
 import './HomePage.scss';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { register, handleSubmit } = useForm();
 
   const { loading, posts, pagesCount } = useSelector(state => state.home);
   const [hashtags, setHashtags] = useState('');
@@ -20,6 +23,10 @@ export const HomePage = () => {
   useEffect(() => {
     dispatch(requestPostsFromAllUsers(currentPage, hashtags));
   }, [hashtags]);
+
+  const onSubmit = data => {
+    dispatch(requestPostsFromAllUsers(currentPage, data.hashtags));
+  };
 
   function showPosts() {
     if (loading) {
@@ -34,7 +41,7 @@ export const HomePage = () => {
       return (
         <div className='home-page__posts'>
           <div className='empty'>
-            Users did't add any post yet <i className='far fa-frown-open'></i>
+            Users did't add any posts yet <i className='far fa-frown-open'></i>
           </div>
         </div>
       );
@@ -61,7 +68,15 @@ export const HomePage = () => {
         <div className='tab-name'>Home</div>
         <div className='item'>Posts from all users</div>
       </h2>
-      <input type='text' onChange={e => setHashtags(e.target.value)} />
+
+      <input
+        type='text'
+        name='hashtags'
+        className='hashtags-input'
+        placeholder='Find post by hashtag'
+        autoComplete='off'
+        onChange={e => setHashtags(e.target.value)}
+      />
 
       {showPosts()}
       {!loading && (
