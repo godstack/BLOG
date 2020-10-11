@@ -6,6 +6,10 @@ const { Types } = require('mongoose');
 const router = Router();
 const { cloudinary } = require('../utils/cloudnary');
 const upload = require('../utils/upload');
+const { getSocketIo } = require('../app');
+const io = getSocketIo();
+
+console.log(io);
 
 router.post('/create', upload.single('img'), async (req, res) => {
   try {
@@ -86,7 +90,7 @@ router.put('/:postId/like', async (req, res) => {
 
     await post.save();
 
-    res.json({ message: 'liked successfully' });
+    res.json({ message: 'Successfully' });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

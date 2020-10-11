@@ -1,32 +1,19 @@
-import io from 'socket.io-client';
-import { take, call, put } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { JobsActions } from '../actions/socketActions';
+import { call } from 'redux-saga/effects';
+import { socket } from '../../index';
 
-export const socket = io.connect('/');
-
-export const SocketEvents = {
-  jobsFresh: 'jobs+fresh'
-};
-
-export function createFreshJobsChannel() {
-  const subscribe = emitter => {
-    socket.on(SocketEvents.jobsFresh, emitter);
-
-    return () => socket.removeEventListener(SocketEvents.jobsFresh, emitter);
+export function createChannel() {
+  const subscribe = emit => {
+    socket.emit('message', 'from saga channel');
   };
 
   return eventChannel(subscribe);
 }
 
-export function* freshJobsSaga() {
-  const channel = yield call(createFreshJobsChannel);
+export function* freshChannelSaga() {
+  const channel = yield call(createChannel);
 
-  while (true) {
-    const jobs = yield take(channel);
-
-    const action = JobsActions.fresh(jobs);
-
-    yield put(action);
-  }
+  // while(true){
+  //   const jobs = yield take()
+  // }
 }
