@@ -75,9 +75,7 @@ async function start() {
     io.on('connection', socket => {
       console.log('connected successfully', socket.id);
 
-      socket.on('message', data => {
-        console.log('data from socket', data);
-      });
+      socket.emit('ping', 'ping from server');
     });
   } catch (e) {
     console.log('Server error', e.message);

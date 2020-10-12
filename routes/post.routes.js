@@ -9,8 +9,6 @@ const upload = require('../utils/upload');
 const { getSocketIo } = require('../app');
 const io = getSocketIo();
 
-console.log(io);
-
 router.post('/create', upload.single('img'), async (req, res) => {
   try {
     const { user: sessUser } = req.session;
