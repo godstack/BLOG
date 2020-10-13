@@ -12,8 +12,6 @@ import './index.scss';
 
 // export const socket = io.connect('/');
 
-// socket.on('ping', data => console.log(data));
-
 const store = configureStore();
 
 const app = (

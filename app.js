@@ -75,7 +75,10 @@ async function start() {
     io.on('connection', socket => {
       console.log('connected successfully', socket.id);
 
-      socket.emit('ping', 'ping from server');
+      socket.on('subscription', (socketId, subscriber, action) => {
+        console.log('server subs', socketId, subscriber, action);
+        socket.to(socketId).emit('subscription', { subscriber, action });
+      });
     });
   } catch (e) {
     console.log('Server error', e.message);
