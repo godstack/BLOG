@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
   hideSessionLoading,
   logoutAuthUser,
@@ -14,6 +14,8 @@ import {
   REQUEST_REGISTER
 } from '../types';
 import { notifySuccess, notifyError } from '../actions/toastrActions';
+import { customizeOwnRoom } from '../helperFunctions/emittingMessages';
+import { socket } from '../../index';
 
 function* workerLoginSaga({ payload: formData }) {
   yield put(showSessionLoading());
@@ -79,8 +81,10 @@ function* workerCheckAuthSaga() {
     if (response.data.user) {
       yield put(setAuthUser(response.data.user));
     }
-
+    // console.log(response.data.user);
     yield put(hideSessionLoading());
+
+    yield fork(customizeOwnRoom, socket, response.data.user.username);
   } catch (e) {
     yield put(
       notifyError(

@@ -75,8 +75,15 @@ async function start() {
     io.on('connection', socket => {
       console.log('connected successfully', socket.id);
 
+      socket.on('customize own room', username => {
+        console.log('customize');
+        socket.join(username);
+      });
+
       socket.on('subscription', (socketId, subscriber, action) => {
         console.log('server subs', socketId, subscriber, action);
+
+        console.log(socket.id === socketId);
         socket.to(socketId).emit('subscription', { subscriber, action });
       });
     });

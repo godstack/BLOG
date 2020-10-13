@@ -1,11 +1,11 @@
 import { take, put, call, apply, delay, fork } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import io from 'socket.io-client';
+import { socket } from '../../index';
 import { notifySuccess } from '../actions/toastrActions';
 
-const createWebSocketConnection = (url = '/') => {
-  return io(url);
-};
+// const createWebSocketConnection = (url = '/') => {
+//   return io(url);
+// };
 // this function creates an event channel from a given socket
 // Setup subscription to incoming `ping` events
 function createSocketChannel(socket) {
@@ -20,6 +20,7 @@ function createSocketChannel(socket) {
     const subscriptionHandler = ({ subscriber, action }) => {
       console.log('here');
       console.log(`${subscriber} ${action} to you`);
+      emit('kek');
     };
 
     // setup the subscription
@@ -36,28 +37,13 @@ function createSocketChannel(socket) {
   });
 }
 
-// reply with a `pong` message by invoking `socket.emit('pong')`
-function* pong(socket, username) {
-  console.log(socket);
-  console.log('id', socket.id);
-  yield apply(socket, socket.emit, [
-    'subscription',
-    socket.id,
-    username,
-    'subscribe'
-  ]); // call `emit` as a method with `socket` as context
-  // yield put(notifySuccess('Subscription'))
-}
-
 export function* watchOnPings() {
-  const socket = yield call(createWebSocketConnection);
-
+  // const socket = yield call(createWebSocketConnection);
   const socketChannel = yield call(createSocketChannel, socket);
-
-  yield fork(pong, socket, 'godlexa');
 
   while (true) {
     try {
+      console.log('in while');
       // An error from socketChannel will cause the saga jump to the catch block
 
       const payload = yield take(socketChannel);

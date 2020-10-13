@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_DELETE_POST_FROM_PROFILE,
   REQUEST_FOLLOW_FROM_PROFILE,
@@ -19,6 +19,8 @@ import {
   removeProfilePost
 } from '../actions/profileActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
+import { subscription } from '../helperFunctions/emittingMessages';
+import { socket } from '../../index';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
   try {
@@ -48,6 +50,8 @@ function* workerFollow({ payload: { aimUsername, authUserId } }) {
     yield put(setFollowers(authUserId));
 
     yield call(axios.put, `/api/user/${aimUsername}/follow`);
+
+    yield fork(subscription, socket, aimUsername);
   } catch (e) {
     yield put(
       notifyError(
@@ -86,6 +90,7 @@ function* workerLikePost({ payload: { postId, userId } }) {
     yield put(updateProfilePost(postId, userId));
 
     const response = yield call(axios.put, `/api/post/${postId}/like`);
+
     console.log(response);
   } catch (e) {
     yield put(
