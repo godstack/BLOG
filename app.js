@@ -80,11 +80,8 @@ async function start() {
         socket.join(username);
       });
 
-      socket.on('subscription', (socketId, subscriber, action) => {
-        console.log('server subs', socketId, subscriber, action);
-
-        console.log(socket.id === socketId);
-        socket.to(socketId).emit('subscription', { subscriber, action });
+      socket.on('subscription', (aimUsername, authUsername) => {
+        socket.to(aimUsername).emit('subscription', authUsername);
       });
     });
   } catch (e) {

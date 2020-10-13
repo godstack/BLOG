@@ -17,10 +17,8 @@ function createSocketChannel(socket) {
       emit(new Error(errorEvent.reason));
     };
 
-    const subscriptionHandler = ({ subscriber, action }) => {
-      console.log('here');
-      console.log(`${subscriber} ${action} to you`);
-      emit('kek');
+    const subscriptionHandler = username => {
+      console.log(`${username} subscribed to you`);
     };
 
     // setup the subscription

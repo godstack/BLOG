@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, select, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_DELETE_POST_FROM_PROFILE,
   REQUEST_FOLLOW_FROM_PROFILE,
@@ -47,11 +47,13 @@ function* workerGetProfileInfo({ payload: { username, currentPage } }) {
 
 function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
+    const authUsername = yield select(state => state.session.user.username);
+
     yield put(setFollowers(authUserId));
 
     yield call(axios.put, `/api/user/${aimUsername}/follow`);
 
-    yield fork(subscription, socket, aimUsername);
+    yield fork(subscription, socket, aimUsername, authUsername);
   } catch (e) {
     yield put(
       notifyError(
