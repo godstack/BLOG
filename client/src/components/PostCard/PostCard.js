@@ -92,10 +92,11 @@ export const PostCard = ({
         style={{ backgroundImage: `url(${post?.image})` }}
       />
       <div className='post-card__text'>{post?.text}</div>
-      <div className='post-card__hashtags'>
-        {post?.hashtags !== undefined &&
-          `#${post?.hashtags?.replace(/,/g, '#')}`}
-      </div>
+      {post?.hashtags && (
+        <div className='post-card__hashtags'>
+          {`#${post?.hashtags?.replace(/,/g, '#')}`}
+        </div>
+      )}
       <div className='post_actions'>
         <button
           className={classNames('action-item', { 'icon-red': isLiked })}
