@@ -74,6 +74,8 @@ router.put('/:username/follow', async (req, res) => {
     const aimUser = await User.findOne({ username });
     const authorizedUser = await User.findById(sessUser.userId);
 
+    let type = '';
+
     const isFollowed = !!aimUser.followers.find(el =>
       el.equals(authorizedUser._id)
     );
@@ -87,16 +89,20 @@ router.put('/:username/follow', async (req, res) => {
         el => !el.equals(aimUser._id)
       );
       authorizedUser.following = newFollowingArr;
+
+      type = 'unfollow';
     } else {
       aimUser.followers.push(authorizedUser._id);
       authorizedUser.following.push(aimUser._id);
+
+      type = 'follow';
     }
 
     await aimUser.save();
 
     await authorizedUser.save();
 
-    res.json({ message: 'Followed successfully' });
+    res.json({ message: 'Followed successfully', type });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

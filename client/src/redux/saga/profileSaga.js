@@ -51,9 +51,15 @@ function* workerFollow({ payload: { aimUsername, authUserId } }) {
 
     yield put(setFollowers(authUserId));
 
-    yield call(axios.put, `/api/user/${aimUsername}/follow`);
+    const response = yield call(axios.put, `/api/user/${aimUsername}/follow`);
 
-    yield fork(subscription, socket, aimUsername, authUsername);
+    yield fork(
+      subscription,
+      socket,
+      aimUsername,
+      authUsername,
+      response.data.type
+    );
   } catch (e) {
     yield put(
       notifyError(
@@ -92,8 +98,6 @@ function* workerLikePost({ payload: { postId, userId } }) {
     yield put(updateProfilePost(postId, userId));
 
     const response = yield call(axios.put, `/api/post/${postId}/like`);
-
-    console.log(response);
   } catch (e) {
     yield put(
       notifyError(

@@ -126,10 +126,7 @@ export const CreatePage = () => {
 
         <div className='hashtags__select'>
           <CreatableSelect
-            onChange={value => {
-              console.log(value);
-              setHashtags(value);
-            }}
+            onChange={value => setHashtags(value)}
             isMulti
             placeholder='Write hashtags here'
             value={hashtags}

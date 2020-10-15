@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
 import {
   REQUEST_GET_USERS_LIST,
   REQUEST_FOLLOW_FROM_USERS_LIST
@@ -11,6 +11,8 @@ import {
   showUsersListLoading
 } from '../actions/usersActions';
 import { notifyError } from '../actions/toastrActions';
+import { subscription } from '../helperFunctions/emittingMessages';
+import { socket } from '../..';
 
 function* workerSetUsersList({ payload: { url, page } }) {
   try {
@@ -36,9 +38,19 @@ function* workerSetUsersList({ payload: { url, page } }) {
 
 function* workerFollow({ payload: { aimUsername, authUserId } }) {
   try {
+    const authUsername = yield select(state => state.session.user.username);
     yield put(setFollowersUsersList(aimUsername, authUserId));
 
-    yield call(axios.put, `/api/user/${aimUsername}/follow`);
+    const response = yield call(axios.put, `/api/user/${aimUsername}/follow`);
+
+    console.log(response.data);
+    yield fork(
+      subscription,
+      socket,
+      aimUsername,
+      authUsername,
+      response.data.type
+    );
   } catch (e) {
     yield put(
       notifyError(

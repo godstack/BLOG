@@ -47,6 +47,7 @@ function* workerRegisterSaga({ payload: formData }) {
     yield put(setAuthUser(response.data.user));
 
     yield put(hideSessionLoading());
+
     yield put(notifySuccess('Registration', 'Successful registration!'));
   } catch (e) {
     yield put(

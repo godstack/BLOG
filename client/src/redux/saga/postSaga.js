@@ -36,7 +36,7 @@ function* workerPostCreateSaga({ payload: formData }) {
 function* workerGetPostText({ payload: postId }) {
   try {
     const response = yield call(axios.get, `/api/post/${postId}`);
-    console.log(response.data);
+
     yield put(setPost(response.data));
   } catch (e) {
     yield put(

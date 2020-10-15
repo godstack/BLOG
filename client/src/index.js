@@ -10,7 +10,7 @@ import './index.scss';
 
 export const socket = io.connect('/');
 
-const store = configureStore();
+export const store = configureStore();
 
 const app = (
   <Provider store={store}>

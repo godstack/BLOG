@@ -2,8 +2,13 @@
 
 import { apply } from 'redux-saga/effects';
 
-export function* subscription(socket, aimUsername, authUsername) {
-  yield apply(socket, socket.emit, ['subscription', aimUsername, authUsername]); // call `emit` as a method with `socket` as context
+export function* subscription(socket, aimUsername, authUsername, type) {
+  yield apply(socket, socket.emit, [
+    'subscription',
+    aimUsername,
+    authUsername,
+    type
+  ]); // call `emit` as a method with `socket` as context
   // yield put(notifySuccess('Subscription'))
 }
 

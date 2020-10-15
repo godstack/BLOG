@@ -76,12 +76,11 @@ async function start() {
       console.log('connected successfully', socket.id);
 
       socket.on('customize own room', username => {
-        console.log('customize');
         socket.join(username);
       });
 
-      socket.on('subscription', (aimUsername, authUsername) => {
-        socket.to(aimUsername).emit('subscription', authUsername);
+      socket.on('subscription', (aimUsername, authUsername, type) => {
+        socket.to(aimUsername).emit('subscription', authUsername, type);
       });
     });
   } catch (e) {

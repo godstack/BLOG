@@ -1,7 +1,8 @@
 import { take, put, call, apply, delay, fork } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { socket } from '../../index';
-import { notifySuccess } from '../actions/toastrActions';
+import { socket, store } from '../../index';
+import { notifyWarning, notifySuccess } from '../actions/toastrActions';
+import { useDispatch } from 'react-redux';
 
 // const createWebSocketConnection = (url = '/') => {
 //   return io(url);
@@ -17,8 +18,16 @@ function createSocketChannel(socket) {
       emit(new Error(errorEvent.reason));
     };
 
-    const subscriptionHandler = username => {
-      console.log(`${username} subscribed to you`);
+    const subscriptionHandler = (username, type) => {
+      if (type === 'follow') {
+        store.dispatch(
+          notifySuccess('Subscription', `${username} subscribed to you`)
+        );
+      } else if (type === 'unfollow') {
+        store.dispatch(
+          notifyWarning('Unsubscription', `${username} unsubscribed from you`)
+        );
+      }
     };
 
     // setup the subscription
@@ -41,13 +50,9 @@ export function* watchOnPings() {
 
   while (true) {
     try {
-      console.log('in while');
       // An error from socketChannel will cause the saga jump to the catch block
 
       const payload = yield take(socketChannel);
-      console.log('payload in while', payload);
-      // yield put({ type: INCOMING_PONG_PAYLOAD, payload })
-      // yield fork(pong, socket);
     } catch (err) {
       console.error('socket error:', err);
       // socketChannel is still open in catch block
