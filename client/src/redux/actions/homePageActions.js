@@ -6,7 +6,8 @@ import {
   REQUEST_LIKE_FROM_HOME,
   UPDATE_HOME_POST,
   REQUEST_DELETE_POST_FROM_HOME,
-  REMOVE_HOME_POST
+  REMOVE_HOME_POST,
+  ADD_HOME_POST
 } from '../types';
 
 export const requestPostsFromAllUsers = (page, hashtags) => ({
@@ -45,4 +46,9 @@ export const requestDeletePostFromHome = postId => ({
 export const removeHomePost = postId => ({
   type: REMOVE_HOME_POST,
   payload: postId
+});
+
+export const addHomePost = post => ({
+  type: ADD_HOME_POST,
+  payload: post
 });

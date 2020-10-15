@@ -82,6 +82,11 @@ async function start() {
       socket.on('subscription', (aimUsername, authUsername, type) => {
         socket.to(aimUsername).emit('subscription', authUsername, type);
       });
+
+      socket.on('add post', post => {
+        console.log(post);
+        socket.broadcast.emit('add post', post);
+      });
     });
   } catch (e) {
     console.log('Server error', e.message);

@@ -30,6 +30,7 @@ export const ProfilePage = () => {
   const isSelfAccount = authUser.username === username;
 
   useEffect(() => {
+    debugger;
     dispatch(requestGetProfileInfo(username, currentPage));
   }, [username, dispatch]);
 

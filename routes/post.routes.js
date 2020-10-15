@@ -41,9 +41,28 @@ router.post('/create', upload.single('img'), async (req, res) => {
 
     await user.save();
 
+    const author = await User.findById(post.author);
+
+    const partAuthor = {
+      _id: author.id,
+      username: author.username,
+      profileImg: author.profileImg
+    };
+
+    const resPost = {
+      _id: post.id,
+      image: post.image,
+      likes: post.likes,
+      date: post.date,
+      text: post.text,
+      author: partAuthor,
+      hashtags: post.hashtags
+    };
+
     return res.json({
       message: 'Post was successfully created!',
-      authorUsername: sessUser.username
+      authorUsername: sessUser.username,
+      post: resPost
     });
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -102,6 +121,8 @@ router.delete('/:postId', async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    const PAGE_SIZE = 5;
+
     const { postId } = req.params;
 
     const user = await User.findById(sessUser.userId);
@@ -122,7 +143,11 @@ router.delete('/:postId', async (req, res) => {
 
     await user.save();
 
-    res.json({ postId, message: 'Post was successfully deleted' });
+    const count = await Post.find({ author: user.id }).countDocuments();
+
+    const pagesCount = Math.ceil(count / PAGE_SIZE);
+
+    res.json({ postId, pagesCount, message: 'Post was successfully deleted' });
   } catch (e) {
     res.status(500).json({ message: 'Failed delete post' });
   }

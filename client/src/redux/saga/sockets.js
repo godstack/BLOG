@@ -3,6 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { socket, store } from '../../index';
 import { notifyWarning, notifySuccess } from '../actions/toastrActions';
 import { useDispatch } from 'react-redux';
+import { addHomePost } from '../actions/homePageActions';
 
 // const createWebSocketConnection = (url = '/') => {
 //   return io(url);
@@ -16,6 +17,11 @@ function createSocketChannel(socket) {
     const errorHandler = errorEvent => {
       // create an Error object and put it into the channel
       emit(new Error(errorEvent.reason));
+    };
+
+    const addPostHandler = post => {
+      console.log('on add post listen', post);
+      store.dispatch(addHomePost(post));
     };
 
     const subscriptionHandler = (username, type) => {
@@ -32,12 +38,14 @@ function createSocketChannel(socket) {
 
     // setup the subscription
     socket.on('subscription', subscriptionHandler);
+    socket.on('add post', addPostHandler);
     socket.on('error', errorHandler);
 
     // the subscriber must return an unsubscribe function
     // this will be invoked when the saga calls `channel.close` method
     const unsubscribe = () => {
       socket.off('subscription', subscriptionHandler);
+      socket.off('add post', addPostHandler);
     };
 
     return unsubscribe;

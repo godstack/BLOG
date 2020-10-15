@@ -76,7 +76,7 @@ export const requestDeletePostFromProfile = postId => ({
   payload: postId
 });
 
-export const removeProfilePost = postId => ({
+export const removeProfilePost = (postId, pagesCount) => ({
   type: REMOVE_PROFILE_POST,
-  payload: postId
+  payload: { postId, pagesCount }
 });

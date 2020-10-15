@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, fork } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 import {
@@ -12,16 +12,20 @@ import {
   showCreatePostLoading
 } from '../actions/postActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
+import { addPost } from '../helperFunctions/emittingMessages';
+import { socket } from '../../index';
 
 function* workerPostCreateSaga({ payload: formData }) {
   try {
     yield put(showCreatePostLoading());
     const response = yield call(axios.post, '/api/post/create', formData);
-
-    yield put(push(`/${response.data.authorUsername}/profile`));
+    console.log(response.data.post);
 
     yield put(hideCreatePostLoading());
+    yield put(push(`/${response.data.authorUsername}/profile`));
     yield put(notifySuccess('Post creation', 'Post was created'));
+
+    yield fork(addPost, socket, response.data.post);
   } catch (e) {
     yield put(
       notifyError(
@@ -69,7 +73,7 @@ function* workerPostEdit({ payload: { formData, postId } }) {
 }
 
 export function* postSaga() {
-  yield takeLatest(REQUEST_CREATE_POST, workerPostCreateSaga);
+  yield takeEvery(REQUEST_CREATE_POST, workerPostCreateSaga);
   yield takeEvery(REQUEST_EDIT_POST, workerPostEdit);
   yield takeEvery(REQUEST_GET_POST, workerGetPostText);
 }

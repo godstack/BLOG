@@ -46,11 +46,13 @@ export const profileReducer = (state = initialState, action) => {
     case UPDATE_PROFILE_POST:
       return { ...state, posts: likePostFn(state.posts, action) };
     case REMOVE_PROFILE_POST:
-      const posts = state.posts.filter(post => post._id !== action.payload);
+      const { postId, pagesCount } = action.payload;
+      debugger;
+      const posts = state.posts.filter(post => post._id !== postId);
       let { user } = state;
       user.posts--;
 
-      return { ...state, posts, user };
+      return { ...state, posts, user, pagesCount };
 
     case SET_USER_POSTS:
       return { ...state, posts: action.payload };
