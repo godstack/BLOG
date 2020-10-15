@@ -19,3 +19,11 @@ export function* customizeOwnRoom(socket, username) {
 export function* addPost(socket, post) {
   yield apply(socket, socket.emit, ['add post', post]); // call `emit` as a method with `socket` as context
 }
+
+export function* deletePost(socket, postId) {
+  yield apply(socket, socket.emit, ['delete post', postId]); // call `emit` as a method with `socket` as context
+}
+
+export function* editPost(socket, post) {
+  yield apply(socket, socket.emit, ['edit post', post]); // call `emit` as a method with `socket` as context
+}

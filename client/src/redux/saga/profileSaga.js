@@ -19,7 +19,7 @@ import {
   removeProfilePost
 } from '../actions/profileActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
-import { subscription } from '../helperFunctions/emittingMessages';
+import { deletePost, subscription } from '../helperFunctions/emittingMessages';
 import { socket } from '../../index';
 
 function* workerGetProfileInfo({ payload: { username, currentPage } }) {
@@ -117,6 +117,7 @@ function* workerDeletePost({ payload: postId }) {
     yield put(
       removeProfilePost(response.data.postId, response.data.pagesCount)
     );
+    yield fork(deletePost, socket, response.data.postId);
     yield put(hidePostsLoading());
     yield put(notifySuccess('Post', 'Deleted successfully'));
   } catch (e) {

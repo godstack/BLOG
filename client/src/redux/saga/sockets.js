@@ -3,7 +3,11 @@ import { eventChannel } from 'redux-saga';
 import { socket, store } from '../../index';
 import { notifyWarning, notifySuccess } from '../actions/toastrActions';
 import { useDispatch } from 'react-redux';
-import { addHomePost } from '../actions/homePageActions';
+import {
+  addHomePost,
+  removeHomePost,
+  updateEditedHomePost
+} from '../actions/homePageActions';
 
 // const createWebSocketConnection = (url = '/') => {
 //   return io(url);
@@ -17,6 +21,16 @@ function createSocketChannel(socket) {
     const errorHandler = errorEvent => {
       // create an Error object and put it into the channel
       emit(new Error(errorEvent.reason));
+    };
+
+    const editPostHandler = post => {
+      console.log('on edit post listen', post);
+      store.dispatch(updateEditedHomePost(post));
+    };
+
+    const deletePostHandler = postId => {
+      console.log('on delete post listen', postId);
+      store.dispatch(removeHomePost(postId));
     };
 
     const addPostHandler = post => {
@@ -39,6 +53,8 @@ function createSocketChannel(socket) {
     // setup the subscription
     socket.on('subscription', subscriptionHandler);
     socket.on('add post', addPostHandler);
+    socket.on('delete post', deletePostHandler);
+    socket.on('edit post', editPostHandler);
     socket.on('error', errorHandler);
 
     // the subscriber must return an unsubscribe function
@@ -46,6 +62,8 @@ function createSocketChannel(socket) {
     const unsubscribe = () => {
       socket.off('subscription', subscriptionHandler);
       socket.off('add post', addPostHandler);
+      socket.off('delete post', deletePostHandler);
+      socket.off('edit post', editPostHandler);
     };
 
     return unsubscribe;

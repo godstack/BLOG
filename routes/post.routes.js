@@ -189,7 +189,25 @@ router.put('/:postId', upload.single('img'), async (req, res) => {
 
     await user.save();
 
-    res.json({ postId, message: 'Post was successfully edited' });
+    const author = await User.findById(post.author);
+
+    const partAuthor = {
+      _id: author.id,
+      username: author.username,
+      profileImg: author.profileImg
+    };
+
+    const resPost = {
+      _id: post.id,
+      image: post.image,
+      likes: post.likes,
+      date: post.date,
+      text: post.text,
+      author: partAuthor,
+      hashtags: post.hashtags
+    };
+
+    res.json({ post: resPost, message: 'Post was successfully edited' });
   } catch (e) {
     res.status(500).json({ message: 'Failed edit post' });
   }

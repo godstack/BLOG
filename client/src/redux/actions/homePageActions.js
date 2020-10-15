@@ -4,10 +4,11 @@ import {
   SET_HOME_PAGE_INFO,
   SHOW_HOME_PAGE_LOADING,
   REQUEST_LIKE_FROM_HOME,
-  UPDATE_HOME_POST,
+  LIKE_HOME_POST,
   REQUEST_DELETE_POST_FROM_HOME,
   REMOVE_HOME_POST,
-  ADD_HOME_POST
+  ADD_HOME_POST,
+  UPDATE_EDITED_HOME_POST
 } from '../types';
 
 export const requestPostsFromAllUsers = (page, hashtags) => ({
@@ -33,8 +34,8 @@ export const requestLikeFromHome = (postId, userId) => ({
   payload: { postId, userId }
 });
 
-export const updateHomePost = (postId, userId) => ({
-  type: UPDATE_HOME_POST,
+export const likeHomePost = (postId, userId) => ({
+  type: LIKE_HOME_POST,
   payload: { postId, userId }
 });
 
@@ -50,5 +51,10 @@ export const removeHomePost = postId => ({
 
 export const addHomePost = post => ({
   type: ADD_HOME_POST,
+  payload: post
+});
+
+export const updateEditedHomePost = post => ({
+  type: UPDATE_EDITED_HOME_POST,
   payload: post
 });

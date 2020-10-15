@@ -4,7 +4,8 @@ import {
   REMOVE_HOME_POST,
   SET_HOME_PAGE_INFO,
   SHOW_HOME_PAGE_LOADING,
-  UPDATE_HOME_POST
+  LIKE_HOME_POST,
+  UPDATE_EDITED_HOME_POST
 } from '../types';
 import { likePostFn } from '../helperFunctions/likePostFn';
 
@@ -16,7 +17,7 @@ const initialState = {
 
 export const homePageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_HOME_POST:
+    case LIKE_HOME_POST:
       return { ...state, posts: likePostFn(state.posts, action) };
     case SET_HOME_PAGE_INFO:
       return { ...state, ...action.payload };
@@ -31,6 +32,14 @@ export const homePageReducer = (state = initialState, action) => {
     case ADD_HOME_POST: {
       let posts = [action.payload, ...state.posts];
 
+      return { ...state, posts };
+    }
+    case UPDATE_EDITED_HOME_POST: {
+      const updatedPost = action.payload;
+
+      const posts = state.posts.map(post =>
+        post._id === updatedPost._id ? updatedPost : post
+      );
       return { ...state, posts };
     }
     default:

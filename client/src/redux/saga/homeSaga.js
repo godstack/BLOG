@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
   REQUEST_DELETE_POST_FROM_HOME,
   REQUEST_LIKE_FROM_HOME,
@@ -10,9 +10,11 @@ import {
   removeHomePost,
   setHomePageInfo,
   showHomePageLoading,
-  updateHomePost
+  likeHomePost
 } from '../actions/homePageActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
+import { socket } from '../..';
+import { deletePost } from '../helperFunctions/emittingMessages';
 
 function* workerSetHomePagePosts({ payload: { page, hashtags } }) {
   try {
@@ -38,7 +40,7 @@ function* workerSetHomePagePosts({ payload: { page, hashtags } }) {
 
 function* workerLikePost({ payload: { postId, userId } }) {
   try {
-    yield put(updateHomePost(postId, userId));
+    yield put(likeHomePost(postId, userId));
 
     yield call(axios.put, `/api/post/${postId}/like`);
   } catch (e) {
@@ -48,7 +50,7 @@ function* workerLikePost({ payload: { postId, userId } }) {
         e?.response?.data?.message || 'Like post action was failed'
       )
     );
-    yield put(updateHomePost(postId, userId));
+    yield put(likeHomePost(postId, userId));
   }
 }
 
@@ -57,6 +59,8 @@ function* workerDeletePost({ payload: postId }) {
     yield put(showHomePageLoading());
     const response = yield call(axios.delete, `/api/post/${postId}`);
     yield put(removeHomePost(response.data.postId));
+
+    yield fork(deletePost, socket, response.data.postId);
     yield put(hideHomePageLoading());
     yield put(notifySuccess('Post', 'Deleted successfully'));
   } catch (e) {

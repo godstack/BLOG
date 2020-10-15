@@ -87,6 +87,12 @@ async function start() {
         console.log(post);
         socket.broadcast.emit('add post', post);
       });
+
+      socket.on('delete post', postId =>
+        socket.broadcast.emit('delete post', postId)
+      );
+
+      socket.on('edit post', post => socket.broadcast.emit('edit post', post));
     });
   } catch (e) {
     console.log('Server error', e.message);

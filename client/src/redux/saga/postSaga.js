@@ -1,4 +1,11 @@
-import { call, put, takeLatest, takeEvery, fork } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  takeLatest,
+  takeEvery,
+  fork,
+  select
+} from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 import {
@@ -12,7 +19,7 @@ import {
   showCreatePostLoading
 } from '../actions/postActions';
 import { notifyError, notifySuccess } from '../actions/toastrActions';
-import { addPost } from '../helperFunctions/emittingMessages';
+import { addPost, editPost } from '../helperFunctions/emittingMessages';
 import { socket } from '../../index';
 
 function* workerPostCreateSaga({ payload: formData }) {
@@ -54,12 +61,14 @@ function* workerGetPostText({ payload: postId }) {
 
 function* workerPostEdit({ payload: { formData, postId } }) {
   try {
+    const authorUsername = yield select(state => state.session.user.username);
     yield put(showCreatePostLoading());
     const response = yield call(axios.put, `/api/post/${postId}`, formData);
 
-    yield put(push(`/${response.data.authorUsername}/profile`));
+    yield put(push(`/${authorUsername}/profile`));
 
     yield put(hideCreatePostLoading());
+    yield fork(editPost, socket, response.data.post);
     yield put(notifySuccess('Post edit', 'Post was edited'));
   } catch (e) {
     yield put(
