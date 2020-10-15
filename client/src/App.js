@@ -39,6 +39,7 @@ function App() {
         progressBar
         closeOnToastrClick
       />
+
       {isAuthorized && <Header />}
       <main> {routes}</main>
     </>

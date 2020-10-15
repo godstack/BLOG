@@ -145,16 +145,22 @@ $bnt-color: #1c90d9;
 }
 
 .workspace {
-  margin-top: 80px;
   background: rgb(31, 47, 63);
   color: white;
+  padding-top: 80px;
   position: relative;
   min-height: 100vh;
+}
+
+main {
+  min-height: 100vh;
+  background: rgb(31, 47, 63);
 }
 
 @media screen and (min-width: 700px) {
   .workspace {
     margin: 0 0 0 20%;
+    padding-top: 0;
     background: rgb(31, 47, 63);
   }
 }

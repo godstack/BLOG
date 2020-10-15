@@ -1,12 +1,13 @@
 .create-page {
   padding-bottom: 20px;
+  border: 1px solid transparent;
 
   .create-page__header {
     text-align: center;
     text-transform: uppercase;
     border-bottom: 3px solid #4f6294;
     font-size: 2rem;
-    margin-bottom: 40px;
+    margin: 40px 0;
   }
 
   .file-info {
@@ -95,7 +96,7 @@
   }
 
   .post-form__textarea {
-    width: 50%;
+    width: 80%;
     min-height: 100px;
     margin: 30px auto 0;
     font-size: 1.3rem;
@@ -120,21 +121,71 @@
     &:focus {
       outline: none;
       background: rgb(207, 207, 207);
-      width: 70%;
+      width: 90%;
     }
   }
 
   .hashtags__select {
-    width: 60%;
+    width: 90%;
     margin: 30px auto 0;
     color: black;
   }
 
   .post-form {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
 
     border-radius: 20px;
-    padding: 20px 10px;
+    padding: 10px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .create-page {
+    padding-bottom: 20px;
+
+    .create-page__header {
+      margin: 0 0 40px 0;
+    }
+
+    .post-form-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px;
+      background: brown;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      width: 150px;
+      cursor: pointer;
+      transition: all 0.5s ease-in;
+
+      &:hover {
+        color: white;
+        width: 170px;
+        background: rgb(85, 8, 8);
+      }
+    }
+
+    .post-form__textarea {
+      width: 50%;
+
+      &:focus {
+        width: 70%;
+      }
+    }
+
+    .hashtags__select {
+      width: 60%;
+    }
+
+    .post-form {
+      width: 60%;
+      margin: 0 auto;
+
+      border-radius: 20px;
+      padding: 20px 10px;
+    }
   }
 }

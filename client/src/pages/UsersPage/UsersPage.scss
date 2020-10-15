@@ -20,7 +20,7 @@ $red-color: rgb(221, 49, 49);
     align-items: center;
     color: $red-color;
     border-bottom: 3px solid $red-color;
-    font-size: 1.5rem;
+    font-size: 1rem;
 
     .bold {
       font-weight: bold;
@@ -28,7 +28,7 @@ $red-color: rgb(221, 49, 49);
     }
 
     i {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
@@ -93,6 +93,22 @@ $red-color: rgb(221, 49, 49);
         font-weight: bold;
         color: $blue-color;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .users-list__empty {
+    border-bottom: 3px solid $red-color;
+    font-size: 1.5rem;
+
+    .bold {
+      font-weight: bold;
+      color: lightcoral;
+    }
+
+    i {
+      font-size: 2rem;
     }
   }
 }
