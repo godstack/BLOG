@@ -11,9 +11,9 @@ $text-color: white;
     text-align: center;
     border-bottom: 3px solid #4f6294;
     text-transform: uppercase;
-    margin-bottom: 120px;
+    margin-bottom: 60px;
     color: $text-color;
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .auth__link {
@@ -21,24 +21,24 @@ $text-color: white;
     display: block;
     margin-top: 20px;
     color: $text-color;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
 
 %input-styles {
   width: 100%;
-  padding: 6px 10px;
+  padding: 3px 5px;
   border-radius: 4px;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 15px;
   background: #192734;
-  border-bottom: 3px solid #8899a6;
+  border-bottom: 2px solid #8899a6;
   color: $text-color;
 }
 
 .auth-form {
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
 
   input {
@@ -54,16 +54,22 @@ $text-color: white;
   }
 
   .btn {
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.2rem;
     text-transform: uppercase;
     border: none;
     background: $btn-color;
     border-radius: 4px;
-    padding: 6px 10px;
-    cursor: pointer;
+    padding: 3px 5px;
+
     border: 1px solid $btn-color;
     transition: all 0.5s ease-in-out;
     color: $text-color;
+
+    &:hover {
+      letter-spacing: 0.3rem;
+      background: #bf1650;
+      cursor: pointer;
+    }
   }
 
   .label {
@@ -71,11 +77,6 @@ $text-color: white;
     color: $text-color;
     display: block;
     font-size: 1.3rem;
-  }
-
-  .btn:hover {
-    letter-spacing: 0.6rem;
-    background: #bf1650;
   }
 
   .input-error {
@@ -87,5 +88,35 @@ $text-color: white;
     font-weight: bold;
     margin-bottom: 20px;
     box-sizing: border-box;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .auth-form {
+    width: 50%;
+    padding: 6px 10px;
+
+    .btn {
+      letter-spacing: 0.5rem;
+      &:hover {
+        letter-spacing: 0.6rem;
+        background: #bf1650;
+      }
+    }
+
+    .auth__link {
+      font-size: 1.5rem;
+    }
+  }
+
+  %input-styles {
+    padding: 6px 10px;
+    font-size: 1.5rem;
+    border-bottom: 3px solid #8899a6;
+  }
+
+  .auth__header {
+    font-size: 3rem;
+    margin-bottom: 120px;
   }
 }
