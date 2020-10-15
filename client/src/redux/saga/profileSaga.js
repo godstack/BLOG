@@ -113,8 +113,7 @@ function* workerDeletePost({ payload: postId }) {
   try {
     yield put(showPostsLoading());
     const response = yield call(axios.delete, `/api/post/${postId}`);
-    debugger;
-    // const { postId, pagesCount } = response.data;
+
     yield put(
       removeProfilePost(response.data.postId, response.data.pagesCount)
     );
