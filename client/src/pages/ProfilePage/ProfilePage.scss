@@ -53,13 +53,13 @@
       text-decoration: none;
       width: 100px;
       display: block;
-      margin: 0 auto;
+      margin-left: 50%;
       width: 140px;
     }
   }
 
   .profile__header-photo {
-    height: 200px;
+    height: 120px;
     background: rgba(0, 0, 0, 0.2);
   }
 
@@ -70,9 +70,9 @@
     background-position: center;
     background-repeat: no-repeat;
     border: 2px solid white;
-    height: 100px;
-    width: 100px;
-    margin: -50px 0 -50px 20px;
+    height: 80px;
+    width: 80px;
+    margin: -40px 0 -40px 20px;
   }
 
   .profile__username {
@@ -101,6 +101,26 @@
     .details-span {
       color: white;
       font-size: 1.1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .profile-header {
+    .profile__info {
+      .btn {
+        margin: 0 auto;
+      }
+    }
+
+    .profile__user-img {
+      height: 100px;
+      width: 100px;
+      margin: -50px 0 -50px 20px;
+    }
+
+    .profile__header-photo {
+      height: 200px;
     }
   }
 }

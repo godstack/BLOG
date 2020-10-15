@@ -1,6 +1,6 @@
 .post-card {
   position: relative;
-  width: 60%;
+  width: 90%;
   margin: 20px auto;
   display: grid;
   padding: 15px;
@@ -9,12 +9,12 @@
   border-radius: 10px;
   grid-template-areas:
     'authorImg username '
-    '. postImg '
-    '. text'
-    '. hashtags'
-    '. actions';
+    'postImg postImg '
+    'text text'
+    'hashtags hashtags'
+    'actions actions';
   grid-template-columns: 60px calc(100% - 80px);
-  gap: 20px;
+  gap: 10px;
 
   a {
     text-decoration: none;
@@ -44,8 +44,8 @@
 
   .post-card__authorImg {
     grid-area: authorImg;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: rgb(151, 150, 150);
     background-repeat: no-repeat;
@@ -55,7 +55,7 @@
 
   .post-card__img {
     grid-area: postImg;
-    height: 400px;
+    height: 300px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -115,6 +115,28 @@
           background: rgba(238, 58, 58, 0.3);
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .post-card {
+    width: 60%;
+    grid-template-areas:
+      'authorImg username '
+      '. postImg '
+      '. text'
+      '. hashtags'
+      '. actions';
+    gap: 20px;
+
+    .post-card__authorImg {
+      width: 60px;
+      height: 60px;
+    }
+
+    .post-card__img {
+      height: 400px;
     }
   }
 }

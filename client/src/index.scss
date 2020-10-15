@@ -101,14 +101,6 @@ select {
   background: rgb(21, 32, 43);
 }
 
-.workspace {
-  margin-left: 20%;
-  background: rgb(31, 47, 63);
-  min-height: 100vh;
-  color: white;
-  position: relative;
-}
-
 button:disabled {
   background: rgb(117, 113, 113);
 }
@@ -125,6 +117,7 @@ button:focus {
   align-items: center;
   position: absolute;
   z-index: 2;
+
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -148,5 +141,20 @@ $bnt-color: #1c90d9;
   &:hover {
     background: rgba($bnt-color, 0.3);
     cursor: pointer;
+  }
+}
+
+.workspace {
+  margin-top: 80px;
+  background: rgb(31, 47, 63);
+  color: white;
+  position: relative;
+  min-height: 100vh;
+}
+
+@media screen and (min-width: 700px) {
+  .workspace {
+    margin: 0 0 0 20%;
+    background: rgb(31, 47, 63);
   }
 }
