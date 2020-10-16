@@ -33,15 +33,6 @@ $red-color: rgb(221, 49, 49);
   }
 
   .users-page__header {
-    padding: 20px 20px 0;
-    border-bottom: 10px solid #2f3b44;
-
-    .all-users {
-      text-align: center;
-      font-size: 2rem;
-      text-transform: uppercase;
-    }
-
     .header__links {
       display: flex;
       justify-content: flex-start;

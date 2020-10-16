@@ -49,7 +49,7 @@ export const UsersPage = () => {
 
   function showHeaderContent() {
     if (location.pathname === '/all-users') {
-      return <div className='all-users'>All users</div>;
+      return <div className='page-header'>All users</div>;
     }
 
     return (

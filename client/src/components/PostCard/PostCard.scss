@@ -121,7 +121,7 @@
 
 @media screen and (min-width: 700px) {
   .post-card {
-    width: 60%;
+    width: 80%;
     grid-template-areas:
       'authorImg username '
       '. postImg '
@@ -138,5 +138,11 @@
     .post-card__img {
       height: 400px;
     }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .post-card {
+    width: 60%;
   }
 }

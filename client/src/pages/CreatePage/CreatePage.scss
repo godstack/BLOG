@@ -2,14 +2,6 @@
   padding-bottom: 20px;
   border: 1px solid transparent;
 
-  .create-page__header {
-    text-align: center;
-    text-transform: uppercase;
-    border-bottom: 3px solid #4f6294;
-    font-size: 2rem;
-    margin: 40px 0;
-  }
-
   .file-info {
     width: 50%;
     margin: 0 auto;
@@ -96,13 +88,13 @@
   }
 
   .post-form__textarea {
-    width: 80%;
+    width: 90%;
     min-height: 100px;
     margin: 30px auto 0;
-    font-size: 1.3rem;
+    font-size: 1rem;
     padding: 10px;
     border-radius: 20px 10px 10px 20px;
-    transition: all 0.3s ease-in-out;
+
     box-sizing: border-box;
     display: block;
 
@@ -121,7 +113,6 @@
     &:focus {
       outline: none;
       background: rgb(207, 207, 207);
-      width: 90%;
     }
   }
 
@@ -135,18 +126,15 @@
     width: 90%;
     margin: 0 auto;
 
-    border-radius: 20px;
     padding: 10px;
+    box-shadow: 0 0 5px white;
+    background: rgba(0, 0, 0, 0.3);
   }
 }
 
 @media screen and (min-width: 700px) {
   .create-page {
     padding-bottom: 20px;
-
-    .create-page__header {
-      margin: 0 0 40px 0;
-    }
 
     .post-form-btn {
       display: block;
@@ -169,22 +157,20 @@
     }
 
     .post-form__textarea {
-      width: 50%;
-
+      width: 70%;
+      font-size: 1.3rem;
       &:focus {
         width: 70%;
       }
     }
 
     .hashtags__select {
-      width: 60%;
+      width: 70%;
     }
 
     .post-form {
       width: 60%;
-      margin: 0 auto;
 
-      border-radius: 20px;
       padding: 20px 10px;
     }
   }

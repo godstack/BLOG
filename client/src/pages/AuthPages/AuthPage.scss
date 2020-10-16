@@ -92,16 +92,10 @@ $text-color: white;
 }
 
 @media screen and (min-width: 700px) {
-  .auth-form {
-    width: 50%;
-    padding: 6px 10px;
-
-    .btn {
-      letter-spacing: 0.5rem;
-      &:hover {
-        letter-spacing: 0.6rem;
-        background: #bf1650;
-      }
+  .auth-page {
+    .auth__header {
+      font-size: 3rem;
+      margin-bottom: 120px;
     }
 
     .auth__link {
@@ -115,8 +109,16 @@ $text-color: white;
     border-bottom: 3px solid #8899a6;
   }
 
-  .auth__header {
-    font-size: 3rem;
-    margin-bottom: 120px;
+  .auth-form {
+    width: 50%;
+    padding: 6px 10px;
+
+    .btn {
+      letter-spacing: 0.5rem;
+      &:hover {
+        letter-spacing: 0.6rem;
+        background: #bf1650;
+      }
+    }
   }
 }

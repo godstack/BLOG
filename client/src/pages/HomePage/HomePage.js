@@ -61,10 +61,7 @@ export const HomePage = () => {
 
   return (
     <section className='home-page'>
-      <h2 className='home__header'>
-        <div className='tab-name'>Home</div>
-        <div className='item'>Posts from all users</div>
-      </h2>
+      <h2 className='page-header'>Home</h2>
 
       <input
         type='text'

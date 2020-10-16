@@ -82,8 +82,8 @@ export const CreatePage = () => {
           <Loader />
         </div>
       )}
-
-      <h2 className='create-page__header'>{actionType} POST</h2>
+      {/* create-page__header */}
+      <h2 className=' page-header'>{actionType} post</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>
         <label htmlFor='img' className='image__text'>

@@ -36,7 +36,7 @@ export const Header = () => {
 
         <NavLink to='/post/create' className='header__item'>
           <i className='far fa-plus-square'></i>
-          <span className='item__name'>Create Post</span>
+          <span className='item__name'>Create</span>
         </NavLink>
 
         <div className='header__item logout' onClick={handleLogout}>
