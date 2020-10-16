@@ -82,7 +82,7 @@ export const CreatePage = () => {
           <Loader />
         </div>
       )}
-      {/* create-page__header */}
+
       <h2 className=' page-header'>{actionType} post</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='post-form'>

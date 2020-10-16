@@ -29,7 +29,7 @@ $empty-color: orangered;
     background-size: 20px 20px;
     background-position: 20px center;
     background-repeat: no-repeat;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid transparent;
 
     &:focus {
@@ -50,5 +50,11 @@ $empty-color: orangered;
     font-size: 2rem;
     margin: 0 auto;
     width: fit-content;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .hashtags-input {
+    font-size: 1.3rem;
   }
 }
