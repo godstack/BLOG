@@ -49,14 +49,18 @@ router.put('/profile', upload.single('profileImg'), async (req, res) => {
         .json({ message: 'User with such username already exists' });
     }
 
-    birthday = new Date(birthday);
+    if (birthday) {
+      birthday = new Date(birthday);
 
-    const validBirthday = birthday < Date.now();
+      const validBirthday = birthday < Date.now();
 
-    if (!validBirthday) {
-      return res
-        .status(400)
-        .json({ message: 'Invalid date. It should be less than now' });
+      if (!validBirthday) {
+        return res
+          .status(400)
+          .json({
+            message: 'Invalid birthday date. It should be less than now'
+          });
+      }
     }
 
     if (bio.length > 300) {
@@ -77,7 +81,7 @@ router.put('/profile', upload.single('profileImg'), async (req, res) => {
 
     user.username = username;
     user.bio = bio;
-    user.birthday = birthday;
+    user.birthday = birthday ? null : birthday;
     user.gender = gender;
     user.profileImg = result ? result.url : user.profileImg;
     user.profileImg_public_id = result

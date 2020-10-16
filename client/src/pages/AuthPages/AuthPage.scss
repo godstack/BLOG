@@ -26,6 +26,7 @@ $text-color: white;
 }
 
 %input-styles {
+  display: block;
   width: 100%;
   padding: 3px 5px;
   border-radius: 4px;
@@ -111,7 +112,6 @@ $text-color: white;
 
   .auth-form {
     width: 50%;
-    padding: 6px 10px;
 
     .btn {
       letter-spacing: 0.5rem;

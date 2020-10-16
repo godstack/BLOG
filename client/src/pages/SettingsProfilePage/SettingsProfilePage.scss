@@ -59,7 +59,7 @@
 
   .input-field {
     position: relative;
-    width: 50%;
+    width: 80%;
     margin: 30px auto;
 
     textarea {
@@ -107,4 +107,21 @@
   border-bottom: 3px solid #3a5875;
   margin-bottom: 20px;
   padding-left: 20px;
+  border: 1px solid transparent;
+}
+
+@media screen and (min-width: 700px) {
+  .settings-form {
+    .input-field {
+      width: 70%;
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .settings-form {
+    .input-field {
+      width: 50%;
+    }
+  }
 }

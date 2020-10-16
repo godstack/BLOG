@@ -44,7 +44,7 @@ export const SettingsProfilePage = () => {
 
   return (
     <section className='settings-profile'>
-      <header className='settings-profile__header'>Edit profile</header>
+      <header className='page-header'>Edit profile</header>
 
       <form onSubmit={handleSubmit(onSubmit)} className='settings-form'>
         <input type='submit' value='Save' className='btn' />
