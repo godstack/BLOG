@@ -27,8 +27,8 @@
         "summary": "Create new user",
         "description": "",
         "operationId": "create user",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -53,11 +53,49 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "New user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -68,8 +106,8 @@
         "summary": "Sign in user to the system",
         "description": "",
         "operationId": "createSession",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -94,11 +132,49 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "New user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -109,10 +185,29 @@
         "summary": "Deletes session",
         "description": "",
         "operationId": "deleteSession",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "responses": {
-          "422": {
-            "description": "Unprocessable entity"
+          "200": {
+            "description": "Successfully logged out",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -123,13 +218,40 @@
         "summary": "Check if user is signed in",
         "description": "Check if user is signed in",
         "operationId": "checkAuth",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Authenticated Successfully"
+            "description": "Authenticated Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -140,13 +262,61 @@
         "summary": "Get all users",
         "description": "Get all users",
         "operationId": "allUsers",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Get all user successfully"
-          },
-          "500": {
-            "description": "Server error"
+            "description": "Get all user successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "pagesCount": {
+                  "type": "number"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "likes": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "date": {
+                        "type": "date"
+                      },
+                      "text": {
+                        "type": "date"
+                      },
+                      "author": {
+                        "type": "string"
+                      },
+                      "hashtags": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -157,7 +327,7 @@
         "summary": "Create new post",
         "description": "Create new post",
         "operationId": "createPost",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "text",
@@ -183,16 +353,80 @@
         ],
         "responses": {
           "200": {
-            "description": "Post was successfully created"
+            "description": "Post was successfully created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "authorUsername": {
+                  "type": "string"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "likes": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "date": {
+                        "type": "date"
+                      },
+                      "text": {
+                        "type": "date"
+                      },
+                      "author": {
+                        "type": "string"
+                      },
+                      "hashtags": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Image required"
+            "description": "Image required",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -203,7 +437,7 @@
         "summary": "Get post",
         "description": "Get post",
         "operationId": "getPost",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -215,13 +449,43 @@
         ],
         "responses": {
           "200": {
-            "description": "Post was successfully received"
+            "description": "Post was successfully received",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "postText": {
+                  "type": "string"
+                },
+                "hashtags": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -232,7 +496,7 @@
         "summary": "Like or dislike post",
         "description": "Like or dislike post",
         "operationId": "likePost",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "postId",
@@ -244,13 +508,37 @@
         ],
         "responses": {
           "200": {
-            "description": "Post was successfully liked"
+            "description": "Post was successfully liked",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -261,7 +549,7 @@
         "summary": "Delete post",
         "description": "Delete post",
         "operationId": "deletePost",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "postId",
@@ -273,13 +561,43 @@
         ],
         "responses": {
           "200": {
-            "description": "Post was successfully deleted"
+            "description": "Post was successfully deleted",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "postId": {
+                  "type": "string"
+                },
+                "pagesCount": {
+                  "type": "number"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -289,7 +607,7 @@
         "summary": "Edit post",
         "description": "Edit post",
         "operationId": "editPost",
-        "produces": ["application/xml", "application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "postId",
@@ -301,13 +619,63 @@
         ],
         "responses": {
           "200": {
-            "description": "Post was successfully edited"
+            "description": "Post was successfully edited",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "post": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "likes": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "date": {
+                      "type": "date"
+                    },
+                    "text": {
+                      "type": "date"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "hashtags": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -318,8 +686,8 @@
         "summary": "Change profile info",
         "description": "",
         "operationId": "changeProfileInfo",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -358,11 +726,38 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Profile info was successfully edited",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -371,14 +766,64 @@
         "summary": "Get profile info",
         "description": "",
         "operationId": "getProfileInfo",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "responses": {
+          "200": {
+            "description": "Get profile info",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "likes": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "birthday": {
+                      "type": "date"
+                    },
+                    "profileImg": {
+                      "type": "date"
+                    },
+                    "gender": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -389,8 +834,8 @@
         "summary": "Get profile page info",
         "description": "",
         "operationId": "getProfilePageInfo",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -401,11 +846,76 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Get profile info",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "likes": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "type": "date"
+                    },
+                    "profileImg": {
+                      "type": "date"
+                    },
+                    "gender": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "following": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "followers": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -416,8 +926,8 @@
         "summary": "Get profile page posts",
         "description": "",
         "operationId": "getProfilePagePosts",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -428,11 +938,67 @@
           }
         ],
         "responses": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "pagesCount": {
+                "type": "number"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "likes": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "date": {
+                      "type": "date"
+                    },
+                    "text": {
+                      "type": "date"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "hashtags": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -443,8 +1009,8 @@
         "summary": "Follow/Unfollow user",
         "description": "",
         "operationId": "Follow/Unfollow user",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -455,11 +1021,41 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Followed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -470,8 +1066,8 @@
         "summary": "Get user followers",
         "description": "",
         "operationId": "Get user followers",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -482,11 +1078,44 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Get followers",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "pagesCount": {
+                  "type": "number"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -497,8 +1126,8 @@
         "summary": "Get user following",
         "description": "",
         "operationId": "Get user following",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "username",
@@ -509,102 +1138,135 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Get followers",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "pagesCount": {
+                  "type": "number"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Invalid data supplied"
+            "description": "Invalid data supplied",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "required": ["email", "username", "password"],
-      "properties": {
-        "email": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "username": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "password": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "posts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "likes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "birthday": {
-          "type": "date"
-        },
-        "profileImg": {
-          "type": "string"
-        },
-        "profileImg_public_id": {
-          "type": "string"
-        },
-        "gender": {
-          "type": "string"
-        },
-        "bio": {
-          "type": "string"
-        },
-        "followers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "following": {
-          "type": "array",
-          "items": {
-            "type": "string"
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
     },
-    "Post": {
-      "required": ["image", "author"],
-      "properties": {
-        "image": {
-          "type": "string",
-          "uniqueItems": true
-        },
+    "definitions": {
+      "User": {
+        "required": ["email", "username", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "username": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "likes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "birthday": {
+            "type": "date"
+          },
+          "profileImg": {
+            "type": "string"
+          },
+          "profileImg_public_id": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "following": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Post": {
+        "required": ["image", "author"],
+        "properties": {
+          "image": {
+            "type": "string",
+            "uniqueItems": true
+          },
 
-        "author": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "likes": {
-          "type": "array",
-          "items": {
+          "author": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "likes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "date": {
+            "type": "date"
+          },
+          "text": {
+            "type": "string"
+          },
+          "public_id": {
+            "type": "string"
+          },
+          "hashtags": {
             "type": "string"
           }
-        },
-        "date": {
-          "type": "date"
-        },
-        "text": {
-          "type": "string"
-        },
-        "public_id": {
-          "type": "string"
-        },
-        "hashtags": {
-          "type": "string"
         }
       }
     }

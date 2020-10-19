@@ -136,7 +136,7 @@ router.delete('/logout', async (req, res) => {
       throw new Error('Something went wrong');
     }
   } catch (e) {
-    res.status(422).json({ message: e.message });
+    res.status(400).json({ message: e.message });
   }
 });
 
