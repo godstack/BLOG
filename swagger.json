@@ -158,6 +158,29 @@
         "description": "Create new post",
         "operationId": "createPost",
         "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "formData",
+            "description": "Create post",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hashtags",
+            "in": "formData",
+            "description": "Create post",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Create post",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Post was successfully created"
