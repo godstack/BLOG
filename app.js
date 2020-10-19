@@ -7,6 +7,8 @@ const path = require('path');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 function getSocketIo() {
   return io;
@@ -23,6 +25,7 @@ app.disable('x-powered-by');
 app.use(express.json({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const mongoDBstore = new MongoDBStore({
   uri: config.get('mongoUri'),

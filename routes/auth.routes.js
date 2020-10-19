@@ -143,7 +143,7 @@ router.delete('/logout', async (req, res) => {
 router.get('/authchecker', (req, res) => {
   const { user } = req.session;
   if (user) {
-    return res.json({ message: ' Authenticated Successfully', user });
+    return res.json({ message: 'Authenticated Successfully', user });
   } else {
     return res.status(401).json({ message: 'Unauthorized' });
   }
