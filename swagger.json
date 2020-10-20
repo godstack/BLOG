@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://rest-api-sandbox-ds.herokuapp.com/api/v1"
+      "url": "https://https://blog-magisoft.herokuapp.com/api/v1"
     },
     {
       "url": "http://localhost:5000/api/v1"
