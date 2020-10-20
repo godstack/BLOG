@@ -13,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import './CreatePage.scss';
 
 export const CreatePage = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, setValue } = useForm();
   const dispatch = useDispatch();
 
   const { postId } = useParams();
@@ -50,14 +50,16 @@ export const CreatePage = () => {
   useEffect(() => {
     if (actionType === 'edit') {
       dispatch(requestGetPost(postId));
+    } else {
+      setValue('text', '', { shouldValidate: true });
     }
-  }, []);
+  }, [location.pathname]);
 
   const onSubmit = data => {
     const fd = new FormData();
 
     let hashtagsArr = [];
-
+    debugger;
     for (const item of hashtags) {
       hashtagsArr.push(item.value.replace(/\W/g, '').toLowerCase());
     }

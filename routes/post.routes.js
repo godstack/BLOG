@@ -161,7 +161,7 @@ router.put('/:postId', upload.single('img'), async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { text } = req.body;
+    const { text, hashtags } = req.body;
 
     const { postId } = req.params;
 
@@ -184,6 +184,7 @@ router.put('/:postId', upload.single('img'), async (req, res) => {
 
     post.image = result ? result.url : post.image;
     post.text = text;
+    post.hashtags = hashtags;
 
     await post.save();
 
