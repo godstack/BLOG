@@ -30,7 +30,6 @@ export const ProfilePage = () => {
   const isSelfAccount = authUser.username === username;
 
   useEffect(() => {
-
     dispatch(requestGetProfileInfo(username, currentPage));
   }, [username, dispatch]);
 
@@ -147,7 +146,7 @@ export const ProfilePage = () => {
               currentPage={currentPage}
               pagesCount={pagesCount}
               setPage={setCurrentPage}
-              callback={page => dispatch(requestGetUserPosts(username, page))}
+              changePage={page => dispatch(requestGetUserPosts(username, page))}
             />
           )}
         </section>

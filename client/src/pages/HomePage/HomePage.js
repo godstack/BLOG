@@ -79,7 +79,7 @@ export const HomePage = () => {
             currentPage={currentPage}
             pagesCount={pagesCount}
             setPage={setCurrentPage}
-            callback={page =>
+            changePage={page =>
               dispatch(requestPostsFromAllUsers(page, hashtags))
             }
           />

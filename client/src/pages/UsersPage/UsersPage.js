@@ -87,7 +87,7 @@ export const UsersPage = () => {
           currentPage={currentPage}
           setPage={setCurrentPage}
           pagesCount={pagesCount}
-          callback={page =>
+          changePage={page =>
             dispatch(requestGetUsersList(location.pathname, page))
           }
         />

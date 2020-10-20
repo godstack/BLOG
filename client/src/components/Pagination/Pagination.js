@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './Pagination.scss';
 
-export const Pagination = ({ currentPage, pagesCount, setPage, callback }) => {
+export const Pagination = ({
+  currentPage,
+  pagesCount,
+  setPage,
+  changePage
+}) => {
   const nextPageHandler = () => {
     if (currentPage < pagesCount) {
       setPage(prevState => {
-        callback(prevState + 1);
+        changePage(prevState + 1);
 
         return prevState + 1;
       });
@@ -15,7 +20,7 @@ export const Pagination = ({ currentPage, pagesCount, setPage, callback }) => {
   const previousPageHandler = () => {
     if (currentPage > 1) {
       setPage(prevState => {
-        callback(prevState - 1);
+        changePage(prevState - 1);
 
         return prevState - 1;
       });
