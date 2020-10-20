@@ -140,7 +140,7 @@
         ],
         "responses": {
           "200": {
-            "description": "New user created",
+            "description": "Successfully log in",
             "schema": {
               "type": "object",
               "properties": {
