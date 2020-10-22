@@ -75,6 +75,7 @@ export const UsersPage = () => {
 
   useEffect(() => {
     dispatch(requestGetUsersList(location.pathname, currentPage));
+    window.scrollTo({ top: 0 });
   }, [userListOwner, type]);
 
   return (

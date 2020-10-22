@@ -31,6 +31,7 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
+    window.scrollTo({ top: 0 });
   }, [username, dispatch]);
 
   const postsList = postsLoading ? (

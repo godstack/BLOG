@@ -19,6 +19,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     dispatch(requestPostsFromAllUsers(currentPage, hashtags));
+    window.scrollTo({ top: 0 });
   }, [hashtags]);
 
   const onSubmit = data => {
