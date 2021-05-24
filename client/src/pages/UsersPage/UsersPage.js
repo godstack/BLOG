@@ -84,16 +84,18 @@ export const UsersPage = () => {
       <header className='users-page__header'>{showHeaderContent()}</header>
       {showUsersList()}
 
-      {!loading && (
-        <Pagination
-          currentPage={currentPage}
-          setPage={setCurrentPage}
-          pagesCount={pagesCount}
-          changePage={page =>
-            dispatch(requestGetUsersList(location.pathname, page))
-          }
-        />
-      )}
+      <section className='users__pagination'>
+        {!loading && (
+          <Pagination
+            currentPage={currentPage}
+            setPage={setCurrentPage}
+            pagesCount={pagesCount}
+            changePage={page =>
+              dispatch(requestGetUsersList(location.pathname, page))
+            }
+          />
+        )}
+      </section>
     </section>
   );
 };

@@ -103,3 +103,10 @@ $red-color: rgb(221, 49, 49);
     }
   }
 }
+
+.users__pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
