@@ -1,8 +1,7 @@
-import { take, put, call, apply, delay, fork } from 'redux-saga/effects';
+import { take, call } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { socket, store } from '../../index';
 import { notifyWarning, notifySuccess } from '../actions/toastrActions';
-import { useDispatch } from 'react-redux';
 import {
   addHomePost,
   removeHomePost,

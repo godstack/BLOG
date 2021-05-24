@@ -10,8 +10,8 @@ import {
 import { likePostFn } from '../helperFunctions/likePostFn';
 
 const initialState = {
-  posts: null,
-  pagesCount: null,
+  posts: [],
+  pagesCount: 0,
   loading: false
 };
 

@@ -45,7 +45,9 @@ router.get('/all-users', async (req, res) => {
       posts.push(post);
     }
 
-    const count = await Post.find({}).countDocuments();
+    const count = await Post.find({
+      hashtags: { $regex: `${hashtags}` }
+    }).countDocuments();
 
     const pagesCount = Math.ceil(count / PAGE_SIZE);
 

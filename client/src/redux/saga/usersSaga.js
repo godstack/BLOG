@@ -43,7 +43,6 @@ function* workerFollow({ payload: { aimUsername, authUserId } }) {
 
     const response = yield call(axios.put, `/api/user/${aimUsername}/follow`);
 
-    console.log(response.data);
     yield fork(
       subscription,
       socket,

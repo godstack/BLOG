@@ -26,7 +26,6 @@ function* workerPostCreateSaga({ payload: formData }) {
   try {
     yield put(showCreatePostLoading());
     const response = yield call(axios.post, '/api/post/create', formData);
-    console.log(response.data.post);
 
     yield put(hideCreatePostLoading());
     yield put(push(`/${response.data.authorUsername}/profile`));

@@ -59,7 +59,7 @@ export const CreatePage = () => {
     const fd = new FormData();
 
     let hashtagsArr = [];
-    debugger;
+
     for (const item of hashtags) {
       hashtagsArr.push(item.value.replace(/\W/g, '').toLowerCase());
     }

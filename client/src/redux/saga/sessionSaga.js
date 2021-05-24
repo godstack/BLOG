@@ -82,7 +82,7 @@ function* workerCheckAuthSaga() {
     if (response.data.user) {
       yield put(setAuthUser(response.data.user));
     }
-    // console.log(response.data.user);
+
     yield put(hideSessionLoading());
 
     yield fork(customizeOwnRoom, socket, response.data.user.username);

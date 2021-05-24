@@ -8,6 +8,7 @@ import {
 import { PostCard } from '../../components/PostCard/PostCard';
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
+import useDebounce from '../../hooks/useDebounce';
 import './HomePage.scss';
 
 export const HomePage = () => {
@@ -17,14 +18,12 @@ export const HomePage = () => {
   const { loading, posts, pagesCount } = useSelector(state => state.home);
   const [hashtags, setHashtags] = useState('');
 
-  useEffect(() => {
-    dispatch(requestPostsFromAllUsers(currentPage, hashtags));
-    window.scrollTo({ top: 0 });
-  }, [hashtags]);
+  const debouncedHashtags = useDebounce(hashtags, 400);
 
-  const onSubmit = data => {
-    dispatch(requestPostsFromAllUsers(currentPage, data.hashtags));
-  };
+  useEffect(() => {
+    dispatch(requestPostsFromAllUsers(currentPage, debouncedHashtags));
+    window.scrollTo({ top: 0 });
+  }, [debouncedHashtags]);
 
   function showPosts() {
     if (loading) {
@@ -81,7 +80,7 @@ export const HomePage = () => {
             pagesCount={pagesCount}
             setPage={setCurrentPage}
             changePage={page =>
-              dispatch(requestPostsFromAllUsers(page, hashtags))
+              dispatch(requestPostsFromAllUsers(page, debouncedHashtags))
             }
           />
         </div>
