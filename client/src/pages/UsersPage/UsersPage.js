@@ -76,6 +76,7 @@ export const UsersPage = () => {
   useEffect(() => {
     dispatch(requestGetUsersList(location.pathname, currentPage));
     window.scrollTo({ top: 0 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userListOwner, type]);
 
   return (

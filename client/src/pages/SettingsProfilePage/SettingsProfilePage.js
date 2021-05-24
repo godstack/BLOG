@@ -21,10 +21,12 @@ export const SettingsProfilePage = () => {
 
   useEffect(() => {
     setGender(user?.gender);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.gender]);
 
   useEffect(() => {
     dispatch(requestUserInfoForSettings());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = data => {

@@ -1,11 +1,4 @@
-import {
-  call,
-  put,
-  takeLatest,
-  takeEvery,
-  fork,
-  select
-} from 'redux-saga/effects';
+import { call, put, takeEvery, fork, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 import {

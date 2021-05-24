@@ -77,7 +77,7 @@ export function* watchOnPings() {
     try {
       // An error from socketChannel will cause the saga jump to the catch block
 
-      const payload = yield take(socketChannel);
+      yield take(socketChannel);
     } catch (err) {
       console.error('socket error:', err);
       // socketChannel is still open in catch block

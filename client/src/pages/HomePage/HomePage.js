@@ -23,6 +23,7 @@ export const HomePage = () => {
   useEffect(() => {
     dispatch(requestPostsFromAllUsers(currentPage, debouncedHashtags));
     window.scrollTo({ top: 0 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedHashtags]);
 
   function showPosts() {

@@ -32,6 +32,7 @@ export const ProfilePage = () => {
   useEffect(() => {
     dispatch(requestGetProfileInfo(username, currentPage));
     window.scrollTo({ top: 0 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, dispatch]);
 
   const postsList = postsLoading ? (

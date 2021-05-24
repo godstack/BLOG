@@ -27,6 +27,7 @@ export const FollowButton = ({ user, requestFollow }) => {
 
   useEffect(() => {
     setBtnText(btnTextConditions());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHovered, isExist]);
 
   const handleFollow = e => {

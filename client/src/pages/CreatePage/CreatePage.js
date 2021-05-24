@@ -42,6 +42,7 @@ export const CreatePage = () => {
 
   useEffect(() => {
     setHashtags(defaultValueHashtags());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   const [file, setFile] = useState(null);
@@ -53,6 +54,7 @@ export const CreatePage = () => {
     } else {
       setValue('text', '', { shouldValidate: true });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   const onSubmit = data => {

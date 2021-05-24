@@ -1,7 +1,6 @@
 // reply with a `pong` message by invoking `socket.emit('pong')`
 
 import { apply } from 'redux-saga/effects';
-import { socket } from '../..';
 
 export function* subscription(socket, aimUsername, authUsername, type) {
   yield apply(socket, socket.emit, [
